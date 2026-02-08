@@ -1,25 +1,21 @@
-import eslint from '@eslint/js';
-import tseslint from 'typescript-eslint';
 import angular from 'angular-eslint';
+import eslint from '@eslint/js';
+import tslint from 'typescript-eslint';
+import eslintConfigPrettier from 'eslint-config-prettier';
 
-export default [
-  eslint.configs.recommended,
-  ...tseslint.configs.recommended,
-  ...tseslint.configs.stylistic,
-  ...angular.configs.tsRecommended,
+export default tslint.config(
   {
-    ignores: ['**/dist'],
-  },
-  {
-    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
+    files: ['**/*.ts'],
+    extends: [
+      eslint.configs.recommended,
+      ...angular.configs.tsRecommended,
+      ...tslint.configs.recommended,
+      ...tslint.configs.stylistic,
+      ...tslint.configs.strict,
+      eslintConfigPrettier,
+    ],
     processor: angular.processInlineTemplates,
     rules: {
-      '@typescript-eslint/no-unused-vars': [
-        'error',
-        {
-          argsIgnorePattern: '^_',
-        },
-      ],
       '@angular-eslint/directive-selector': [
         'error',
         {
@@ -36,6 +32,18 @@ export default [
           style: 'kebab-case',
         },
       ],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+        },
+      ],
+      '@typescript-eslint/no-extraneous-class': 'off',
     },
   },
-];
+  {
+    files: ['**/*.html'],
+    extends: [...angular.configs.templateRecommended, ...angular.configs.templateAccessibility],
+    rules: {},
+  },
+);
