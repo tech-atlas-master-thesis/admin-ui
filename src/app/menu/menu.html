@@ -1,0 +1,12 @@
+<div>
+  <p-menubar [model]="menuItems()">
+    <ng-template #start>
+      <a [href]="BASE_URL">
+        <span class="pi pi-home"></span>
+      </a>
+    </ng-template>
+    <ng-template #end>
+      <p-button [icon]="isDarkMode() ? 'pi pi-sun' : 'pi pi-moon'" (onClick)="toggleDarkMode()"></p-button>
+    </ng-template>
+  </p-menubar>
+</div>

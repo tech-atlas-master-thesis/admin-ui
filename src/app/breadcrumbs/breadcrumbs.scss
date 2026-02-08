@@ -1,0 +1,12 @@
+.app-breadcrumbs {
+  width: fit-content;
+
+  &__skeleton {
+    padding: 1rem;
+    width: fit-content;
+    height: 50px;
+    background-color: white;
+    border: 1px solid var(--surface-d);
+    border-radius: 6px;
+  }
+}

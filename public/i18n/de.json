@@ -1,0 +1,13 @@
+{
+  "app": {
+    "title": "Tech Atlas",
+    "subTitle": "Admin UI",
+    "menu": {
+      "scraper": "Scraper",
+      "transformer": "Transformer",
+      "pipelines": "Pipelines"
+    }
+  },
+  "label": {},
+  "action": {}
+}
