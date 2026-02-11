@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HashMap, TranslocoService } from '@jsverse/transloco';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { filter, switchMap, tap } from 'rxjs';
+import { filter, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,12 +11,10 @@ export class I18nService {
 
   currentLanguage = toSignal(
     this.translocoService.events$.pipe(
-      tap(console.log),
       filter((event) => event.type === 'translationLoadSuccess'),
       switchMap(() =>
         this.translocoService.langChanges$.pipe(filter((lang) => !!this.translocoService.getTranslation().get(lang))),
       ),
-      tap(console.log),
     ),
   );
 

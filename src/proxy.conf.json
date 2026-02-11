@@ -1,0 +1,10 @@
+{
+  "/api/scraper/**": {
+    "target": "http://localhost:8050",
+    "secure": false
+  },
+  "/api/transformer": {
+    "target": "http://localhost:8060",
+    "secure": false
+  }
+}

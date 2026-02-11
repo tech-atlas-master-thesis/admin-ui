@@ -12,6 +12,7 @@ import { provideTransloco } from '@jsverse/transloco';
 import { TranslocoHttpLoader } from '../transloco-loader';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
+import { provideOAuthClient } from 'angular-oauth2-oidc';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -37,5 +38,6 @@ export const appConfig: ApplicationConfig = {
         preset: Aura,
       },
     }),
+    provideOAuthClient(),
   ],
 };
