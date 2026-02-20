@@ -4,7 +4,7 @@ on:
     branches:
       - main
 env:
-  IMAGE_NAME: admin-ui
+  IMAGE_NAME: tech-atlas-admin-ui
   IMAGE_TAG: latest
 jobs:
   build:

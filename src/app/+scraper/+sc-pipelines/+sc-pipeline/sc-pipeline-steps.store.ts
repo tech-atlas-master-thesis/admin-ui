@@ -18,7 +18,7 @@ export const ScPipelineStepsStore = signalStore(
     _stepsResource: resource({
       params: store.pipelineId,
       loader: (pipelineId) =>
-        firstValueFrom(pipelineId.params ? store._scraperApi.getSteps(pipelineId.params) : of(undefined)),
+        firstValueFrom(pipelineId.params !== undefined ? store._scraperApi.getSteps(pipelineId.params) : of(undefined)),
     }),
   })),
   withComputed((store) => ({

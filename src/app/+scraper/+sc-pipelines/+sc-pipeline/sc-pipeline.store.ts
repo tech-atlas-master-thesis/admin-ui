@@ -18,7 +18,14 @@ export const ScPipelineStore = signalStore(
     _pipelineResource: resource({
       params: store.pipelineId,
       loader: (pipelineId) =>
-        firstValueFrom(pipelineId.params ? store._scraperApi.getPipeline(pipelineId.params) : of(undefined)),
+        firstValueFrom(
+          pipelineId.params !== undefined ? store._scraperApi.getPipeline(pipelineId.params) : of(undefined),
+        ),
+    }),
+    _pipelineStepsResource: resource({
+      params: store.pipelineId,
+      loader: (pipelineId) =>
+        firstValueFrom(pipelineId.params !== undefined ? store._scraperApi.getSteps(pipelineId.params) : of(undefined)),
     }),
   })),
   withComputed((store) => ({
@@ -28,7 +35,6 @@ export const ScPipelineStore = signalStore(
   })),
   withMethods((store) => {
     function setPipelineId(pipelineId?: number) {
-      console.log('setPipelineId', pipelineId);
       patchState(store, { pipelineId: pipelineId ?? undefined });
     }
 

@@ -5,7 +5,6 @@ import { Breadcrumbs } from './breadcrumbs/breadcrumbs';
 import { TranslocoService } from '@jsverse/transloco';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { OAuthService } from 'angular-oauth2-oidc';
-import { authCodeFlowConfig } from './oauth.config';
 
 @Component({
   selector: 'app-root',
@@ -22,9 +21,5 @@ export class App {
       .selectTranslation(this.translocoService.getActiveLang())
       .pipe(takeUntilDestroyed())
       .subscribe();
-
-    this.oAuthService.configure(authCodeFlowConfig);
-    this.oAuthService.loadDiscoveryDocumentAndTryLogin().then(console.log);
-    this.oAuthService.initLoginFlow();
   }
 }

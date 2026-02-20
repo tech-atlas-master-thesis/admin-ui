@@ -8,8 +8,15 @@
       "pipelines": "Pipelines"
     }
   },
-  "label": {},
+  "label": {
+    "timestamp": "Timestamp",
+    "type": "Type",
+    "message": "Message"
+  },
   "action": {},
+  "format": {
+    "dateTime": "yyyy-MM-dd HH:mm:ss"
+  },
   "scraper": {
     "breadcrumbKey": "Scraper",
     "pipelines": {
