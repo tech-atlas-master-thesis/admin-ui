@@ -1,0 +1,41 @@
+.sc-pipeline-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &__step {
+    display: flex;
+    flex-direction: column;
+    border: 2px gray solid;
+    border-radius: 1rem;
+    cursor: pointer;
+
+    padding: 1rem;
+    background-color: lightgray;
+    color: black;
+
+    &--running {
+      background-color: yellow;
+    }
+
+    &--finished {
+      background-color: green;
+      color: white;
+    }
+
+    &--error {
+      background-color: darkred;
+      color: white;
+    }
+
+    &--selected {
+      outline: dashed 3px white;
+      outline-offset: 3px;
+    }
+
+    &:hover {
+      outline: solid 3px white;
+      outline-offset: 3px;
+    }
+  }
+}

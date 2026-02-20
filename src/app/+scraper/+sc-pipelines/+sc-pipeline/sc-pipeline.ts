@@ -1,15 +1,14 @@
 import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
 import { ScPipelineStore } from './sc-pipeline.store';
 import { ScPipelineStepsStore } from './sc-pipeline-steps.store';
-import { DatePipe, NgClass } from '@angular/common';
-import { StateClassPipe } from '../../../shared/styles/state-class.pipe';
 import { StepDto } from '../../../api/models/step-dto';
 import { TableModule } from 'primeng/table';
-import { TranslocoPipe } from '@jsverse/transloco';
+import { ScPipelineStep } from './sc-pipeline-step/sc-pipeline-step';
+import { ScPipelineTimeline } from './sc-pipeline-timeline/sc-pipeline-timeline';
 
 @Component({
   selector: 'app-sc-pipeline',
-  imports: [NgClass, StateClassPipe, TableModule, DatePipe, TranslocoPipe],
+  imports: [TableModule, ScPipelineStep, ScPipelineTimeline],
   templateUrl: './sc-pipeline.html',
   styleUrl: './sc-pipeline.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

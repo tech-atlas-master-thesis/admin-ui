@@ -1,13 +1,23 @@
 @if (scPipelinesStore.pipelines(); as pipelines) {
   <p-table [value]="pipelines">
+    <ng-template #header>
+      <tr>
+        <th>{{ 'label.id' | transloco }}</th>
+        <th>{{ 'label.name' | transloco }}</th>
+        <th>{{ 'label.state' | transloco }}</th>
+        <th style="width: 0">
+          <p-button [label]="'label.new' | transloco" icon="pi pi-plus" [routerLink]="'new'"></p-button>
+        </th>
+      </tr>
+    </ng-template>
     <ng-template #body let-pipeline>
       <tr>
         <td>
           <a [routerLink]="['pipeline', pipeline.id]">{{ pipeline.id }}</a>
         </td>
-        <td>{{ pipeline.display_name }}</td>
-        <td>{{ pipeline.name }}</td>
+        <td>{{ pipeline.displayName ?? pipeline.name }}</td>
         <td>{{ pipeline.state }}</td>
+        <td></td>
       </tr>
     </ng-template>
   </p-table>

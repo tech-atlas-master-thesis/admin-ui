@@ -1,0 +1,34 @@
+<div class="sc-pipeline-steps">
+  @if (pipelineStepsStore.selectedStep(); as step) {
+    <h1>{{ step.displayName ?? step.name }}</h1>
+    <h3>{{ 'label.messages' | transloco }}</h3>
+    <div>
+      <p-table [value]="step.events">
+        <ng-template #header>
+          <tr>
+            <th>{{ 'label.timestamp' | transloco }}</th>
+            <th>{{ 'label.type' | transloco }}</th>
+            <th>{{ 'label.message' | transloco }}</th>
+          </tr>
+        </ng-template>
+        <ng-template #body let-event>
+          <tr>
+            <td>
+              {{ event.timestamp | date: ('format.dateTime' | transloco) }}
+            </td>
+            <td>
+              {{ event.type }}
+            </td>
+            <td>
+              {{ event.message }}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <h3>{{ 'label.results' | transloco }}</h3>
+    <div>
+      <ngx-json-viewer [json]="step.result"></ngx-json-viewer>
+    </div>
+  }
+</div>

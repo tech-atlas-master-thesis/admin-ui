@@ -1,0 +1,11 @@
+.sc-new-pipeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+
+  footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

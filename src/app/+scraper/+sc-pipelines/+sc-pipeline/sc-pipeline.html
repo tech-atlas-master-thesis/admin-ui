@@ -1,51 +1,7 @@
 @if (pipelineStore.pipeline(); as pipeline) {
   <div class="sc-pipeline">
-    <h1>{{ pipeline.name }}</h1>
-    <div class="sc-pipeline__timeline">
-      @for (step of stepsStore.steps(); track step.id) {
-        <button
-          class="sc-pipeline__timeline__step"
-          [ngClass]="step.state | stateClass: 'sc-pipeline__timeline__step'"
-          (click)="onStepSelect(step)"
-        >
-          <span>{{ step.name }}</span
-          ><span>{{ step.state }}</span>
-        </button>
-      } @empty {
-        Empty
-      }
-    </div>
-    <div class="sc-pipeline__step">
-      @if (selectedStep(); as step) {
-        {{ step.name }}
-        <div>
-          <p-table [value]="step.events">
-            <ng-template #header>
-              <tr>
-                <th>{{ 'label.timestamp' }}</th>
-                <th>{{ 'label.type' }}</th>
-                <th>{{ 'label.message' }}</th>
-              </tr>
-            </ng-template>
-            <ng-template #body let-event>
-              <tr>
-                <td>
-                  {{ event.timestamp | date: ('format.dateTime' | transloco) }}
-                </td>
-                <td>
-                  {{ event.type }}
-                </td>
-                <td>
-                  {{ event.message }}
-                </td>
-              </tr>
-            </ng-template>
-          </p-table>
-        </div>
-        <div>
-          {{ JSON.stringify(step.result) }}
-        </div>
-      }
-    </div>
+    <h1>{{ pipeline.displayName ?? pipeline.name }}</h1>
+    <app-sc-pipeline-timeline></app-sc-pipeline-timeline>
+    <app-sc-pipeline-step></app-sc-pipeline-step>
   </div>
 } @else {}

@@ -1,0 +1,22 @@
+<div class="sc-new-pipeline">
+  <section>
+    <h3>{{ 'pipeline.label.type' | transloco }}</h3>
+    <div>
+      <p-floatlabel variant="on">
+        <p-select
+          id="new-pipeline-type"
+          class="full-width"
+          [options]="typeOptions()"
+          [ngModel]="pipelineForm.pipelineType()"
+          (ngModelChange)="pipelineForm.pipelineType().value.set($event)"
+          dataKey="name"
+        >
+        </p-select>
+        <label for="new-pipeline-type">{{ 'pipeline.label.type' | transloco }}</label>
+      </p-floatlabel>
+    </div>
+  </section>
+  <footer>
+    <p-button [label]="'label.create' | transloco" icon="pi pi-plus" (onClick)="onPipelineCreate()"></p-button>
+  </footer>
+</div>

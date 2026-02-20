@@ -9,9 +9,16 @@
     }
   },
   "label": {
+    "id": "ID",
+    "name": "Name",
+    "state": "State",
+    "new": "New",
+    "create": "Create",
     "timestamp": "Timestamp",
     "type": "Type",
-    "message": "Message"
+    "message": "Message",
+    "messages": "Messages",
+    "results": "Results"
   },
   "action": {},
   "format": {
@@ -21,6 +28,11 @@
     "breadcrumbKey": "Scraper",
     "pipelines": {
       "breadcrumbKey": "Pipelines"
+    }
+  },
+  "pipeline": {
+    "label": {
+      "type": "Pipeline Type"
     }
   }
 }

@@ -5,6 +5,7 @@ import environment from '../../../environment/environment';
 import { PipelineDto } from '../models/pipeline-dto';
 import { StepDto } from '../models/step-dto';
 import { PipelineCreateDto } from '../models/pipeline-create-dto';
+import { PipelineConfigDto } from '../models/pipeline-config-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -27,5 +28,9 @@ export class ScraperApi extends Api {
 
   createPipeline(pipelineConfig: PipelineCreateDto) {
     return this.post<PipelineDto>(`/pipelines`, pipelineConfig);
+  }
+
+  getPipelineTypes() {
+    return this.get<PipelineConfigDto[]>('/config/pipeline-types');
   }
 }

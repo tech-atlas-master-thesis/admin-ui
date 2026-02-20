@@ -9,6 +9,10 @@ export const routes: Routes = [
     loadComponent: () => import('./sc-pipelines').then((m) => m.ScPipelines),
   },
   {
+    path: 'new',
+    loadComponent: () => import('./+sc-new-pipeline/sc-new-pipeline').then((m) => m.ScNewPipeline),
+  },
+  {
     path: 'pipeline/:pipelineId',
     providers: [ScPipelineStore, ScPipelineStepsStore],
     resolve: {

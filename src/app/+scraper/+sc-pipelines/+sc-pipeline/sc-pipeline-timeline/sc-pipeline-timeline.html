@@ -1,0 +1,15 @@
+<div class="sc-pipeline-timeline">
+  @for (step of pipelineStepsStore.steps(); track step.id) {
+    <button
+      class="sc-pipeline-timeline__step"
+      [ngClass]="step.state | stateClass: 'sc-pipeline-timeline__step'"
+      [class.sc-pipeline-timeline__step--selected]="step.name === pipelineStepsStore.step()"
+      (click)="pipelineStepsStore.selectStep(step)"
+    >
+      <span>{{ step.displayName ?? step.name }}</span
+      ><span>{{ step.state }}</span>
+    </button>
+  } @empty {
+    Empty
+  }
+</div>
