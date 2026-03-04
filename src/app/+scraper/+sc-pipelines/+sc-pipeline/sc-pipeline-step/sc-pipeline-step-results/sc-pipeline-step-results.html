@@ -1,0 +1,26 @@
+<div class="sc-pipeline-step-result">
+  @if (result(); as result) {
+    @if (result.preview) {
+      <a class="p-button font-bold" [href]="resultFileURI()" target="_blank">
+        <span class="pi pi-download"></span>
+        <span>{{ 'step.downloadResult' | transloco }}</span>
+      </a>
+    }
+    @if (result.data) {
+      @switch (result.type) {
+        @case (StepResultType.JSON) {
+          <ngx-json-viewer [json]="result.data"></ngx-json-viewer>
+        }
+        @default {
+          <span class="sc-pipeline-step-result__data">
+            {{ result.data }}
+          </span>
+        }
+      }
+    }
+  } @else if (step()?.state === StatusDto.FINISHED) {
+    <span>
+      {{ 'step.noResult' | transloco }}
+    </span>
+  }
+</div>

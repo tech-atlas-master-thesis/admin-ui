@@ -26,6 +26,10 @@ export class ScraperApi extends Api {
     return this.get<StepDto[]>(`/pipelines/${pipelineId}/steps`);
   }
 
+  getStepResultFilePath(pipelineId: number, stepId: number) {
+    return `${this.baseUrl}/pipelines/${pipelineId}/steps/${stepId}/result`;
+  }
+
   createPipeline(pipelineConfig: PipelineCreateDto) {
     return this.post<PipelineDto>(`/pipelines`, pipelineConfig);
   }

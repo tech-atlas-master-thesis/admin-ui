@@ -3,10 +3,8 @@ import { HttpClient, HttpContext, HttpHeaders, HttpParams } from '@angular/commo
 export interface ApiOptions {
   headers?: HttpHeaders | Record<string, string | string[]>;
   context?: HttpContext;
-  observe?: 'body' | 'response' | 'events';
   params?: HttpParams | Record<string, string | number | boolean | (string | number | boolean)[]>;
   reportProgress?: boolean;
-  responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
   withCredentials?: boolean;
   credentials?: RequestCredentials;
   keepalive?: boolean;
@@ -31,6 +29,10 @@ export abstract class Api {
 
   protected get<T>(url: string, options?: ApiOptions) {
     return this.httpClient.get<T>(this.baseUrl + url, options as object);
+  }
+
+  protected getFile(url: string, options?: ApiOptions) {
+    return this.httpClient.get(this.baseUrl + url, { ...options, observe: 'events', responseType: 'blob' });
   }
 
   protected post<T>(url: string, data: unknown, options?: ApiOptions) {

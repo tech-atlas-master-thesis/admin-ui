@@ -4,10 +4,11 @@ import { TableModule } from 'primeng/table';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { ScPipelineStepsStore } from '../sc-pipeline-steps.store';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import { ScPipelineStepResults } from './sc-pipeline-step-results/sc-pipeline-step-results';
 
 @Component({
   selector: 'app-sc-pipeline-step',
-  imports: [DatePipe, TableModule, TranslocoPipe, NgxJsonViewerModule],
+  imports: [DatePipe, TableModule, TranslocoPipe, NgxJsonViewerModule, ScPipelineStepResults],
   templateUrl: './sc-pipeline-step.html',
   styleUrl: './sc-pipeline-step.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,7 +1,7 @@
 import { patchState, signalStore, withComputed, withMethods, withProps, withState } from '@ngrx/signals';
 import { computed, inject, resource } from '@angular/core';
 import { firstValueFrom, of } from 'rxjs';
-import { ScraperApi } from '../../../api/scraper-api/scraper-api';
+import { ScraperApi } from '@api/scraper-api/scraper-api';
 
 interface ScPipelineStoreState {
   pipelineId: number | undefined;

@@ -1,10 +1,10 @@
 import { patchState, signalStore, withComputed, withMethods, withProps, withState } from '@ngrx/signals';
 import { computed, inject, resource } from '@angular/core';
 import { firstValueFrom, of } from 'rxjs';
-import { ScraperApi } from '../../../api/scraper-api/scraper-api';
+import { ScraperApi } from '@api/scraper-api/scraper-api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { StepDto } from '../../../api/models/step-dto';
+import { StepDto } from '@api/models/step-dto';
 
 interface ScPipelineStepsStoreState {
   pipelineId: number | undefined;

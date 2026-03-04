@@ -34,5 +34,9 @@
     "label": {
       "type": "Pipeline Type"
     }
+  },
+  "step": {
+    "noResult": "No Result is available for this step",
+    "downloadResult": "Download full result"
   }
 }

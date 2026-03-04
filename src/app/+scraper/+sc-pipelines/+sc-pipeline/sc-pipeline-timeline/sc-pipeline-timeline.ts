@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { StateClassPipe } from '../../../../shared/styles/state-class.pipe';
+import { StateClassPipe } from '@shared/styles/state-class.pipe';
 import { NgClass } from '@angular/common';
 import { ScPipelineStepsStore } from '../sc-pipeline-steps.store';
 

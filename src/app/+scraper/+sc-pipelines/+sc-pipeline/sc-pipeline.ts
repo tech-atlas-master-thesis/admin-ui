@@ -1,7 +1,5 @@
-import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ScPipelineStore } from './sc-pipeline.store';
-import { ScPipelineStepsStore } from './sc-pipeline-steps.store';
-import { StepDto } from '../../../api/models/step-dto';
 import { TableModule } from 'primeng/table';
 import { ScPipelineStep } from './sc-pipeline-step/sc-pipeline-step';
 import { ScPipelineTimeline } from './sc-pipeline-timeline/sc-pipeline-timeline';
@@ -15,20 +13,4 @@ import { ScPipelineTimeline } from './sc-pipeline-timeline/sc-pipeline-timeline'
 })
 export class ScPipeline {
   pipelineStore = inject(ScPipelineStore);
-  stepsStore = inject(ScPipelineStepsStore);
-
-  selectedStep = signal<StepDto | undefined>(undefined);
-
-  constructor() {
-    effect(() => {
-      console.log(this.selectedStep());
-    });
-  }
-
-  protected onStepSelect(step: StepDto) {
-    this.selectedStep.set(step);
-  }
-
-  protected readonly String = String;
-  protected readonly JSON = JSON;
 }

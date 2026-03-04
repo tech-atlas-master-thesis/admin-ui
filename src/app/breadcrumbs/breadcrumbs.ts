@@ -3,7 +3,7 @@ import { Breadcrumb } from 'primeng/breadcrumb';
 import { ActivatedRouteSnapshot, Data, Params, Router, RoutesRecognized } from '@angular/router';
 import { BehaviorSubject, filter, tap } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { I18nService } from '../shared/i18n/i18n-service';
+import { I18nService } from '@shared/i18n/i18n-service';
 import { MenuItem } from 'primeng/api';
 
 interface BreadcrumbElement {

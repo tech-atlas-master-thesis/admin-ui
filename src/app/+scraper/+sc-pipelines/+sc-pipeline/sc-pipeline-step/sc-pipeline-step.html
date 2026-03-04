@@ -27,8 +27,6 @@
       </p-table>
     </div>
     <h3>{{ 'label.results' | transloco }}</h3>
-    <div>
-      <ngx-json-viewer [json]="step.result"></ngx-json-viewer>
-    </div>
+    <app-sc-pipeline-step-results [step]="step"></app-sc-pipeline-step-results>
   }
 </div>

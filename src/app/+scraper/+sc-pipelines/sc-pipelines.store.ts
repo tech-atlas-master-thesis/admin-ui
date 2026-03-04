@@ -1,8 +1,8 @@
 import { patchState, signalStore, withComputed, withMethods, withProps, withState } from '@ngrx/signals';
 import { computed, inject, resource } from '@angular/core';
-import { ScraperApi } from '../../api/scraper-api/scraper-api';
+import { ScraperApi } from '@api/scraper-api/scraper-api';
 import { firstValueFrom, tap } from 'rxjs';
-import { PipelineCreateDto } from '../../api/models/pipeline-create-dto';
+import { PipelineCreateDto } from '@api/models/pipeline-create-dto';
 
 export const ScPipelinesStore = signalStore(
   withState({

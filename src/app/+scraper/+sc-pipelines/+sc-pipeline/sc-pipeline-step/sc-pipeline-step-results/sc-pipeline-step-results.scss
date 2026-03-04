@@ -1,0 +1,13 @@
+.sc-pipeline-step-result {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  padding: 1rem;
+  background-color: var(--p-content-background);
+
+  &__data {
+    white-space: pre-wrap;
+    font-family: monospace;
+  }
+}

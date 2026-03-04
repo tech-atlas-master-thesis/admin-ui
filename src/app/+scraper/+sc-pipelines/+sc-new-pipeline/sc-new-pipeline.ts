@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, signa
 import { ScPipelinesStore } from '../sc-pipelines.store';
 import { Select } from 'primeng/select';
 import { SelectItem } from 'primeng/api';
-import { PipelineConfigDto } from '../../../api/models/pipeline-config-dto';
+import { PipelineConfigDto } from '@api/models/pipeline-config-dto';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { Button } from 'primeng/button';
 import { FloatLabel } from 'primeng/floatlabel';
