@@ -1,17 +1,17 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { ScPipelinesStore } from './sc-pipelines.store';
+import { PipelinesStore } from './pipelines.store';
 import { TableModule } from 'primeng/table';
 import { RouterLink } from '@angular/router';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { Button } from 'primeng/button';
 
 @Component({
-  selector: 'app-sc-pipelines',
+  selector: 'app-pipelines',
   imports: [TableModule, RouterLink, TranslocoPipe, Button],
-  templateUrl: './sc-pipelines.html',
-  styleUrl: './sc-pipelines.scss',
+  templateUrl: './pipelines.component.html',
+  styleUrl: './pipelines.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScPipelines {
-  scPipelinesStore = inject(ScPipelinesStore);
+export class Pipelines {
+  scPipelinesStore = inject(PipelinesStore);
 }

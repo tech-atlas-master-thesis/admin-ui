@@ -1,18 +1,15 @@
-import { inject, Injectable } from '@angular/core';
+import { inject } from '@angular/core';
 import { Api } from '../api';
 import { HttpClient } from '@angular/common/http';
-import environment from '../../../environment/environment';
-import { PipelineDto } from '../models/pipeline-dto';
-import { StepDto } from '../models/step-dto';
-import { PipelineCreateDto } from '../models/pipeline-create-dto';
-import { PipelineConfigDto } from '../models/pipeline-config-dto';
+import { PipelineDto } from '../models/pipeline/pipeline-dto';
+import { StepDto } from '../models/pipeline/step-dto';
+import { PipelineCreateDto } from '../models/pipeline/pipeline-create-dto';
+import { PipelineConfigDto } from '../models/pipeline/pipeline-config-dto';
+import { API_BASE_URL } from '@api/pipeline-api/pipeline-api.token';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class ScraperApi extends Api {
+export class PipelineApi extends Api {
   protected readonly httpClient = inject(HttpClient);
-  protected readonly baseUrl = environment.baseUrl + '/api/scraper';
+  protected readonly baseUrl = inject(API_BASE_URL);
 
   getPipelines() {
     return this.get<PipelineDto[]>('/pipelines');

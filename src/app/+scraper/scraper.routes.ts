@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { ScPipelinesStore } from './+sc-pipelines/sc-pipelines.store';
+import { PipelinesStore } from '../+pipelines/pipelines.store';
 
 export const routes: Routes = [
   {
@@ -7,7 +7,7 @@ export const routes: Routes = [
     data: {
       breadcrumbKey: 'scraper.pipelines.breadcrumbKey',
     },
-    providers: [ScPipelinesStore],
-    loadChildren: () => import('./+sc-pipelines/sc-pipeline.routes').then((m) => m.routes),
+    providers: [PipelinesStore],
+    loadChildren: () => import('../+pipelines/pipeline.routes').then((m) => m.routes),
   },
 ];

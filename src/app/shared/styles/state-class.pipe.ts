@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { StatusDto } from '@api/models/status-dto';
+import { StatusDto } from '@api/models/pipeline/status-dto';
 
 @Pipe({
   name: 'stateClass',

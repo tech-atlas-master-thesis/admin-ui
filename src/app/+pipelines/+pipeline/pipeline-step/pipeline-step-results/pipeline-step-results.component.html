@@ -1,4 +1,4 @@
-<div class="sc-pipeline-step-result">
+<div class="pipeline-step-result">
   @if (result(); as result) {
     @if (result.preview) {
       <a class="p-button font-bold" [href]="resultFileURI()" target="_blank">
@@ -12,7 +12,7 @@
           <ngx-json-viewer [json]="result.data"></ngx-json-viewer>
         }
         @default {
-          <span class="sc-pipeline-step-result__data">
+          <span class="pipeline-step-result__data">
             {{ result.data }}
           </span>
         }

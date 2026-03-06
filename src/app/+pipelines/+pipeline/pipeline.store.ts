@@ -1,18 +1,18 @@
 import { patchState, signalStore, withComputed, withMethods, withProps, withState } from '@ngrx/signals';
 import { computed, inject, resource } from '@angular/core';
 import { firstValueFrom, of } from 'rxjs';
-import { ScraperApi } from '@api/scraper-api/scraper-api';
+import { PipelineApi } from '@api/pipeline-api/pipeline-api';
 
-interface ScPipelineStoreState {
+interface PipelineStoreState {
   pipelineId: number | undefined;
 }
 
-export const ScPipelineStore = signalStore(
-  withState<ScPipelineStoreState>({
+export const PipelineStore = signalStore(
+  withState<PipelineStoreState>({
     pipelineId: undefined,
   }),
   withProps(() => ({
-    _scraperApi: inject(ScraperApi),
+    _scraperApi: inject(PipelineApi),
   })),
   withProps((store) => ({
     _pipelineResource: resource({

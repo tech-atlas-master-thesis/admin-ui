@@ -1,4 +1,4 @@
-<div class="sc-pipeline-steps">
+<div class="pipeline-steps">
   @if (pipelineStepsStore.selectedStep(); as step) {
     <h1>{{ step.displayName ?? step.name }}</h1>
     <h3>{{ 'label.messages' | transloco }}</h3>
@@ -27,6 +27,6 @@
       </p-table>
     </div>
     <h3>{{ 'label.results' | transloco }}</h3>
-    <app-sc-pipeline-step-results [step]="step"></app-sc-pipeline-step-results>
+    <app-pipeline-step-results [step]="step"></app-pipeline-step-results>
   }
 </div>

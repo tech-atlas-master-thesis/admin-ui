@@ -1,25 +1,25 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
-import { StepDto } from '@api/models/step-dto';
-import { StatusDto } from '@api/models/status-dto';
+import { StepDto } from '@api/models/pipeline/step-dto';
+import { StatusDto } from '@api/models/pipeline/status-dto';
 import { TranslocoPipe } from '@jsverse/transloco';
-import { StepResultType } from '@api/models/step-result-dto';
+import { StepResultType } from '@api/models/pipeline/step-result-dto';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
-import { ScPipelineStore } from '../../sc-pipeline.store';
-import { ScraperApi } from '@api/scraper-api/scraper-api';
+import { PipelineStore } from '../../pipeline.store';
+import { PipelineApi } from '@api/pipeline-api/pipeline-api';
 
 @Component({
-  selector: 'app-sc-pipeline-step-results',
+  selector: 'app-pipeline-step-results',
   imports: [TranslocoPipe, NgxJsonViewerModule],
-  templateUrl: './sc-pipeline-step-results.html',
-  styleUrl: './sc-pipeline-step-results.scss',
+  templateUrl: './pipeline-step-results.component.html',
+  styleUrl: './pipeline-step-results.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScPipelineStepResults {
+export class PipelineStepResults {
   protected readonly StatusDto = StatusDto;
   protected readonly StepResultType = StepResultType;
 
-  private readonly pipelineStore = inject(ScPipelineStore);
-  private readonly scraperApi = inject(ScraperApi);
+  private readonly pipelineStore = inject(PipelineStore);
+  private readonly scraperApi = inject(PipelineApi);
 
   step = input<StepDto>();
   result = computed(() => this.step()?.result);

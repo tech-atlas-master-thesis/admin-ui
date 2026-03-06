@@ -1,0 +1,7 @@
+@if (pipelineStore.pipeline(); as pipeline) {
+  <div class="pipeline">
+    <h1>{{ pipeline.displayName ?? pipeline.name }}</h1>
+    <app-pipeline-timeline></app-pipeline-timeline>
+    <app-pipeline-step></app-pipeline-step>
+  </div>
+} @else {}

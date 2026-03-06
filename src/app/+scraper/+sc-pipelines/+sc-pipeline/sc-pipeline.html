@@ -1,7 +1,0 @@
-@if (pipelineStore.pipeline(); as pipeline) {
-  <div class="sc-pipeline">
-    <h1>{{ pipeline.displayName ?? pipeline.name }}</h1>
-    <app-sc-pipeline-timeline></app-sc-pipeline-timeline>
-    <app-sc-pipeline-step></app-sc-pipeline-step>
-  </div>
-} @else {}

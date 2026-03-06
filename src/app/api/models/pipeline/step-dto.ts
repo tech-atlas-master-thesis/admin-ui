@@ -1,5 +1,5 @@
 import { StatusDto } from './status-dto';
-import { StepResultDto } from '@api/models/step-result-dto';
+import { StepResultDto } from '@api/models/pipeline/step-result-dto';
 
 export interface StepDto {
   id: number;

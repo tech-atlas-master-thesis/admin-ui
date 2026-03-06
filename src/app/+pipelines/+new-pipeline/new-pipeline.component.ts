@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, signal } from '@angular/core';
-import { ScPipelinesStore } from '../sc-pipelines.store';
+import { PipelinesStore } from '../pipelines.store';
 import { Select } from 'primeng/select';
 import { SelectItem } from 'primeng/api';
-import { PipelineConfigDto } from '@api/models/pipeline-config-dto';
+import { PipelineConfigDto } from '@api/models/pipeline/pipeline-config-dto';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { Button } from 'primeng/button';
 import { FloatLabel } from 'primeng/floatlabel';
-import { ScNewPipelineForm } from './sc-new-pipeline.interface';
+import { NewPipelineForm } from './new-pipeline.interface';
 import { form } from '@angular/forms/signals';
 import { FormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -14,14 +14,14 @@ import { tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-sc-new-pipeline',
+  selector: 'app-new-pipeline',
   imports: [Select, TranslocoPipe, Button, FloatLabel, FormsModule],
-  templateUrl: './sc-new-pipeline.html',
-  styleUrl: './sc-new-pipeline.scss',
+  templateUrl: './new-pipeline.component.html',
+  styleUrl: './new-pipeline.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScNewPipeline {
-  scPipelinesStore = inject(ScPipelinesStore);
+export class NewPipeline {
+  scPipelinesStore = inject(PipelinesStore);
   router = inject(Router);
   activatedRoute = inject(ActivatedRoute);
   destroyRef = inject(DestroyRef);
@@ -32,10 +32,10 @@ export class ScNewPipeline {
       [],
   );
 
-  creationModel = signal<ScNewPipelineForm>({
+  creationModel = signal<NewPipelineForm>({
     pipelineType: null,
   });
-  pipelineForm = form<ScNewPipelineForm>(this.creationModel);
+  pipelineForm = form<NewPipelineForm>(this.creationModel);
 
   protected onPipelineCreate() {
     const name = this.creationModel().pipelineType?.name;
