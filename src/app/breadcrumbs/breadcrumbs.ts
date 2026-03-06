@@ -35,6 +35,7 @@ export class Breadcrumbs {
   breadcrumbs = computed(() => {
     this.i18nService.currentLanguage();
     const breadcrumbs = this.breadcrumbData();
+    console.log(breadcrumbs);
     return breadcrumbs?.map(
       ({ breadcrumbKey, breadcrumbText, routeUrls, routeParams, data, icon }): MenuItem => ({
         label: breadcrumbKey
@@ -64,6 +65,7 @@ export class Breadcrumbs {
   extractData(route: ActivatedRouteSnapshot | null) {
     if (route !== null) {
       if (route.data['breadcrumbKey']) {
+        console.log(route);
         const urls = route.url.map((url) => url.path);
         const navigable = route.data['navigable'] ?? true;
         this.breadcrumbsSubject.next([

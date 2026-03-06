@@ -4,15 +4,17 @@ import { MenuItem } from 'primeng/api';
 import { Menubar } from 'primeng/menubar';
 import { Button } from 'primeng/button';
 import environment from '../../environment/environment';
+import { Menu } from 'primeng/menu';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
-  selector: 'app-menu',
-  imports: [Menubar, Button],
-  templateUrl: './menu.html',
-  styleUrl: './menu.scss',
+  selector: 'app-menu-bar',
+  imports: [Menubar, Button, Menu, NgOptimizedImage],
+  templateUrl: './menu-bar.component.html',
+  styleUrl: './menu-bar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Menu {
+export class MenuBar {
   private readonly i18nService = inject(I18nService);
   protected readonly BASE_URL = environment.baseUrl;
 
@@ -21,24 +23,36 @@ export class Menu {
     this.i18nService.currentLanguage();
     return [
       {
-        label: this.i18nService.instant('app.menu.scraper'),
+        label: this.i18nService.instant('dashboard.title'),
+        icon: 'pi pi-home',
+        routerLink: '/',
+      },
+      {
+        label: this.i18nService.instant('scraper.title'),
         items: [
           {
-            label: this.i18nService.instant('app.menu.pipelines'),
+            label: this.i18nService.instant('pipelines.title'),
             routerLink: '/scraper/pipelines',
           },
         ],
       },
       {
-        label: this.i18nService.instant('app.menu.transformer'),
+        label: this.i18nService.instant('transformer.title'),
         items: [
           {
-            label: this.i18nService.instant('app.menu.pipelines'),
+            label: this.i18nService.instant('pipelines.title'),
             routerLink: '/transformer/pipelines',
           },
         ],
       },
     ];
+  });
+
+  languageOptions = computed<MenuItem[]>(() => {
+    return this.i18nService.availableLanguages.map((lang) => ({
+      label: lang.label,
+      command: () => this.i18nService.changeLanguage(lang.id),
+    }));
   });
 
   constructor() {

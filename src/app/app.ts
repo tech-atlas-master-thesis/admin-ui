@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Menu } from './menu/menu';
+import { MenuBar } from './menu/menu-bar.component';
 import { Breadcrumbs } from './breadcrumbs/breadcrumbs';
 import { TranslocoService } from '@jsverse/transloco';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -8,7 +8,7 @@ import { OAuthService } from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Menu, Breadcrumbs],
+  imports: [RouterOutlet, MenuBar, Breadcrumbs],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

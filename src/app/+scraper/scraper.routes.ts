@@ -5,9 +5,14 @@ export const routes: Routes = [
   {
     path: 'pipelines',
     data: {
-      breadcrumbKey: 'scraper.pipelines.breadcrumbKey',
+      breadcrumbKey: 'pipelines.breadcrumbKey',
     },
     providers: [PipelinesStore],
     loadChildren: () => import('../+pipelines/pipeline.routes').then((m) => m.routes),
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'pipelines',
   },
 ];

@@ -1,26 +1,47 @@
 {
   "app": {
     "title": "Tech Atlas",
-    "subTitle": "Admin UI",
-    "menu": {
-      "scraper": "Scraper",
-      "transformer": "Transformer",
-      "pipelines": "Pipelines"
-    }
+    "subTitle": "Admin UI"
   },
   "label": {
+    "id": "ID",
+    "name": "Name",
+    "state": "Status",
+    "new": "Neu",
+    "create": "Erstellen",
     "timestamp": "Zeitstempel",
     "type": "Typ",
-    "message": "Nachricht"
+    "message": "Event",
+    "messages": "Events",
+    "results": "Ergebnisse"
   },
   "action": {},
   "format": {
     "dateTime": "yyyy-MM-dd HH:mm:ss"
   },
+  "dashboard": {
+    "title": "Dashboard"
+  },
   "scraper": {
-    "breadcrumbKey": "Scraper",
-    "pipelines": {
-      "breadcrumbKey": "Pipelines"
+    "title": "Scraper",
+    "breadcrumbKey": "Scraper"
+  },
+  "transformer": {
+    "title": "Transformer",
+    "breadcrumbKey": "Transformer"
+  },
+  "pipelines": {
+    "title": "Pipelines",
+    "breadcrumbKey": "Pipelines"
+  },
+  "pipeline": {
+    "breadcrumbKey": "Pipeline {{pipelineId}}",
+    "label": {
+      "type": "Pipeline Typ"
     }
+  },
+  "step": {
+    "noResult": "Keine ergebnisse verfügbar für diesen Step",
+    "downloadResult": "Ergebnisse herunterladen"
   }
 }

@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { HashMap, TranslocoService } from '@jsverse/transloco';
+import { HashMap, LangDefinition, TranslocoService } from '@jsverse/transloco';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, switchMap } from 'rxjs';
 
@@ -7,6 +7,8 @@ import { filter, switchMap } from 'rxjs';
   providedIn: 'root',
 })
 export class I18nService {
+  private readonly STORAGE_KEY = 'i18nService_language';
+
   private readonly translocoService = inject(TranslocoService);
 
   currentLanguage = toSignal(
@@ -18,8 +20,21 @@ export class I18nService {
     ),
   );
 
-  changeLanguage(lang: string) {
-    this.translocoService.setActiveLang(lang);
+  availableLanguages = this.translocoService
+    .getAvailableLangs()
+    .map((lang) => (typeof lang === 'string' ? { id: lang, label: lang } : lang));
+
+  constructor() {
+    const savedLanguage = localStorage.getItem(this.STORAGE_KEY);
+    if (savedLanguage) {
+      this.translocoService.setActiveLang(savedLanguage);
+    }
+  }
+
+  changeLanguage(lang: string | LangDefinition) {
+    const language = typeof lang === 'string' ? lang : lang.id;
+    localStorage.setItem(this.STORAGE_KEY, language);
+    this.translocoService.setActiveLang(language);
   }
 
   instant(identifier: string, params?: HashMap, lang?: string): string {

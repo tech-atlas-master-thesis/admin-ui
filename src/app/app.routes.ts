@@ -9,7 +9,6 @@ export const routes: Routes = [
     path: 'scraper',
     data: {
       breadcrumbKey: 'scraper.breadcrumbKey',
-      navigable: false,
     },
     providers: [
       {
@@ -20,6 +19,10 @@ export const routes: Routes = [
       ScraperApi,
     ],
     loadChildren: () => import('./+scraper/scraper.routes').then((m) => m.routes),
+  },
+  {
+    path: '',
+    loadComponent: () => import('./+dashboard/dashboard').then((m) => m.Dashboard),
   },
   {
     path: '**',

@@ -5,12 +5,15 @@ import { inject } from '@angular/core';
 
 export const routes: Routes = [
   {
+    data: {
+      breadcrumbKey: undefined,
+    },
     path: '',
     loadComponent: () => import('./pipelines.component').then((m) => m.Pipelines),
   },
   {
     data: {
-      breadcrumbKey: 'scraper.newPipeline.breadcrumbKey',
+      breadcrumbKey: 'newPipeline.breadcrumbKey',
     },
     path: 'new',
     loadComponent: () => import('./+new-pipeline/new-pipeline.component').then((m) => m.NewPipeline),
@@ -18,6 +21,9 @@ export const routes: Routes = [
   {
     path: 'pipeline/:pipelineId',
     providers: [PipelineStore, PipelineStepsStore],
+    data: {
+      breadcrumbKey: 'pipeline.breadcrumbKey',
+    },
     resolve: {
       _: (activatedRoute: ActivatedRouteSnapshot) => {
         const parsedId = Number.parseInt(activatedRoute.paramMap.get('pipelineId') ?? '');

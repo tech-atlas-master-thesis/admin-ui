@@ -1,0 +1,14 @@
+<div>
+  <p-menubar [model]="menuItems()">
+    <ng-template #start>
+      <img style="height: 3rem; width: 3rem" ngSrc="/logo.png" alt="Tech-Atlas" height="518" width="586" />
+    </ng-template>
+    <ng-template #end>
+      <div class="action-buttons">
+        <p-button [icon]="isDarkMode() ? 'pi pi-sun' : 'pi pi-moon'" (onClick)="toggleDarkMode()"></p-button>
+        <p-button icon="pi pi-language" (onClick)="languageSelect.toggle($event)"> </p-button>
+      </div>
+      <p-menu #languageSelect [model]="languageOptions()" [popup]="true"></p-menu>
+    </ng-template>
+  </p-menubar>
+</div>
