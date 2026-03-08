@@ -1,7 +1,7 @@
-import { StepConfigDto } from './step-config-dto';
+import { LocalisedString } from '@api/models/localisedString';
 
 export interface PipelineConfigDto {
   name: string;
-  displayName?: string;
-  steps: StepConfigDto[];
+  displayName?: LocalisedString;
+  description?: LocalisedString;
 }

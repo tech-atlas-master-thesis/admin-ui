@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LocalisedPipe } from '@shared/i18n/localised.pipe';
+import { I18nService } from '@shared/i18n/i18n-service';
 
 @Component({
   selector: 'app-new-pipeline',
@@ -23,13 +25,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class NewPipeline {
   scPipelinesStore = inject(PipelinesStore);
   router = inject(Router);
+  i18nService = inject(I18nService);
   activatedRoute = inject(ActivatedRoute);
   destroyRef = inject(DestroyRef);
 
+  localisedPipe = new LocalisedPipe();
+
   typeOptions = computed<SelectItem<PipelineConfigDto>[]>(
     () =>
-      this.scPipelinesStore.pipelineTypes()?.map((type) => ({ label: type.displayName ?? type.name, value: type })) ??
-      [],
+      this.scPipelinesStore.pipelineTypes()?.map((type) => ({
+        label: this.localisedPipe.transform(type.displayName, this.i18nService.currentLanguage(), type.name),
+        value: type,
+      })) ?? [],
   );
 
   creationModel = signal<NewPipelineForm>({

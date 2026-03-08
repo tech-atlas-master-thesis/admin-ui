@@ -1,6 +1,6 @@
 <div class="pipeline-steps">
   @if (pipelineStepsStore.selectedStep(); as step) {
-    <h1>{{ step.displayName ?? step.name }}</h1>
+    <h1>{{ step.displayName | localised: currentLanguage() : step.name }}</h1>
     <h3>{{ 'label.messages' | transloco }}</h3>
     <div>
       <p-table [value]="step.events">

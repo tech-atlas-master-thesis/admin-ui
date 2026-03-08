@@ -1,4 +1,4 @@
-@if (scPipelinesStore.pipelines(); as pipelines) {
+@if (pipelinesStore.pipelines(); as pipelines) {
   <p-table [value]="pipelines">
     <ng-template #header>
       <tr>
@@ -15,7 +15,7 @@
         <td>
           <a [routerLink]="['pipeline', pipeline.id]">{{ pipeline.id }}</a>
         </td>
-        <td>{{ pipeline.displayName ?? pipeline.name }}</td>
+        <td>{{ pipeline.displayName | localised: currentLanguage() : pipeline.name }}</td>
         <td>{{ pipeline.state }}</td>
         <td></td>
       </tr>
