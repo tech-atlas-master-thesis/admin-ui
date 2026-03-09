@@ -6,6 +6,7 @@ import { StepDto } from '../models/pipeline/step-dto';
 import { PipelineCreateDto } from '../models/pipeline/pipeline-create-dto';
 import { PipelineConfigDto } from '../models/pipeline/pipeline-config-dto';
 import { API_BASE_URL } from '@api/pipeline-api/pipeline-api.token';
+import { UserStepConfigDto } from '@api/models/pipeline/user-config/user-step-config-dto';
 
 export class PipelineApi extends Api {
   protected readonly httpClient = inject(HttpClient);
@@ -33,5 +34,9 @@ export class PipelineApi extends Api {
 
   getPipelineTypes() {
     return this.get<PipelineConfigDto[]>('/config/pipeline-types');
+  }
+
+  getPipelineTypeConfigDefinition(pipelineType: string) {
+    return this.get<UserStepConfigDto[]>(`/config/pipeline-types/${pipelineType}`);
   }
 }

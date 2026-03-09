@@ -1,7 +1,7 @@
-import { LocalisedString } from '@api/models/localisedString';
+import { LocalisedStringDto } from '@api/models/localised-string-dto';
 
 export interface PipelineConfigDto {
   name: string;
-  displayName?: LocalisedString;
-  description?: LocalisedString;
+  displayName?: LocalisedStringDto;
+  description?: LocalisedStringDto;
 }

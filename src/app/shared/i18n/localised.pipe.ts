@@ -1,11 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { LocalisedString } from '@api/models/localisedString';
+import { LocalisedStringDto } from '@api/models/localised-string-dto';
 
 @Pipe({
   name: 'localised',
 })
 export class LocalisedPipe implements PipeTransform {
-  transform(value: LocalisedString | undefined, language: string | undefined, fallback?: string): string {
+  transform(value: LocalisedStringDto | undefined, language: string | undefined, fallback?: string): string {
     if (!value) {
       return fallback ?? '';
     }

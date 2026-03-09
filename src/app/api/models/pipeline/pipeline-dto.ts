@@ -1,10 +1,10 @@
 import { StatusDto } from './status-dto';
-import { LocalisedString } from '@api/models/localisedString';
+import { LocalisedStringDto } from '@api/models/localised-string-dto';
 
 export interface PipelineDto {
   id: number;
   name: string;
-  displayName?: LocalisedString;
-  description?: LocalisedString;
+  displayName?: LocalisedStringDto;
+  description?: LocalisedStringDto;
   state: StatusDto;
 }

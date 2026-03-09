@@ -1,14 +1,14 @@
 import { StatusDto } from './status-dto';
 import { StepResultDto } from '@api/models/pipeline/step-result-dto';
-import { LocalisedString } from '@api/models/localisedString';
+import { LocalisedStringDto } from '@api/models/localised-string-dto';
+import { StepEventDto } from '@api/models/pipeline/step-event-dto';
 
 export interface StepDto {
   id: number;
   name: string;
-  displayName?: LocalisedString;
-  description?: LocalisedString;
+  displayName?: LocalisedStringDto;
+  description?: LocalisedStringDto;
   state: StatusDto;
-  events: string[];
-
+  events: StepEventDto[];
   result: StepResultDto;
 }
