@@ -1,0 +1,23 @@
+<div>
+  @if (!isLoading()) {
+    @for (step of Object.entries(configDefinition()); track step[0]) {
+      @let stepName = step[0];
+      @let stepDefinition = step[1];
+      @if (configForm().controls[stepName]; as stepForm) {
+        <h3>{{ stepDefinition.displayName | localised: language() : stepName }}</h3>
+        @for (configDefinition of stepDefinition?.userConfig; track $index) {
+          @let configName = configDefinition.name;
+          @if (stepForm.controls[configName]; as configForm) {
+            <div>
+              <span>{{ configDefinition.displayName | localised: language() : configName }}</span>
+              {{ configDefinition.type }}
+              @switch (configDefinition.type) {}
+            </div>
+          }
+        }
+      }
+    }
+  } @else {
+    Loading
+  }
+</div>

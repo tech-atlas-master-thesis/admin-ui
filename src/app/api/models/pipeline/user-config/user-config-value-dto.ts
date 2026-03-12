@@ -1,1 +1,1 @@
-export type UserConfigValueDto = string | number | boolean | Date | string[] | Record<string, string>;
+export type UserConfigValueDto = null | string | number | boolean | Date | string[] | Record<string, string>;

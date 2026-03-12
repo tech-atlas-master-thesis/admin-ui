@@ -16,7 +16,17 @@
       </p-floatlabel>
     </div>
   </section>
+  <app-step-configuration
+    [configForm]="pipelineConfigForm()"
+    [configDefinition]="stepConfigDefinition()"
+    [isLoading]="pipelineConfiguration.isLoading()"
+  ></app-step-configuration>
   <footer>
-    <p-button [label]="'label.create' | transloco" icon="pi pi-plus" (onClick)="onPipelineCreate()"></p-button>
+    <p-button
+      [label]="'label.create' | transloco"
+      icon="pi pi-plus"
+      [disabled]="pipelineForm().invalid() || configFormValid() || pipelineConfiguration.isLoading()"
+      (onClick)="onPipelineCreate()"
+    ></p-button>
   </footer>
 </div>

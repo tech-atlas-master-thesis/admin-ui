@@ -6,6 +6,7 @@ import { LocalisedStringDto } from '@api/models/localised-string-dto';
 })
 export class LocalisedPipe implements PipeTransform {
   transform(value: LocalisedStringDto | undefined, language: string | undefined, fallback?: string): string {
+    console.log(value, language);
     if (!value) {
       return fallback ?? '';
     }
@@ -15,6 +16,7 @@ export class LocalisedPipe implements PipeTransform {
     if (!language) {
       return fallback ?? '';
     }
+    console.log(value, language);
     return value[language] ?? fallback ?? '';
   }
 }
