@@ -6,7 +6,7 @@
       [class.pipeline-timeline__step--selected]="step.name === pipelineStepsStore.step()"
       (click)="pipelineStepsStore.selectStep(step)"
     >
-      <span>{{ step.displayName | localised: currentLanguage() : step.name }}</span
+      <span>{{ step.displayName | localised: step.name }}</span
       ><span>{{ step.state }}</span>
     </button>
   } @empty {

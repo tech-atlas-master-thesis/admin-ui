@@ -1,1 +1,43 @@
-<p>configuration-value works!</p>
+<div #value class="fluid-form-element">
+  @let label = configDefinition().displayName | localised: configDefinition().name;
+  <div class="configuration-value__label">
+    <label [for]="value.childNodes[1]">{{ label }}</label>
+    @if (configDefinition().displayName; as description) {
+      <span class="pi pi-info-circle" [pTooltip]="description | localised"></span>
+    }
+  </div>
+  @switch (configDefinition().type) {
+    @case (UserConfigTypeDto.STRING) {
+      <textarea rows="1" pTextarea [autoResize]="true" [formControl]="configForm()"></textarea>
+    }
+    @case (UserConfigTypeDto.INTEGER) {
+      <p-input-number inputId="integeronly" [formControl]="configForm()" />
+    }
+    @case (UserConfigTypeDto.FLOAT) {
+      <p-input-number [formControl]="configForm()" />
+    }
+    @case (UserConfigTypeDto.LIST) {
+      <p-auto-complete
+        [formControl]="configForm()"
+        inputId="chips-combined"
+        multiple
+        fluid
+        [typeahead]="false"
+        [addOnBlur]="true"
+        [addOnTab]="true"
+        separator=","
+        placeholder="Use Tab, Blur, or Comma to add items..."
+      />
+    }
+    @case (UserConfigTypeDto.ENUM) {
+      <input type="text" pInputText [formControl]="configForm()" />
+      <p-select [options]="configDefinition().enumValues" [formControl]="configForm()"></p-select>
+    }
+    @case (UserConfigTypeDto.MAPPING) {
+      <input type="text" pInputText [formControl]="configForm()" />
+    }
+    @case (UserConfigTypeDto.DATE) {
+      <input type="text" pInputText [formControl]="configForm()" />
+    }
+  }
+</div>

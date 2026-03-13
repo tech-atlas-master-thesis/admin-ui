@@ -30,3 +30,16 @@ a {
   gap: 0.5rem;
   align-items: center;
 }
+
+.fluid-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem 1rem;
+
+  .fluid-form-element {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

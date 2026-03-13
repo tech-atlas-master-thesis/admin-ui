@@ -5,10 +5,12 @@ import { PipelineConfigForm } from '../new-pipeline.interface';
 import { StepConfigDto } from '@api/models/pipeline/step-config-dto';
 import { LocalisedPipe } from '@shared/i18n/localised.pipe';
 import { I18nService } from '@shared/i18n/i18n-service';
+import { ConfigurationValue } from './configuration-value/configuration-value';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-step-configuration',
-  imports: [LocalisedPipe],
+  imports: [LocalisedPipe, ConfigurationValue, TranslocoPipe],
   templateUrl: './step-configuration.html',
   styleUrl: './step-configuration.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

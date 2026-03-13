@@ -40,6 +40,10 @@
       "type": "Pipeline Typ"
     }
   },
+  "newPipeline": {
+    "breadcrumbKey": "Neue Pipeline",
+    "noConfig": "Keine Konfiguration verfügbar für diesen Schritt"
+  },
   "step": {
     "noResult": "Keine ergebnisse verfügbar für diesen Step",
     "downloadResult": "Ergebnisse herunterladen"

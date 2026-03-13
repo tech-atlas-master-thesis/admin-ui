@@ -48,13 +48,15 @@ export class NewPipeline {
 
   localisedPipe = new LocalisedPipe();
 
-  typeOptions = computed<SelectItem<PipelineConfigDto>[]>(
-    () =>
+  typeOptions = computed<SelectItem<PipelineConfigDto>[]>(() => {
+    this.i18nService.currentLanguage();
+    return (
       this.pipelinesStore.pipelineTypes()?.map((type) => ({
-        label: this.localisedPipe.transform(type.displayName, this.i18nService.currentLanguage(), type.name),
+        label: this.localisedPipe.transform(type.displayName, type.name),
         value: type,
-      })) ?? [],
-  );
+      })) ?? []
+    );
+  });
 
   creationModel = signal<NewPipelineForm>({
     pipelineType: null,

@@ -15,7 +15,7 @@
         <td>
           <a [routerLink]="['pipeline', pipeline.id]">{{ pipeline.id }}</a>
         </td>
-        <td>{{ pipeline.displayName | localised: currentLanguage() : pipeline.name }}</td>
+        <td>{{ pipeline.displayName | localised: pipeline.name }}</td>
         <td>{{ pipeline.state }}</td>
         <td></td>
       </tr>
