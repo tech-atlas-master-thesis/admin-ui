@@ -18,6 +18,10 @@ import { InputText } from 'primeng/inputtext';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { AutoFocus } from 'primeng/autofocus';
 import { form, FormField, required } from '@angular/forms/signals';
+import { UserConfigEnumDto } from '@api/models/pipeline/user-config/user-config-enum-dto';
+import { Select } from 'primeng/select';
+import { LocalisedPipe } from '@shared/i18n/localised.pipe';
+import { Tooltip } from 'primeng/tooltip';
 
 type Mapping = Record<string, string>;
 
@@ -28,7 +32,20 @@ interface AddMappingForm {
 
 @Component({
   selector: 'app-input-mapping',
-  imports: [FormsModule, AutoComplete, Button, Popover, InputGroup, InputText, TranslocoPipe, AutoFocus, FormField],
+  imports: [
+    FormsModule,
+    AutoComplete,
+    Button,
+    Popover,
+    InputGroup,
+    InputText,
+    TranslocoPipe,
+    AutoFocus,
+    FormField,
+    Select,
+    LocalisedPipe,
+    Tooltip,
+  ],
   templateUrl: './input-mapping.html',
   styleUrl: './input-mapping.scss',
   providers: [
@@ -43,7 +60,9 @@ interface AddMappingForm {
 export class InputMapping implements ControlValueAccessor {
   mappingAddKey = viewChild<ElementRef<HTMLInputElement>>('mappingAddKey');
 
+  enumValues = input<UserConfigEnumDto[]>();
   readonly = input<boolean>();
+
   value = signal<Mapping>({});
   mappingStrings = computed(() => Object.entries(this.value()).map(([key, value]) => `${key} -> ${value}`));
   disabled = signal(false);

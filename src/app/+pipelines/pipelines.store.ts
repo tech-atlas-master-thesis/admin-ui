@@ -32,7 +32,7 @@ export const PipelinesStore = signalStore(
     }
 
     function createPipeline$(pipeline: PipelineCreateDto) {
-      return store._scraperApi.createPipeline({ name: pipeline.name, config: {} }).pipe(tap(() => reload()));
+      return store._scraperApi.createPipeline(pipeline).pipe(tap(() => reload()));
     }
 
     return {

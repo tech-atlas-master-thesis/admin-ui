@@ -130,7 +130,17 @@ export class NewPipeline {
       return;
     }
     this.pipelinesStore
-      .createPipeline$({ name, config: {} })
+      .createPipeline$({
+        name,
+        config: Object.fromEntries(
+          Object.entries(this.pipelineConfigForm().value)
+            .filter(([, value]) => value !== undefined && value !== null)
+            .map(([key, value]) => [
+              key,
+              Object.fromEntries(Object.entries(value ?? {}).filter(([, value]) => value !== undefined)),
+            ]),
+        ),
+      })
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         tap((pipeline) => this.router.navigate(['pipeline', pipeline.id], { relativeTo: this.activatedRoute.parent })),

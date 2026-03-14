@@ -31,10 +31,22 @@
     }
     @case (UserConfigTypeDto.ENUM) {
       <input type="text" pInputText [formControl]="configForm()" />
-      <p-select [options]="configDefinition().enumValues" [formControl]="configForm()"></p-select>
+      <p-select [options]="configDefinition().enumValues" [formControl]="configForm()" dataKey="name">
+        <ng-template #item let-item>
+          <span>
+            {{ item.displayName | localised }}
+            @if (item.description) {
+              <span class="pi pi-info-circle" [pTooltip]="item.description | localised"></span>
+            }
+          </span>
+        </ng-template>
+        <ng-template #selectedItem let-item>
+          {{ item.displayName | localised }}
+        </ng-template>
+      </p-select>
     }
     @case (UserConfigTypeDto.MAPPING) {
-      <app-input-mapping [formControl]="configForm()"></app-input-mapping>
+      <app-input-mapping [formControl]="configForm()" [enumValues]="configDefinition().enumValues"></app-input-mapping>
     }
     @case (UserConfigTypeDto.DATE) {
       <input type="text" pInputText [formControl]="configForm()" />

@@ -14,7 +14,23 @@
   <div class="input-mapping__add">
     <input pInputText #mappingAddKey [pAutoFocus]="true" [formField]="addMappingForm.key" />
     ->
-    <input pInputText [formField]="addMappingForm.value" (keydown.enter)="onMappingAdded()" />
+    @if (enumValues(); as enumValues) {
+      <p-select [options]="enumValues" [(ngModel)]="addMappingForm.value().value" dataKey="name">
+        <ng-template #item let-item>
+          <span>
+            {{ item.displayName | localised }}
+            @if (item.description) {
+              <span class="pi pi-info-circle" [pTooltip]="item.description | localised"></span>
+            }
+          </span>
+        </ng-template>
+        <ng-template #selectedItem let-item>
+          {{ item.displayName | localised }}
+        </ng-template>
+      </p-select>
+    } @else {
+      <input pInputText [formField]="addMappingForm.value" (keydown.enter)="onMappingAdded()" />
+    }
     <p-button
       icon="pi pi-plus"
       [label]="'action.add' | transloco"
