@@ -1,0 +1,25 @@
+<p-input-group>
+  <p-auto-complete
+    [ngModel]="mappingStrings()"
+    inputId="chips-combined"
+    multiple
+    fluid
+    [forceSelection]="true"
+    [readonly]="true"
+    (onFocus)="onInputTouched()"
+  ></p-auto-complete>
+  <p-button icon="pi pi-plus" severity="secondary" (onClick)="popover.toggle($event)"></p-button>
+</p-input-group>
+<p-popover #popover>
+  <div class="input-mapping__add">
+    <input pInputText #mappingAddKey [pAutoFocus]="true" [formField]="addMappingForm.key" />
+    ->
+    <input pInputText [formField]="addMappingForm.value" (keydown.enter)="onMappingAdded()" />
+    <p-button
+      icon="pi pi-plus"
+      [label]="'action.add' | transloco"
+      [disabled]="addMappingForm().invalid()"
+      (onClick)="onMappingAdded()"
+    ></p-button>
+  </div>
+</p-popover>

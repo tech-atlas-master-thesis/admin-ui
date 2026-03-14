@@ -17,7 +17,6 @@ export class LocalisedPipe implements PipeTransform {
   }
 
   transform(value: LocalisedStringDto | undefined, fallback?: string): string {
-    console.log(value);
     if (!value) {
       return fallback ?? '';
     }
@@ -28,7 +27,6 @@ export class LocalisedPipe implements PipeTransform {
     if (!language) {
       return fallback ?? '';
     }
-    console.log(value, language);
     return value[language] ?? fallback ?? '';
   }
 }

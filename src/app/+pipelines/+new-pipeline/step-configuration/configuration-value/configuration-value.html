@@ -34,7 +34,7 @@
       <p-select [options]="configDefinition().enumValues" [formControl]="configForm()"></p-select>
     }
     @case (UserConfigTypeDto.MAPPING) {
-      <input type="text" pInputText [formControl]="configForm()" />
+      <app-input-mapping [formControl]="configForm()"></app-input-mapping>
     }
     @case (UserConfigTypeDto.DATE) {
       <input type="text" pInputText [formControl]="configForm()" />

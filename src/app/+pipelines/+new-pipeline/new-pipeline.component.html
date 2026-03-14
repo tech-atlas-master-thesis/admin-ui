@@ -25,7 +25,7 @@
     <p-button
       [label]="'label.create' | transloco"
       icon="pi pi-plus"
-      [disabled]="pipelineForm().invalid() || configFormValid() || pipelineConfiguration.isLoading()"
+      [disabled]="pipelineForm().invalid() || !configFormValid() || pipelineConfiguration.isLoading()"
       (onClick)="onPipelineCreate()"
     ></p-button>
   </footer>

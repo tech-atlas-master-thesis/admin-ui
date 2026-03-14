@@ -20,7 +20,7 @@ import { NewPipelineForm, PipelineConfigForm } from './new-pipeline.interface';
 import { form, required, schema } from '@angular/forms/signals';
 import { FormsModule, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { firstValueFrom, map, of, switchMap, tap } from 'rxjs';
+import { firstValueFrom, map, of, startWith, switchMap, tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalisedPipe } from '@shared/i18n/localised.pipe';
 import { I18nService } from '@shared/i18n/i18n-service';
@@ -107,7 +107,7 @@ export class NewPipeline {
   pipelineConfigForm = computed(() => this.getPipelineForm(this.userConfigDefinition()));
   configFormValid = toSignal(
     toObservable(this.pipelineConfigForm).pipe(
-      switchMap((form) => form.statusChanges),
+      switchMap((form) => form.statusChanges.pipe(startWith(form.status))),
       map((status) => status === 'VALID'),
     ),
   );
@@ -115,9 +115,10 @@ export class NewPipeline {
   constructor() {
     effect(() => {
       console.log(
-        this.pipelineForm().invalid(),
+        this.pipelineForm().errors(),
+        this.pipelineForm().valid(),
         this.configFormValid(),
-        this.pipelineConfiguration.isLoading(),
+        !this.pipelineConfiguration.isLoading(),
         this.pipelineForm().invalid() || !this.configFormValid() || this.pipelineConfiguration.isLoading(),
       );
     });

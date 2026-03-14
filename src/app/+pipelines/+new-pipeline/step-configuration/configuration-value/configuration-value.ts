@@ -10,10 +10,21 @@ import { Textarea } from 'primeng/textarea';
 import { Select } from 'primeng/select';
 import { AutoComplete } from 'primeng/autocomplete';
 import { Tooltip } from 'primeng/tooltip';
+import { InputMapping } from '@shared/input-mapping/input-mapping';
 
 @Component({
   selector: 'app-configuration-value',
-  imports: [LocalisedPipe, InputText, ReactiveFormsModule, InputNumber, Textarea, Select, AutoComplete, Tooltip],
+  imports: [
+    LocalisedPipe,
+    InputText,
+    ReactiveFormsModule,
+    InputNumber,
+    Textarea,
+    Select,
+    AutoComplete,
+    Tooltip,
+    InputMapping,
+  ],
   templateUrl: './configuration-value.html',
   styleUrl: './configuration-value.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
