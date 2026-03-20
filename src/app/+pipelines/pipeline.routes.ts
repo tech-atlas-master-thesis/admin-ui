@@ -26,10 +26,8 @@ export const routes: Routes = [
     },
     resolve: {
       _: (activatedRoute: ActivatedRouteSnapshot) => {
-        const parsedId = Number.parseInt(activatedRoute.paramMap.get('pipelineId') ?? '');
-        const pipelineId = Number.isNaN(parsedId) ? undefined : parsedId;
-        inject(PipelineStore).setPipelineId(pipelineId);
-        inject(PipelineStepsStore).setPipelineId(pipelineId);
+        const id = activatedRoute.paramMap.get('pipelineId') ?? undefined;
+        inject(PipelineStore).setPipelineId(id);
       },
     },
     loadChildren: () => import('./+pipeline/pipeline.routes').then((m) => m.routes),

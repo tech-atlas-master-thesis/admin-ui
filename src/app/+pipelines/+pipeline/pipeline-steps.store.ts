@@ -1,23 +1,21 @@
-import { patchState, signalStore, withComputed, withMethods, withProps, withState } from '@ngrx/signals';
+import { signalStore, withComputed, withMethods, withProps } from '@ngrx/signals';
 import { computed, inject, resource } from '@angular/core';
 import { firstValueFrom, of } from 'rxjs';
 import { PipelineApi } from '@api/pipeline-api/pipeline-api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { StepDto } from '@api/models/pipeline/step-dto';
-
-interface PipelineStepsStoreState {
-  pipelineId: number | undefined;
-}
+import { PipelineStore } from './pipeline.store';
 
 export const PipelineStepsStore = signalStore(
-  withState<PipelineStepsStoreState>({
-    pipelineId: undefined,
-  }),
   withProps(() => ({
+    _pipelineStore: inject(PipelineStore),
     _scraperApi: inject(PipelineApi),
     _activatedRoute: inject(ActivatedRoute),
     _router: inject(Router),
+  })),
+  withComputed((store) => ({
+    pipelineId: computed(() => store._pipelineStore.pipelineId()),
   })),
   withProps((store) => ({
     _stepsResource: resource({
@@ -41,10 +39,6 @@ export const PipelineStepsStore = signalStore(
     }),
   })),
   withMethods((store) => {
-    function setPipelineId(pipelineId?: number) {
-      patchState(store, { pipelineId });
-    }
-
     function selectStep(step: StepDto) {
       store._router.navigate([], {
         relativeTo: store._activatedRoute,
@@ -55,7 +49,6 @@ export const PipelineStepsStore = signalStore(
 
     return {
       selectStep,
-      setPipelineId,
     };
   }),
 );

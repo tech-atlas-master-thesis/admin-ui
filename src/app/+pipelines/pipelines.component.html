@@ -1,5 +1,16 @@
 @if (pipelinesStore.pipelines(); as pipelines) {
-  <p-table [value]="pipelines">
+  <p-table
+    [value]="pipelines"
+    [lazy]="true"
+    [paginator]="true"
+    [first]="TableConstants.INITIAL_OFFSET"
+    [rows]="TableConstants.INITIAL_LIMIT"
+    [totalRecords]="pipelinesStore.totalItems() ?? 0"
+    [rowsPerPageOptions]="TableConstants.SIZE_OPTIONS"
+    (onFilter)="onFilter($event)"
+    (onSort)="onSort($event)"
+    (onPage)="onPage($event)"
+  >
     <ng-template #header>
       <tr>
         <th>{{ 'label.id' | transloco }}</th>

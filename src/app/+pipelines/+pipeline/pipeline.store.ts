@@ -4,7 +4,7 @@ import { firstValueFrom, of } from 'rxjs';
 import { PipelineApi } from '@api/pipeline-api/pipeline-api';
 
 interface PipelineStoreState {
-  pipelineId: number | undefined;
+  pipelineId: string | undefined;
 }
 
 export const PipelineStore = signalStore(
@@ -34,7 +34,7 @@ export const PipelineStore = signalStore(
     loading: computed(() => store._pipelineResource.isLoading()),
   })),
   withMethods((store) => {
-    function setPipelineId(pipelineId?: number) {
+    function setPipelineId(pipelineId?: string) {
       patchState(store, { pipelineId: pipelineId ?? undefined });
     }
 

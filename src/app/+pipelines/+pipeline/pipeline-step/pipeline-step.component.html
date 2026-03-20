@@ -6,21 +6,21 @@
       <p-table [value]="step.events">
         <ng-template #header>
           <tr>
-            <th>{{ 'label.timestamp' | transloco }}</th>
             <th>{{ 'label.type' | transloco }}</th>
             <th>{{ 'label.message' | transloco }}</th>
+            <th>{{ 'label.timestamp' | transloco }}</th>
           </tr>
         </ng-template>
         <ng-template #body let-event>
           <tr>
             <td>
-              {{ event.timestamp | date: ('format.dateTime' | transloco) }}
-            </td>
-            <td>
               {{ event.type }}
             </td>
             <td>
               {{ event.message }}
+            </td>
+            <td>
+              {{ event.timestamp | date: ('format.dateTime' | transloco) }}
             </td>
           </tr>
         </ng-template>

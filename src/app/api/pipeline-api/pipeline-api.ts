@@ -7,24 +7,34 @@ import { PipelineCreateDto } from '../models/pipeline/pipeline-create-dto';
 import { PipelineConfigDto } from '../models/pipeline/pipeline-config-dto';
 import { API_BASE_URL } from '@api/pipeline-api/pipeline-api.token';
 import { StepConfigDto } from '@api/models/pipeline/step-config-dto';
+import { PaginatorState } from 'primeng/paginator';
+import { PipelineFilterDto } from '@api/models/pipeline/pipeline-filter-dto';
+import { PaginatedListDto } from '@api/models/paginated-list-dto';
+import { PipelineSortDto } from '@api/models/pipeline/pipeline-sort-dto';
+import { TableConstants } from '@shared/contants/table.constants';
 
 export class PipelineApi extends Api {
   protected readonly httpClient = inject(HttpClient);
   protected readonly baseUrl = inject(API_BASE_URL);
 
-  getPipelines() {
-    return this.get<PipelineDto[]>('/pipelines');
+  getPipelines(pagination: PaginatorState, _filter: PipelineFilterDto, _sort: PipelineSortDto[]) {
+    return this.get<PaginatedListDto<PipelineDto>>('/pipelines', {
+      params: {
+        offset: pagination.first ?? TableConstants.INITIAL_OFFSET,
+        limit: pagination.rows ?? TableConstants.INITIAL_LIMIT,
+      },
+    });
   }
 
-  getPipeline(pipelineId: number) {
+  getPipeline(pipelineId: string) {
     return this.get<PipelineDto>(`/pipelines/${pipelineId}`);
   }
 
-  getSteps(pipelineId: number) {
+  getSteps(pipelineId: string) {
     return this.get<StepDto[]>(`/pipelines/${pipelineId}/steps`);
   }
 
-  getStepResultFilePath(pipelineId: number, stepId: number) {
+  getStepResultFilePath(pipelineId: string, stepId: string) {
     return `${this.baseUrl}/pipelines/${pipelineId}/steps/${stepId}/result`;
   }
 

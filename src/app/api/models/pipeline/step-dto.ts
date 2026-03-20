@@ -4,7 +4,7 @@ import { LocalisedStringDto } from '@api/models/localised-string-dto';
 import { StepEventDto } from '@api/models/pipeline/step-event-dto';
 
 export interface StepDto {
-  id: number;
+  id: string;
   name: string;
   displayName?: LocalisedStringDto;
   description?: LocalisedStringDto;
