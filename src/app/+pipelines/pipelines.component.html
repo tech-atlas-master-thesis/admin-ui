@@ -7,15 +7,64 @@
     [rows]="TableConstants.INITIAL_LIMIT"
     [totalRecords]="pipelinesStore.totalItems() ?? 0"
     [rowsPerPageOptions]="TableConstants.SIZE_OPTIONS"
+    sortMode="multiple"
+    [multiSortMeta]="pipelinesStore.sort()"
+    [filters]="pipelinesStore.filterCleaned()"
     (onFilter)="onFilter($event)"
     (onSort)="onSort($event)"
     (onPage)="onPage($event)"
   >
     <ng-template #header>
       <tr>
-        <th>{{ 'label.id' | transloco }}</th>
-        <th>{{ 'label.name' | transloco }}</th>
-        <th>{{ 'label.state' | transloco }}</th>
+        <th style="width: 25%">{{ 'label.id' | transloco }}</th>
+        <th style="width: 25%" pSortableColumn="name">
+          <div class="table-header-with-actions">
+            <span>{{ 'label.name' | transloco }}</span>
+            <p-sortIcon field="name"></p-sortIcon>
+            <p-columnFilter
+              field="name"
+              type="text"
+              display="menu"
+              matchMode="contains"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false"
+              [showButtons]="false"
+            ></p-columnFilter>
+          </div>
+        </th>
+        <th style="width: 25%" pSortableColumn="type">
+          <div class="table-header-with-actions">
+            {{ 'label.type' | transloco }}
+            <p-sortIcon field="type"></p-sortIcon>
+            <p-columnFilter
+              field="type"
+              type="text"
+              display="menu"
+              matchMode="contains"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false"
+              [showButtons]="false"
+            ></p-columnFilter>
+          </div>
+        </th>
+        <th style="width: 25%" pSortableColumn="state">
+          <div class="table-header-with-actions">
+            {{ 'label.state' | transloco }}
+            <p-sortIcon field="state"></p-sortIcon>
+            <p-columnFilter
+              field="state"
+              type="text"
+              display="menu"
+              matchMode="contains"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false"
+              [showButtons]="false"
+            ></p-columnFilter>
+          </div>
+        </th>
         <th style="width: 0">
           <p-button [label]="'label.new' | transloco" icon="pi pi-plus" [routerLink]="'new'"></p-button>
         </th>
@@ -26,9 +75,16 @@
         <td>
           <a [routerLink]="['pipeline', pipeline.id]">{{ pipeline.id }}</a>
         </td>
-        <td>{{ pipeline.displayName | localised: pipeline.name }}</td>
+        <td>
+          <span [pTooltip]="pipeline.description ? pipeline.description : undefined">{{
+            pipeline.displayName | localised: pipeline.name
+          }}</span>
+        </td>
+        <td>{{ pipeline.name }}</td>
         <td>{{ pipeline.state }}</td>
-        <td></td>
+        <td>
+          <app-audit-panel [created]="pipeline.created"></app-audit-panel>
+        </td>
       </tr>
     </ng-template>
   </p-table>

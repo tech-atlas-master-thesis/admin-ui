@@ -42,4 +42,18 @@ a {
     flex-direction: column;
     gap: 0.5rem;
   }
+
+  .fluid-form-full-width {
+    grid-column: 1/-1;
+  }
+}
+
+.table-header-with-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  p-sorticon {
+    margin-left: 0.5rem;
+  }
 }

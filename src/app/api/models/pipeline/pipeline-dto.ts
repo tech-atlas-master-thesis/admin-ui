@@ -1,10 +1,13 @@
 import { StatusDto } from './status-dto';
-import { LocalisedStringDto } from '@api/models/localised-string-dto';
+import { UserConfigDto } from '@api/models/pipeline/user-config/user-config-dto';
+import { AuditInfoDto } from '@api/models/audit-info-dto';
 
 export interface PipelineDto {
   id: string;
+  type: string;
   name: string;
-  displayName?: LocalisedStringDto;
-  description?: LocalisedStringDto;
+  description: string;
   state: StatusDto;
+  userConfig: UserConfigDto;
+  created: AuditInfoDto;
 }

@@ -1,0 +1,10 @@
+<p-button
+  [icon]="icon()"
+  [severity]="severity()"
+  [title]="'label.info' | transloco"
+  [text]="true"
+  (onClick)="popover.toggle($event)"
+></p-button>
+<p-popover #popover>
+  <ng-content></ng-content>
+</p-popover>

@@ -1,0 +1,12 @@
+<app-info-panel>
+  <div class="audit-panel">
+    @if (created(); as created) {
+      <h3>{{ 'label.created' | transloco }}</h3>
+      <app-audit-info [auditInfo]="created"></app-audit-info>
+    }
+    @if (modified(); as modified) {
+      <h3>{{ 'label.modified' | transloco }}</h3>
+      <app-audit-info [auditInfo]="modified"></app-audit-info>
+    }
+  </div>
+</app-info-panel>

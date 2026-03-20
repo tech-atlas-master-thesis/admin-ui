@@ -14,10 +14,9 @@ import { Select } from 'primeng/select';
 import { SelectItem } from 'primeng/api';
 import { PipelineConfigDto } from '@api/models/pipeline/pipeline-config-dto';
 import { TranslocoPipe } from '@jsverse/transloco';
-import { Button } from 'primeng/button';
 import { FloatLabel } from 'primeng/floatlabel';
 import { NewPipelineForm, PipelineConfigForm } from './new-pipeline.interface';
-import { form, required, schema } from '@angular/forms/signals';
+import { form, FormField, required, schema } from '@angular/forms/signals';
 import { FormsModule, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { firstValueFrom, map, of, startWith, switchMap, tap } from 'rxjs';
@@ -26,13 +25,16 @@ import { LocalisedPipe } from '@shared/i18n/localised.pipe';
 import { I18nService } from '@shared/i18n/i18n-service';
 import { PipelineApi } from '@api/pipeline-api/pipeline-api';
 import { UserConfigDto } from '@api/models/pipeline/user-config/user-config-dto';
-import { StepConfiguration } from './step-configuration/step-configuration';
 import { UserConfigDefinitionDto } from '@api/models/pipeline/user-config/user-config-definition-dto';
 import { UserConfigValueDto } from '@api/models/pipeline/user-config/user-config-value-dto';
+import { InputText } from 'primeng/inputtext';
+import { Textarea } from 'primeng/textarea';
+import { StepConfiguration } from './step-configuration/step-configuration';
+import { Button } from 'primeng/button';
 
 @Component({
   selector: 'app-new-pipeline',
-  imports: [Select, TranslocoPipe, Button, FloatLabel, FormsModule, StepConfiguration],
+  imports: [Select, TranslocoPipe, FloatLabel, FormsModule, InputText, FormField, Textarea, StepConfiguration, Button],
   templateUrl: './new-pipeline.component.html',
   styleUrl: './new-pipeline.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -52,7 +54,7 @@ export class NewPipeline {
     this.i18nService.currentLanguage();
     return (
       this.pipelinesStore.pipelineTypes()?.map((type) => ({
-        label: this.localisedPipe.transform(type.displayName, type.name),
+        label: this.localisedPipe.transform(type.displayName, type.type),
         value: type,
       })) ?? []
     );
@@ -60,13 +62,18 @@ export class NewPipeline {
 
   creationModel = signal<NewPipelineForm>({
     pipelineType: null,
+    name: '',
+    description: '',
   });
   pipelineForm = form<NewPipelineForm>(
     this.creationModel,
-    schema((path) => required(path.pipelineType)),
+    schema((path) => {
+      required(path.pipelineType);
+      required(path.name);
+    }),
   );
 
-  pipelineType = computed(() => this.pipelineForm.pipelineType().value()?.name);
+  pipelineType = computed(() => this.pipelineForm.pipelineType().value()?.type);
   pipelineConfiguration = resource({
     params: this.pipelineType,
     loader: (pipelineType) =>
@@ -125,13 +132,16 @@ export class NewPipeline {
   }
 
   protected onPipelineCreate() {
-    const name = this.creationModel().pipelineType?.name;
-    if (!name) {
+    const { pipelineType, name, description } = this.creationModel();
+    const type = pipelineType?.type;
+    if (!type || !name) {
       return;
     }
     this.pipelinesStore
       .createPipeline$({
+        type,
         name,
+        description,
         config: Object.fromEntries(
           Object.entries(this.pipelineConfigForm().value)
             .filter(([, value]) => value !== undefined && value !== null)

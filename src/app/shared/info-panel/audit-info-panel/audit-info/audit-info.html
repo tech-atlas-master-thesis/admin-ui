@@ -1,0 +1,15 @@
+<div class="audit-info">
+  @let date = auditInfo().at;
+  @let user = auditInfo().by;
+  <span>{{ 'label.at' | transloco }}</span>
+  <span>{{ date | date: ('format.dateTime' | transloco) }}</span>
+  <span>{{ 'label.by' | transloco }}</span>
+  <span>
+    {{ user.name }}
+    @if (user.email) {
+      (
+      <a [href]="`mailto://${user.email}`">{{ user.email }}</a>
+      )
+    }
+  </span>
+</div>

@@ -10,16 +10,21 @@ import { StepConfigDto } from '@api/models/pipeline/step-config-dto';
 import { PaginatorState } from 'primeng/paginator';
 import { PipelineFilterDto } from '@api/models/pipeline/pipeline-filter-dto';
 import { PaginatedListDto } from '@api/models/paginated-list-dto';
-import { PipelineSortDto } from '@api/models/pipeline/pipeline-sort-dto';
 import { TableConstants } from '@shared/contants/table.constants';
+import { SortMeta } from 'primeng/api';
+import { SortUtil } from '@shared/util/sort';
+import { FilterUtil } from '@shared/util/filter';
 
 export class PipelineApi extends Api {
   protected readonly httpClient = inject(HttpClient);
   protected readonly baseUrl = inject(API_BASE_URL);
 
-  getPipelines(pagination: PaginatorState, _filter: PipelineFilterDto, _sort: PipelineSortDto[]) {
+  getPipelines(pagination: PaginatorState, filter: PipelineFilterDto, sort: SortMeta[]) {
+    console.log(filter, sort);
     return this.get<PaginatedListDto<PipelineDto>>('/pipelines', {
       params: {
+        sort: SortUtil.getSortString(sort),
+        ...FilterUtil.getFilter(filter),
         offset: pagination.first ?? TableConstants.INITIAL_OFFSET,
         limit: pagination.rows ?? TableConstants.INITIAL_LIMIT,
       },

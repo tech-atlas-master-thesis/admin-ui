@@ -4,6 +4,8 @@ import { UserConfigValueDto } from '@api/models/pipeline/user-config/user-config
 
 export interface NewPipelineForm {
   pipelineType: PipelineConfigDto | null;
+  name: string;
+  description: string;
 }
 
 export type PipelineConfigForm = FormGroup<Record<string, StepConfigForm>>;

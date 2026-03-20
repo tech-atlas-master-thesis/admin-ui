@@ -6,20 +6,26 @@ import { PipelineCreateDto } from '@api/models/pipeline/pipeline-create-dto';
 import { TableConstants } from '@shared/contants/table.constants';
 import { PaginatorState } from 'primeng/paginator';
 import { PipelineFilterDto } from '@api/models/pipeline/pipeline-filter-dto';
-import { PipelineSortDto } from '@api/models/pipeline/pipeline-sort-dto';
-import { FilterMetadata } from 'primeng/api';
+import { FilterMetadata, SortMeta } from 'primeng/api';
+import { SortUtil } from '@shared/util/sort';
 
 interface PipelineStoreState {
   pagination: PaginatorState;
   filter: PipelineFilterDto;
-  sort: PipelineSortDto[];
+  sort: SortMeta[];
 }
 
 export const PipelinesStore = signalStore(
   withState<PipelineStoreState>({
     pagination: TableConstants.INITIAL_STATE,
-    filter: {},
-    sort: [],
+    filter: {
+      name: [],
+      type: [],
+      state: [],
+      createdBy: [],
+      createdAt: [],
+    },
+    sort: [{ field: 'name', order: 1 }],
   }),
   withProps(() => ({
     _scraperApi: inject(PipelineApi),
@@ -37,6 +43,14 @@ export const PipelinesStore = signalStore(
   withComputed((store) => ({
     pipelines: computed(() => store._pipelinesResource.value()?.items),
     totalItems: computed(() => store._pipelinesResource.value()?.page.totalRecords),
+    filterCleaned: computed<Record<string, FilterMetadata[]>>(
+      () =>
+        Object.fromEntries(
+          Object.entries(store.filter()).filter(
+            ([_, value]) => value !== undefined && Array.isArray(value) && value.length > 0,
+          ),
+        ) as Record<string, FilterMetadata[]>,
+    ),
     error: computed(() => store._pipelinesResource.error()),
     loading: computed(() => store._pipelinesResource.isLoading()),
     pipelineTypes: computed(() => store._pipelineTypeResource.value()),
@@ -54,12 +68,15 @@ export const PipelinesStore = signalStore(
       patchState(store, { pagination });
     }
 
-    function changeFilter(filter?: Record<string, FilterMetadata | undefined>) {
+    function changeFilter(filter?: PipelineFilterDto) {
       patchState(store, { filter });
     }
 
     function changeSort(sort: object) {
-      patchState(store, { sort: sort as unknown as PipelineSortDto[] });
+      if (!SortUtil.isMultiSort(sort)) {
+        return;
+      }
+      patchState(store, { sort: sort.multisortmeta });
     }
 
     return {

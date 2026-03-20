@@ -13,7 +13,12 @@
     "type": "Type",
     "message": "Event",
     "messages": "Events",
-    "results": "Results"
+    "results": "Results",
+    "info": "Info",
+    "created": "Created",
+    "modified": "Modified",
+    "at": "At",
+    "by": "By"
   },
   "action": {},
   "format": {

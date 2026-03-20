@@ -16,6 +16,16 @@
       </p-floatlabel>
     </div>
   </section>
+  <section class="fluid-form">
+    <div class="fluid-form-element">
+      <label [for]="name">{{ 'label.name' | transloco }}</label>
+      <input #name pInputText [formField]="pipelineForm.name" />
+    </div>
+    <div class="fluid-form-element fluid-form-full-width">
+      <label [for]="description">{{ 'label.description' | transloco }}</label>
+      <textarea #description rows="3" pTextarea [autoResize]="true" [formField]="pipelineForm.description"></textarea>
+    </div>
+  </section>
   <app-step-configuration
     [configForm]="pipelineConfigForm()"
     [configDefinition]="stepConfigDefinition()"
