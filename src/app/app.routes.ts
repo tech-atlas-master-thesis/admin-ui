@@ -3,6 +3,7 @@ import environment from '../environment/environment';
 import { API_BASE_URL } from '@api/pipeline-api/pipeline-api.token';
 import { PipelineApi } from '@api/pipeline-api/pipeline-api';
 import { ScraperApi } from '@api/pipeline-api/scraper-api';
+import { TransformerApi } from '@api/pipeline-api/transformer-api';
 
 export const routes: Routes = [
   {
@@ -19,6 +20,21 @@ export const routes: Routes = [
       ScraperApi,
     ],
     loadChildren: () => import('./+scraper/scraper.routes').then((m) => m.routes),
+  },
+  {
+    path: 'transformer',
+    data: {
+      breadcrumbKey: 'transformer.breadcrumbKey',
+    },
+    providers: [
+      {
+        provide: API_BASE_URL,
+        useValue: environment.baseUrl + '/api/transformer',
+      },
+      PipelineApi,
+      TransformerApi,
+    ],
+    loadChildren: () => import('./+transformer/transformer.routes').then((m) => m.routes),
   },
   {
     path: '',

@@ -11,9 +11,15 @@
     "create": "Erstellen",
     "timestamp": "Zeitstempel",
     "type": "Typ",
+    "description": "Beschreibung",
     "message": "Event",
     "messages": "Events",
-    "results": "Ergebnisse"
+    "results": "Ergebnisse",
+    "info": "Info",
+    "created": "Erstellt",
+    "modified": "Verändert",
+    "at": "Um",
+    "by": "Von"
   },
   "action": {},
   "format": {

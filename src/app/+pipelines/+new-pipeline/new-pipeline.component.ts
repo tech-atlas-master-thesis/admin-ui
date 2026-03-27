@@ -3,7 +3,6 @@ import {
   Component,
   computed,
   DestroyRef,
-  effect,
   inject,
   linkedSignal,
   resource,
@@ -21,7 +20,6 @@ import { FormsModule, NonNullableFormBuilder, Validators } from '@angular/forms'
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { firstValueFrom, map, of, startWith, switchMap, tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LocalisedPipe } from '@shared/i18n/localised.pipe';
 import { I18nService } from '@shared/i18n/i18n-service';
 import { PipelineApi } from '@api/pipeline-api/pipeline-api';
 import { UserConfigDto } from '@api/models/pipeline/user-config/user-config-dto';
@@ -48,13 +46,11 @@ export class NewPipeline {
   destroyRef = inject(DestroyRef);
   fb = inject(NonNullableFormBuilder);
 
-  localisedPipe = new LocalisedPipe();
-
   typeOptions = computed<SelectItem<PipelineConfigDto>[]>(() => {
     this.i18nService.currentLanguage();
     return (
       this.pipelinesStore.pipelineTypes()?.map((type) => ({
-        label: this.localisedPipe.transform(type.displayName, type.type),
+        label: this.i18nService.localised(type.displayName, type.type),
         value: type,
       })) ?? []
     );
@@ -118,18 +114,6 @@ export class NewPipeline {
       map((status) => status === 'VALID'),
     ),
   );
-
-  constructor() {
-    effect(() => {
-      console.log(
-        this.pipelineForm().errors(),
-        this.pipelineForm().valid(),
-        this.configFormValid(),
-        !this.pipelineConfiguration.isLoading(),
-        this.pipelineForm().invalid() || !this.configFormValid() || this.pipelineConfiguration.isLoading(),
-      );
-    });
-  }
 
   protected onPipelineCreate() {
     const { pipelineType, name, description } = this.creationModel();

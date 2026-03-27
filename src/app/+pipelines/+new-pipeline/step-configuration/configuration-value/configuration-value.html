@@ -7,9 +7,6 @@
     }
   </div>
   @switch (configDefinition().type) {
-    @case (UserConfigTypeDto.STRING) {
-      <textarea rows="1" pTextarea [autoResize]="true" [formControl]="configForm()"></textarea>
-    }
     @case (UserConfigTypeDto.INTEGER) {
       <p-input-number inputId="integeronly" [formControl]="configForm()" />
     }
@@ -50,6 +47,9 @@
     }
     @case (UserConfigTypeDto.DATE) {
       <input type="text" pInputText [formControl]="configForm()" />
+    }
+    @default {
+      <textarea rows="1" pTextarea [autoResize]="true" [formControl]="configForm()"></textarea>
     }
   }
 </div>

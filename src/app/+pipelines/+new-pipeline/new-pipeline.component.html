@@ -9,7 +9,7 @@
           [options]="typeOptions()"
           [ngModel]="pipelineForm.pipelineType()"
           (ngModelChange)="pipelineForm.pipelineType().value.set($event)"
-          dataKey="name"
+          dataKey="type"
         >
         </p-select>
         <label for="new-pipeline-type">{{ 'pipeline.label.type' | transloco }}</label>

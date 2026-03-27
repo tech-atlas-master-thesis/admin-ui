@@ -1,19 +1,19 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { StatusDto } from '@api/models/pipeline/status-dto';
+import { StateDto } from '@api/models/pipeline/state-dto';
 
 @Pipe({
   name: 'stateClass',
 })
 export class StateClassPipe implements PipeTransform {
-  transform(state: StatusDto, baseClass: string): string {
+  transform(state: StateDto, baseClass: string): string {
     switch (state) {
-      case StatusDto.OPEN:
+      case StateDto.OPEN:
         return baseClass + '--open';
-      case StatusDto.FINISHED:
+      case StateDto.FINISHED:
         return baseClass + '--finished';
-      case StatusDto.RUNNING:
+      case StateDto.RUNNING:
         return baseClass + '--running';
-      case StatusDto.ERROR:
+      case StateDto.ERROR:
         return baseClass + '--error';
     }
   }

@@ -19,12 +19,18 @@ export class PipelineApi extends Api {
   protected readonly httpClient = inject(HttpClient);
   protected readonly baseUrl = inject(API_BASE_URL);
 
-  getPipelines(pagination: PaginatorState, filter: PipelineFilterDto, sort: SortMeta[]) {
-    console.log(filter, sort);
+  getPipelines(pagination: PaginatorState, filter: PipelineFilterDto, sort: SortMeta[], allowedTypes?: string[]) {
+    const filterObject = FilterUtil.getFilter(filter) as Record<string, unknown>;
+    if (
+      allowedTypes &&
+      (!('type' in filterObject) || (Array.isArray(filterObject['type']) && filterObject['type'].length < 1))
+    ) {
+      filterObject['type'] = allowedTypes;
+    }
     return this.get<PaginatedListDto<PipelineDto>>('/pipelines', {
       params: {
         sort: SortUtil.getSortString(sort),
-        ...FilterUtil.getFilter(filter),
+        ...filterObject,
         offset: pagination.first ?? TableConstants.INITIAL_OFFSET,
         limit: pagination.rows ?? TableConstants.INITIAL_LIMIT,
       },

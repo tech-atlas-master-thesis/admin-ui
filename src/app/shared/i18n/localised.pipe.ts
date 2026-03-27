@@ -17,16 +17,6 @@ export class LocalisedPipe implements PipeTransform {
   }
 
   transform(value: LocalisedStringDto | undefined, fallback?: string): string {
-    if (!value) {
-      return fallback ?? '';
-    }
-    if (typeof value === 'string') {
-      return value;
-    }
-    const language = this.i18nService.currentLanguage();
-    if (!language) {
-      return fallback ?? '';
-    }
-    return value[language] ?? fallback ?? '';
+    return this.i18nService.localised(value, fallback);
   }
 }

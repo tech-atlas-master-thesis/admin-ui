@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HashMap, LangDefinition, TranslocoService } from '@jsverse/transloco';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, switchMap } from 'rxjs';
+import { LocalisedStringDto } from '@api/models/localised-string-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -42,5 +43,19 @@ export class I18nService {
       return identifier;
     }
     return this.translocoService.translate<string>(identifier, params, lang);
+  }
+
+  localised(value: LocalisedStringDto | undefined, fallback?: string) {
+    if (!value) {
+      return fallback ?? '';
+    }
+    if (typeof value === 'string') {
+      return value;
+    }
+    const language = this.currentLanguage();
+    if (!language) {
+      return fallback ?? '';
+    }
+    return value[language] ?? fallback ?? '';
   }
 }

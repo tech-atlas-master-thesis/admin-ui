@@ -11,6 +11,7 @@
     "create": "Create",
     "timestamp": "Timestamp",
     "type": "Type",
+    "description": "Description",
     "message": "Event",
     "messages": "Events",
     "results": "Results",

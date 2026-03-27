@@ -16,7 +16,22 @@
   >
     <ng-template #header>
       <tr>
-        <th style="width: 25%">{{ 'label.id' | transloco }}</th>
+        <th style="width: 25%" pSortableColumn="_id">
+          <div class="table-header-with-actions">
+            <span>{{ 'label.id' | transloco }}</span>
+            <p-sortIcon field="_id"></p-sortIcon>
+            <p-columnFilter
+              field="_id"
+              type="text"
+              display="menu"
+              matchMode="contains"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false"
+              [showButtons]="false"
+            ></p-columnFilter>
+          </div>
+        </th>
         <th style="width: 25%" pSortableColumn="name">
           <div class="table-header-with-actions">
             <span>{{ 'label.name' | transloco }}</span>
@@ -46,7 +61,15 @@
               [showOperator]="false"
               [showAddButton]="false"
               [showButtons]="false"
-            ></p-columnFilter>
+            >
+              <ng-template #filter let-value let-filter="filterCallback">
+                <p-multi-select
+                  [ngModel]="value"
+                  [options]="typeOptions()"
+                  (onChange)="filter($event.value)"
+                ></p-multi-select>
+              </ng-template>
+            </p-columnFilter>
           </div>
         </th>
         <th style="width: 25%" pSortableColumn="state">
@@ -62,7 +85,15 @@
               [showOperator]="false"
               [showAddButton]="false"
               [showButtons]="false"
-            ></p-columnFilter>
+            >
+              <ng-template #filter let-value let-filter="filterCallback">
+                <p-multi-select
+                  [ngModel]="value"
+                  [options]="stateOptions"
+                  (onChange)="filter($event.value)"
+                ></p-multi-select>
+              </ng-template>
+            </p-columnFilter>
           </div>
         </th>
         <th style="width: 0">

@@ -7,11 +7,9 @@ export interface DateTimeFilter {
 
 export class FilterUtil {
   public static getFilter(filter: Record<string, FilterMetadata[] | undefined>): object {
-    console.log(filter);
     return Object.fromEntries(
       Object.entries(filter)
         .flatMap(([key, value]) => {
-          console.log(key, value);
           if (value === undefined) {
             return undefined;
           }

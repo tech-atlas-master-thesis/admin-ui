@@ -1,4 +1,4 @@
-export enum StatusDto {
+export enum StateDto {
   OPEN = 'OPEN',
   RUNNING = 'RUNNING',
   ERROR = 'ERROR',

@@ -11,7 +11,7 @@ export class SortUtil {
     return 'multisortmeta' in sort;
   }
 
-  public static getSortString(_sort: SortMeta[]): string {
-    return '';
+  public static getSortString(sort: SortMeta[]): string {
+    return sort.map((s) => `${s.field}:${s.order}`).join(';');
   }
 }

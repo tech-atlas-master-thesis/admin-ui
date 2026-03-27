@@ -1,4 +1,4 @@
-import { StatusDto } from './status-dto';
+import { StateDto } from './state-dto';
 import { UserConfigDto } from '@api/models/pipeline/user-config/user-config-dto';
 import { AuditInfoDto } from '@api/models/audit-info-dto';
 
@@ -7,7 +7,7 @@ export interface PipelineDto {
   type: string;
   name: string;
   description: string;
-  state: StatusDto;
+  state: StateDto;
   userConfig: UserConfigDto;
   created: AuditInfoDto;
 }

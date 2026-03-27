@@ -25,19 +25,29 @@ export const PipelinesStore = signalStore(
       createdBy: [],
       createdAt: [],
     },
-    sort: [{ field: 'name', order: 1 }],
+    sort: [{ field: '_id', order: -1 }],
   }),
   withProps(() => ({
     _scraperApi: inject(PipelineApi),
   })),
   withProps((store) => ({
-    _pipelinesResource: resource({
-      params: () => ({ pagination: store.pagination(), filter: store.filter(), sort: store.sort() }),
-      loader: ({ params: { pagination, sort, filter } }) =>
-        firstValueFrom(store._scraperApi.getPipelines(pagination, filter, sort)),
-    }),
     _pipelineTypeResource: resource({
       loader: () => firstValueFrom(store._scraperApi.getPipelineTypes()),
+    }),
+  })),
+  withComputed((store) => ({
+    pipelineTypes: computed(() => store._pipelineTypeResource.value()),
+  })),
+  withProps((store) => ({
+    _pipelinesResource: resource({
+      params: () => ({
+        pagination: store.pagination(),
+        filter: store.filter(),
+        sort: store.sort(),
+        allowedTypes: store.pipelineTypes()?.map((type) => type.type),
+      }),
+      loader: ({ params: { pagination, sort, filter, allowedTypes } }) =>
+        firstValueFrom(store._scraperApi.getPipelines(pagination, filter, sort, allowedTypes)),
     }),
   })),
   withComputed((store) => ({
@@ -53,7 +63,6 @@ export const PipelinesStore = signalStore(
     ),
     error: computed(() => store._pipelinesResource.error()),
     loading: computed(() => store._pipelinesResource.isLoading()),
-    pipelineTypes: computed(() => store._pipelineTypeResource.value()),
   })),
   withMethods((store) => {
     function reload() {
