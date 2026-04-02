@@ -25,6 +25,21 @@
   "format": {
     "dateTime": "yyyy-MM-dd HH:mm:ss"
   },
+  "enum": {
+    "state": {
+      "OPEN": "Offen",
+      "FINISHED": "Fertig",
+      "RUNNING": "Laufend",
+      "ERROR": "Error"
+    },
+    "eventType": {
+      "DEBUG": "Debug",
+      "INFO": "Info",
+      "WARNING": "Warnung",
+      "ERROR": "Error",
+      "RESULT": "Resultat"
+    }
+  },
   "dashboard": {
     "title": "Dashboard"
   },

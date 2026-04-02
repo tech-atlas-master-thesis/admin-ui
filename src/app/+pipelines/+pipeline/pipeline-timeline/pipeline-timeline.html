@@ -6,8 +6,9 @@
       [class.pipeline-timeline__step--selected]="step.name === pipelineStepsStore.step()"
       (click)="pipelineStepsStore.selectStep(step)"
     >
-      <span>{{ step.displayName | localised: step.name }}</span
-      ><span>{{ step.state }}</span>
+      <span class="pi" [ngClass]="step.state | stateIcon"></span>
+      <span class="pipeline-timeline__step__name">{{ step.displayName | localised: step.name }}</span
+      ><span>{{ 'enum.state.' + step.state | transloco }}</span>
     </button>
   } @empty {
     Empty

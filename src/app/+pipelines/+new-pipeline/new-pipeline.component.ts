@@ -3,6 +3,7 @@ import {
   Component,
   computed,
   DestroyRef,
+  effect,
   inject,
   linkedSignal,
   resource,
@@ -115,6 +116,10 @@ export class NewPipeline {
     ),
   );
 
+  constructor() {
+    this.initializePipelineName();
+  }
+
   protected onPipelineCreate() {
     const { pipelineType, name, description } = this.creationModel();
     const type = pipelineType?.type;
@@ -140,6 +145,15 @@ export class NewPipeline {
         tap((pipeline) => this.router.navigate(['pipeline', pipeline.id], { relativeTo: this.activatedRoute.parent })),
       )
       .subscribe();
+  }
+
+  private initializePipelineName() {
+    effect(() => {
+      const pipelineType = this.pipelineForm.pipelineType().value();
+      if (pipelineType?.displayName && this.pipelineForm.name().value() === '') {
+        this.pipelineForm.name().value.set(this.i18nService.localised(pipelineType.displayName));
+      }
+    });
   }
 
   private getPipelineForm(userConfig: Record<string, Record<string, UserConfigDefinitionDto>>): PipelineConfigForm {

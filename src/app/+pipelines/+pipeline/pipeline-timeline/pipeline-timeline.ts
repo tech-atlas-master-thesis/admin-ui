@@ -4,10 +4,21 @@ import { NgClass } from '@angular/common';
 import { PipelineStepsStore } from '../pipeline-steps.store';
 import { LocalisedPipe } from '@shared/i18n/localised.pipe';
 import { I18nService } from '@shared/i18n/i18n-service';
+import { StateIconPipe } from '@shared/styles/state-icon.pipe';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-pipeline-timeline',
-  imports: [StateClassPipe, NgClass, LocalisedPipe],
+  imports: [
+    StateClassPipe,
+    NgClass,
+    LocalisedPipe,
+    StateClassPipe,
+    StateClassPipe,
+    StateIconPipe,
+    StateClassPipe,
+    TranslocoPipe,
+  ],
   templateUrl: './pipeline-timeline.html',
   styleUrl: './pipeline-timeline.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

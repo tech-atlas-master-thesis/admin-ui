@@ -44,6 +44,7 @@ export const PipelineStepsStore = signalStore(
         relativeTo: store._activatedRoute,
         queryParams: { step: step.name },
         queryParamsHandling: 'merge',
+        replaceUrl: true,
       });
     }
 

@@ -14,7 +14,11 @@
         <ng-template #body let-event>
           <tr>
             <td>
-              {{ event.type }}
+              <span
+                class="pi"
+                [ngClass]="event.type | eventTypeIcon"
+                [title]="'enum.eventType.' + event.type | transloco"
+              ></span>
             </td>
             <td>
               {{ event.message }}
