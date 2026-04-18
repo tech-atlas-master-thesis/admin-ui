@@ -1,10 +1,12 @@
 {
-  "/api/scraper/**": {
+  "/api/scraper/": {
     "target": "http://localhost:8050",
-    "secure": false
+    "secure": false,
+    "logLevel": "debug"
   },
-  "/api/transformer": {
+  "/api/transformer/": {
     "target": "http://localhost:8060",
-    "secure": false
+    "secure": false,
+    "logLevel": "debug"
   }
 }

@@ -68,11 +68,11 @@
             },
             "development": {
               "buildTarget": "techAtlas-admin-ui:build:development"
-            },
-            "options": {
-              "port": 4300,
-              "proxyConfig": "src/proxy.conf.json"
             }
+          },
+          "options": {
+            "port": 4300,
+            "proxyConfig": "src/proxy.conf.json"
           },
           "defaultConfiguration": "development"
         },
