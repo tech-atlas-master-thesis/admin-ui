@@ -1,7 +1,6 @@
 @use "primeicons/primeicons.css";
 
 body {
-  background-color: var(--p-surface-100);
   font-family: "TTNormsPro",sans-serif;
   margin: 0;
 }
@@ -9,12 +8,6 @@ body {
 a {
   color: var(--p-text-color);
   text-decoration: none;
-}
-
-.app-dark-mode {
-  body {
-    background-color: var(--p-surface-800);
-  }
 }
 
 .full-width {

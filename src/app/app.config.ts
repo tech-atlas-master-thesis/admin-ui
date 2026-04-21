@@ -11,8 +11,8 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideTransloco } from '@jsverse/transloco';
 import { TranslocoHttpLoader } from '../transloco-loader';
 import { providePrimeNG } from 'primeng/config';
-import Aura from '@primeuix/themes/aura';
 import { provideOAuthClient } from 'angular-oauth2-oidc';
+import { Preset } from './preset';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -38,7 +38,8 @@ export const appConfig: ApplicationConfig = {
     }),
     providePrimeNG({
       theme: {
-        preset: Aura,
+        preset: Preset,
+        options: { darkModeSelector: '.app-dark-mode' },
       },
     }),
     provideOAuthClient(),
