@@ -4,7 +4,7 @@ import { MenuBar } from './menu/menu-bar.component';
 import { Breadcrumbs } from './breadcrumbs/breadcrumbs';
 import { TranslocoService } from '@jsverse/transloco';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { OAuthService } from 'angular-oauth2-oidc';
+import { AuthService } from '@shared/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -14,9 +14,11 @@ import { OAuthService } from 'angular-oauth2-oidc';
 })
 export class App {
   private readonly translocoService = inject(TranslocoService);
-  private readonly oAuthService = inject(OAuthService);
+  private readonly authService = inject(AuthService);
 
   constructor() {
+    this.authService.initialize();
+
     this.translocoService
       .selectTranslation(this.translocoService.getActiveLang())
       .pipe(takeUntilDestroyed())
