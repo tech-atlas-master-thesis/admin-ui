@@ -5,10 +5,36 @@
     </ng-template>
     <ng-template #end>
       <div class="action-buttons">
+        <p-button icon="pi pi-user" (onClick)="user.toggle($event)"></p-button>
         <p-button [icon]="isDarkMode() ? 'pi pi-sun' : 'pi pi-moon'" (onClick)="toggleDarkMode()"></p-button>
         <p-button icon="pi pi-language" (onClick)="languageSelect.toggle($event)"> </p-button>
       </div>
       <p-menu #languageSelect [model]="languageOptions()" [popup]="true"></p-menu>
+      <p-popover #user>
+        <div class="menu__user">
+          @if (userInfo(); as userInfo) {
+            <div class="menu__user__info">
+              @let username = userInfo.preferred_username ?? userInfo.nickname ?? userInfo.given_name ?? userInfo.name;
+              @if (username) {
+                <span>{{ username }}</span>
+              }
+              @if (userInfo.email; as email) {
+                <span>{{ email }}</span>
+              }
+            </div>
+          }
+          @if (userRoles(); as userRoles) {
+            <div class="menu__user__roles">
+              @for (userRole of userRoles; track userRole) {
+                <p-tag>{{ userRole }}</p-tag>
+              }
+            </div>
+          }
+          <div class="menu__user__actions">
+            <p-button icon="pi pi-sign-out" [label]="'action.logOut' | transloco" (onClick)="logOut()"></p-button>
+          </div>
+        </div>
+      </p-popover>
     </ng-template>
   </p-menubar>
 </div>

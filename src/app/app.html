@@ -1,5 +1,7 @@
 <div class="app">
   <app-menu-bar></app-menu-bar>
-  <app-breadcrumbs></app-breadcrumbs>
-  <router-outlet />
+  @if (isAuthenticated()) {
+    <app-breadcrumbs></app-breadcrumbs>
+    <router-outlet />
+  }
 </div>

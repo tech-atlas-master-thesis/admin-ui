@@ -21,7 +21,9 @@
     "at": "At",
     "by": "By"
   },
-  "action": {},
+  "action": {
+    "logOut": "Log out"
+  },
   "format": {
     "dateTime": "yyyy-MM-dd HH:mm:ss"
   },

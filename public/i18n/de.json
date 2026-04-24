@@ -21,7 +21,9 @@
     "at": "Um",
     "by": "Von"
   },
-  "action": {},
+  "action": {
+    "logOut": "Log out"
+  },
   "format": {
     "dateTime": "yyyy-MM-dd HH:mm:ss"
   },

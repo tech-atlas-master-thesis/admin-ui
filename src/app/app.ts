@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { MenuBar } from './menu/menu-bar.component';
 import { Breadcrumbs } from './breadcrumbs/breadcrumbs';
 import { TranslocoService } from '@jsverse/transloco';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { AuthService } from '@shared/auth/auth.service';
 
 @Component({
@@ -15,6 +15,8 @@ import { AuthService } from '@shared/auth/auth.service';
 export class App {
   private readonly translocoService = inject(TranslocoService);
   private readonly authService = inject(AuthService);
+
+  isAuthenticated = toSignal(this.authService.isAuthenticated$);
 
   constructor() {
     this.authService.initialize();

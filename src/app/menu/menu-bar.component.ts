@@ -6,20 +6,32 @@ import { Button } from 'primeng/button';
 import environment from '../../environment/environment';
 import { Menu } from 'primeng/menu';
 import { NgOptimizedImage } from '@angular/common';
+import { Popover } from 'primeng/popover';
+import { AuthService } from '@shared/auth/auth.service';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { Tag } from 'primeng/tag';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-menu-bar',
-  imports: [Menubar, Button, Menu, NgOptimizedImage],
+  imports: [Menubar, Button, Menu, NgOptimizedImage, Popover, Tag, TranslocoPipe],
   templateUrl: './menu-bar.component.html',
   styleUrl: './menu-bar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuBar {
   private readonly i18nService = inject(I18nService);
+  private readonly authService = inject(AuthService);
   protected readonly BASE_URL = environment.baseUrl;
 
+  isAuthenticated = toSignal(this.authService.isAuthenticated$);
+  userInfo = toSignal(this.authService.userInfo$);
+  userRoles = toSignal(this.authService.userRoles$);
   isDarkMode = signal(false);
   menuItems = computed<MenuItem[]>(() => {
+    if (!this.isAuthenticated()) {
+      return [];
+    }
     this.i18nService.currentLanguage();
     return [
       {
@@ -61,11 +73,15 @@ export class MenuBar {
     this.isDarkMode.set(element?.classList.contains('app-dark-mode') ?? false);
   }
 
-  toggleDarkMode() {
+  protected toggleDarkMode() {
     const element = document.querySelector('html');
     element?.classList.toggle('app-dark-mode');
     this.isDarkMode.set(element?.classList.contains('app-dark-mode') ?? false);
     localStorage.setItem('theme', this.isDarkMode() ? 'dark' : 'light');
+  }
+
+  protected logOut() {
+    this.authService.logOut();
   }
 
   private keepTheme() {

@@ -6,7 +6,6 @@ export const authCodeFlowConfig: AuthConfig = {
   ...environment.auth,
   redirectUri: globalThis.location.origin,
   showDebugInformation: isDevMode(),
-  requireHttps: 'remoteOnly',
   options: {
     disableNonceCheck: !isDevMode(),
   },
