@@ -7,7 +7,7 @@ import {
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideTransloco } from '@jsverse/transloco';
 import { TranslocoHttpLoader } from '../transloco-loader';
 import { providePrimeNG } from 'primeng/config';
@@ -18,7 +18,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
-    provideHttpClient(),
+    provideHttpClient(withInterceptorsFromDi()),
     provideRouter(routes),
     provideTransloco({
       config: {
@@ -42,6 +42,11 @@ export const appConfig: ApplicationConfig = {
         options: { darkModeSelector: '.app-dark-mode' },
       },
     }),
-    provideOAuthClient(),
+    provideOAuthClient({
+      resourceServer: {
+        sendAccessToken: true,
+        allowedUrls: ['./api/'],
+      },
+    }),
   ],
 };

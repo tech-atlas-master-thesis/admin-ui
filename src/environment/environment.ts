@@ -7,6 +7,6 @@ export default {
     issuer: 'https://auth.mooslechner.dev/application/o/tech-atlas/',
     clientId: 'NjrD7i3pcLYKUPRlzdCpqLJGlbUwCq2DPY9ceeIh',
     responseType: 'code',
-    scope: 'openid profile email offline_access api',
+    scope: 'openid profile email offline_access api entitlements',
   },
 } satisfies EnvironmentInterface;
