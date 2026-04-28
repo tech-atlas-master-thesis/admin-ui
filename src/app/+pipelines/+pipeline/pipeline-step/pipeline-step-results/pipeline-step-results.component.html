@@ -1,10 +1,11 @@
 <div class="pipeline-step-result">
   @if (result(); as result) {
     @if (result.preview) {
-      <a class="p-button font-bold" [href]="resultFileURI()" target="_blank">
-        <span class="pi pi-download"></span>
-        <span>{{ 'step.downloadResult' | transloco }}</span>
-      </a>
+      <p-button
+        icon="pi pi-download"
+        [label]="'step.downloadResult' | transloco"
+        (onClick)="downloadResult()"
+      ></p-button>
     }
     @if (result.data) {
       @switch (result.type) {

@@ -32,7 +32,12 @@ export abstract class Api {
   }
 
   protected getFile(url: string, options?: ApiOptions) {
-    return this.httpClient.get(this.baseUrl + url, { ...options, observe: 'events', responseType: 'blob' });
+    return this.httpClient.get(this.baseUrl + url, {
+      ...options,
+      observe: 'events',
+      responseType: 'blob',
+      transferCache: { includeHeaders: ['Content-Disposition'] },
+    });
   }
 
   protected post<T>(url: string, data: unknown, options?: ApiOptions) {

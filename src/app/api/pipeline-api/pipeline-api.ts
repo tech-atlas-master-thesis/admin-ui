@@ -45,8 +45,8 @@ export class PipelineApi extends Api {
     return this.get<StepDto[]>(`/pipelines/${pipelineId}/steps`);
   }
 
-  getStepResultFilePath(pipelineId: string, stepId: string) {
-    return `${this.baseUrl}/pipelines/${pipelineId}/steps/${stepId}/result`;
+  downloadStepResult(pipelineId: string, stepId: string) {
+    return this.getFile(`/pipelines/${pipelineId}/steps/${stepId}/result`);
   }
 
   createPipeline(pipelineConfig: PipelineCreateDto) {
