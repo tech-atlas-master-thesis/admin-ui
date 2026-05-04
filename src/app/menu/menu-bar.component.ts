@@ -55,6 +55,10 @@ export class MenuBar {
             label: this.i18nService.instant('pipelines.title'),
             routerLink: '/transformer/pipelines',
           },
+          {
+            label: this.i18nService.instant('dataSets.title'),
+            routerLink: '/transformer/datasets',
+          },
         ],
       },
     ];

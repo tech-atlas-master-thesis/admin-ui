@@ -9,6 +9,7 @@
     "state": "Status",
     "new": "Neu",
     "create": "Erstellen",
+    "pipeline": "Pipeline",
     "timestamp": "Zeitstempel",
     "type": "Typ",
     "description": "Beschreibung",
@@ -22,7 +23,8 @@
     "by": "Von"
   },
   "action": {
-    "logOut": "Log out"
+    "logOut": "Ausloggen",
+    "delete": "Löschen"
   },
   "format": {
     "dateTime": "yyyy-MM-dd HH:mm:ss"
@@ -70,5 +72,16 @@
   "step": {
     "noResult": "Keine ergebnisse verfügbar für diesen Step",
     "downloadResult": "Ergebnisse herunterladen"
+  },
+  "dataSets": {
+    "breadcrumbKey": "Datensätze",
+    "title": "Datensätze"
+  },
+  "dataSet": {
+    "breadcrumbKey": "Datensatz",
+    "title": "Datensatz \"{{dataSetId}}\"",
+    "projects": "Projekte ({{total}})",
+    "organizations": "Organisationen ({{total}})",
+    "grants": "Förderungen ({{total}})"
   }
 }

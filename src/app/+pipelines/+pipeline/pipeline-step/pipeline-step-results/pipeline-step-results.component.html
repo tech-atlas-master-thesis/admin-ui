@@ -7,7 +7,7 @@
         (onClick)="downloadResult()"
       ></p-button>
     }
-    @if (result.data) {
+    @if (result.data && !result.preview) {
       @switch (result.type) {
         @case (StepResultType.JSON) {
           <ngx-json-viewer [json]="result.data"></ngx-json-viewer>
@@ -18,6 +18,10 @@
           </span>
         }
       }
+    } @else if (result.data) {
+      <span class="pipeline-step-result__data">
+        {{ result.data }}
+      </span>
     }
   } @else if (step()?.state === StatusDto.FINISHED) {
     <span>

@@ -8,7 +8,7 @@ export const routes: Routes = [
       breadcrumbKey: 'pipelines.breadcrumbKey',
     },
     providers: [PipelinesStore],
-    loadChildren: () => import('../+pipelines/pipeline.routes').then((m) => m.routes),
+    loadChildren: () => import('../+pipelines/pipelines.routes').then((m) => m.routes),
   },
   {
     path: '',

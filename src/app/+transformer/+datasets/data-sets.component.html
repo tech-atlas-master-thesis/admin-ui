@@ -1,0 +1,105 @@
+@if (dataSetsStore.dataSets(); as dataSets) {
+  <p-table
+    [value]="dataSets"
+    [lazy]="true"
+    [paginator]="true"
+    [first]="TableConstants.INITIAL_OFFSET"
+    [rows]="TableConstants.INITIAL_LIMIT"
+    [totalRecords]="dataSetsStore.totalItems() ?? 0"
+    [rowsPerPageOptions]="TableConstants.SIZE_OPTIONS"
+    sortMode="multiple"
+    [multiSortMeta]="dataSetsStore.sort()"
+    [filters]="dataSetsStore.filterCleaned()"
+    (onFilter)="onFilter($event)"
+    (onSort)="onSort($event)"
+    (onPage)="onPage($event)"
+  >
+    <ng-template #header>
+      <tr>
+        <th style="width: 25%" pSortableColumn="_id">
+          <div class="table-header-with-actions">
+            <span>{{ 'label.id' | transloco }}</span>
+            <p-sortIcon field="_id"></p-sortIcon>
+            <p-columnFilter
+              field="_id"
+              type="text"
+              display="menu"
+              matchMode="contains"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false"
+              [showButtons]="false"
+            ></p-columnFilter>
+          </div>
+        </th>
+        <th style="width: 25%" pSortableColumn="pipelineType">
+          <div class="table-header-with-actions">
+            {{ 'label.type' | transloco }}
+            <p-sortIcon field="pipelineType"></p-sortIcon>
+            <p-columnFilter
+              field="pipelineType"
+              type="text"
+              display="menu"
+              matchMode="contains"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false"
+              [showButtons]="false"
+            >
+              <ng-template #filter let-value let-filter="filterCallback">
+                <p-multi-select
+                  [ngModel]="value"
+                  [options]="typeOptions()"
+                  (onChange)="filter($event.value)"
+                ></p-multi-select>
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th style="width: 25%" pSortableColumn="pipelineName">
+          <div class="table-header-with-actions">
+            <span>{{ 'label.name' | transloco }}</span>
+            <p-sortIcon field="pipelineName"></p-sortIcon>
+            <p-columnFilter
+              field="pipelineName"
+              type="text"
+              display="menu"
+              matchMode="contains"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false"
+              [showButtons]="false"
+            ></p-columnFilter>
+          </div>
+        </th>
+        <th style="width: 25%">
+          {{ 'label.pipeline' | transloco }}
+        </th>
+        <th style="width: 0"></th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-dataSet>
+      <tr>
+        <td>
+          <a [routerLink]="['dataset', dataSet.id]">{{ dataSet.id }}</a>
+        </td>
+        <td>{{ dataSet.pipelineType }}</td>
+        <td>{{ dataSet.pipelineName }}</td>
+        <td>
+          <a [routerLink]="['/', 'transformer', 'pipelines', 'pipeline', dataSet.pipeline]">{{ dataSet.pipeline }}</a>
+        </td>
+        <td>
+          <div class="action-buttons">
+            <app-audit-panel [created]="dataSet.created"></app-audit-panel>
+            <p-button
+              [title]="'action.delete' | transloco"
+              [text]="true"
+              icon="pi pi-trash"
+              severity="danger"
+            ></p-button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+}
