@@ -12,10 +12,12 @@ import { PipelineFilterDto } from '@api/models/pipeline/pipeline-filter-dto';
 import { PipelinesStore } from '../../+pipelines/pipelines.store';
 import { SelectItem } from 'primeng/api';
 import { I18nService } from '@shared/i18n/i18n-service';
+import { AuthorizationPipe } from '@shared/auth/authorization.pipe';
+import { AuthRole } from '@shared/auth/auth-roles';
 
 @Component({
   selector: 'app-datasets',
-  imports: [TableModule, TranslocoPipe, MultiSelect, FormsModule, Button, AuditPanel, RouterLink],
+  imports: [TableModule, TranslocoPipe, MultiSelect, FormsModule, Button, AuditPanel, RouterLink, AuthorizationPipe],
   templateUrl: './data-sets.component.html',
   styleUrl: './data-sets.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -45,4 +47,6 @@ export class DataSetsComponent {
   protected onPage(event: TablePageEvent) {
     this.dataSetsStore.changePage(event);
   }
+
+  protected readonly AuthRole = AuthRole;
 }

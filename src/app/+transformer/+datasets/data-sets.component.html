@@ -96,6 +96,7 @@
               [text]="true"
               icon="pi pi-trash"
               severity="danger"
+              [disabled]="!(AuthRole.EDIT | authorization)"
             ></p-button>
           </div>
         </td>

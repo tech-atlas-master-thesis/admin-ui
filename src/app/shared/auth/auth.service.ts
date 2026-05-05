@@ -1,7 +1,7 @@
 import { HostListener, Injectable } from '@angular/core';
 import { OAuthEvent, OAuthService, OAuthSuccessEvent } from 'angular-oauth2-oidc';
 import { authCodeFlowConfig } from '../../oauth.config';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, firstValueFrom, Observable, skip, tap } from 'rxjs';
 import { AuthUserInfo } from '@shared/auth/auth.interface';
 
 @Injectable({
@@ -90,6 +90,17 @@ export class AuthService extends OAuthService {
       return !(expiresAt && Number.parseInt(expiresAt, 10) < now.getTime());
     }
     return false;
+  }
+
+  async check(role: string) {
+    if (!this.userInfoSubject.value) {
+      await firstValueFrom(this.userInfoSubject.pipe(skip(1)));
+    }
+    return this.checkSync(role);
+  }
+
+  checkSync(role: string) {
+    return this.userRolesSubject.value.includes(role);
   }
 
   private subscribeEvents() {

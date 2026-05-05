@@ -11,6 +11,7 @@ import { AuthService } from '@shared/auth/auth.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Tag } from 'primeng/tag';
 import { TranslocoPipe } from '@jsverse/transloco';
+import { AuthRole } from '@shared/auth/auth-roles';
 
 @Component({
   selector: 'app-menu-bar',
@@ -29,7 +30,7 @@ export class MenuBar {
   userRoles = toSignal(this.authService.userRoles$);
   isDarkMode = signal(false);
   menuItems = computed<MenuItem[]>(() => {
-    if (!this.isAuthenticated()) {
+    if (!this.isAuthenticated() && this.authService.checkSync(AuthRole.VIEW)) {
       return [];
     }
     this.i18nService.currentLanguage();

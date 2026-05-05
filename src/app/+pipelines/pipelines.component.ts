@@ -14,6 +14,8 @@ import { FormsModule } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 import { I18nService } from '@shared/i18n/i18n-service';
 import { StateDto } from '@api/models/pipeline/state-dto';
+import { AuthRole } from '@shared/auth/auth-roles';
+import { AuthorizationPipe } from '@shared/auth/authorization.pipe';
 
 @Component({
   selector: 'app-pipelines',
@@ -27,6 +29,7 @@ import { StateDto } from '@api/models/pipeline/state-dto';
     AuditPanel,
     MultiSelect,
     FormsModule,
+    AuthorizationPipe,
   ],
   templateUrl: './pipelines.component.html',
   styleUrl: './pipelines.component.scss',
@@ -34,6 +37,7 @@ import { StateDto } from '@api/models/pipeline/state-dto';
 })
 export class Pipelines {
   protected readonly TableConstants = TableConstants;
+  protected readonly AuthRole = AuthRole;
 
   protected readonly pipelinesStore = inject(PipelinesStore);
   private readonly i18nService = inject(I18nService);

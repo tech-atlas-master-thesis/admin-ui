@@ -97,7 +97,12 @@
           </div>
         </th>
         <th style="width: 0">
-          <p-button [label]="'label.new' | transloco" icon="pi pi-plus" [routerLink]="'new'"></p-button>
+          <p-button
+            [label]="'label.new' | transloco"
+            icon="pi pi-plus"
+            [routerLink]="'new'"
+            [disabled]="!(AuthRole.EDIT | authorization)"
+          ></p-button>
         </th>
       </tr>
     </ng-template>
