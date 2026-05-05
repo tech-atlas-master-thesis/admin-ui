@@ -84,6 +84,17 @@ export const DataSetObjectStore = signalStore(
       }
     }
 
+    function getObjectTypeResource(type: DataSetObjectType) {
+      switch (type) {
+        case 'projects':
+          return store.projectResource;
+        case 'organizations':
+          return store.organizationResource;
+        case 'grants':
+          return store.grantResource;
+      }
+    }
+
     function changePage(type: DataSetObjectType, pagination: PaginatorState) {
       patchState(store, { [type]: { pagination } });
     }
@@ -101,6 +112,7 @@ export const DataSetObjectStore = signalStore(
 
     return {
       reload,
+      getObjectTypeResource,
       changePage,
       changeFilter,
       changeSort,

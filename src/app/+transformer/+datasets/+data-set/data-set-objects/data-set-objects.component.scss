@@ -1,0 +1,7 @@
+.data-set-objects {
+  &__details {
+    max-width: max(50vw, 600px);
+    max-height: max(50vh, 300px);
+    overflow: auto;
+  }
+}

@@ -1,0 +1,69 @@
+@if (data(); as data) {
+  <p-table
+    [value]="data.items"
+    [lazy]="true"
+    [paginator]="true"
+    [first]="TableConstants.INITIAL_OFFSET"
+    [rows]="TableConstants.INITIAL_LIMIT"
+    [totalRecords]="data.page.totalRecords ?? 0"
+    [rowsPerPageOptions]="TableConstants.SIZE_OPTIONS"
+    sortMode="multiple"
+    [multiSortMeta]="pageState().sort"
+    (onSort)="onSort($event)"
+    (onPage)="onPage($event)"
+  >
+    <ng-template #header>
+      <tr>
+        <th pSortableColumn="_id">
+          <div class="table-header-with-actions">
+            <span>{{ 'label.id' | transloco }}</span>
+            <p-sortIcon field="_id"></p-sortIcon>
+          </div>
+        </th>
+        @for (column of additionalColumns(); track column.field) {
+          @if (column.sort) {
+            <th [pSortableColumn]="column.sort">
+              <div class="table-header-with-actions">
+                <span>{{ column.labelKey | transloco }}</span>
+                <p-sortIcon [field]="column.sort"></p-sortIcon>
+              </div>
+            </th>
+          } @else {
+            <th>
+              <span>{{ column.labelKey | transloco }}</span>
+            </th>
+          }
+        }
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-value>
+      <tr>
+        <td>
+          {{ value._id }}
+        </td>
+        @for (column of additionalColumns(); track column.field) {
+          <td>
+            <span [pTooltip]="column.tooltipField ? value[column.tooltipField] : undefined">{{
+              column.displayFn ? column.displayFn(value[column.field]) : value[column.field]
+            }}</span>
+          </td>
+        }
+        <td>
+          <div class="action-buttons">
+            <app-info-panel [title]="'dataSetObjects.rawData' | transloco">
+              <div class="data-set-objects__details">
+                <h3>{{ 'dataSetObjects.rawData' | transloco }}</h3>
+                <ngx-json-viewer [json]="value"></ngx-json-viewer>
+              </div>
+            </app-info-panel>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+} @else if (loading()) {
+  Loading
+} @else {
+  {{ error() }}
+}

@@ -1,23 +1,32 @@
 @if (dataSetStore.dataSet(); as dataSet) {
   <div class="dataset">
     <h1>{{ 'dataSet.title' | transloco: { dataSetId: dataSet.id } }}</h1>
-    <p-tabs value="0">
+    <p-tabs [(value)]="selectedTab">
       <p-tablist>
-        <p-tab value="0">{{
+        <p-tab [value]="0">{{
           'dataSet.projects' | transloco: { total: dataSetObjectStore.projectResource.value()?.page?.totalRecords }
         }}</p-tab>
-        <p-tab value="1">{{
+        <p-tab [value]="1">{{
           'dataSet.organizations'
             | transloco: { total: dataSetObjectStore.organizationResource.value()?.page?.totalRecords }
         }}</p-tab>
-        <p-tab value="2">{{
+        <p-tab [value]="2">{{
           'dataSet.grants' | transloco: { total: dataSetObjectStore.grantResource.value()?.page?.totalRecords }
         }}</p-tab>
       </p-tablist>
       <p-tabpanels>
-        <p-tabpanel value="0"></p-tabpanel>
-        <p-tabpanel value="1"></p-tabpanel>
-        <p-tabpanel value="2"></p-tabpanel>
+        <p-tabpanel [value]="0">
+          <app-data-set-objects objectType="projects" [additionalColumns]="projectColumns"></app-data-set-objects>
+        </p-tabpanel>
+        <p-tabpanel [value]="1">
+          <app-data-set-objects
+            objectType="organizations"
+            [additionalColumns]="organizationColumns"
+          ></app-data-set-objects>
+        </p-tabpanel>
+        <p-tabpanel [value]="2">
+          <app-data-set-objects objectType="grants" [additionalColumns]="grantColumns"></app-data-set-objects>
+        </p-tabpanel>
       </p-tabpanels>
     </p-tabs>
   </div>

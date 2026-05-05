@@ -24,6 +24,8 @@ import { AuthRole } from '@shared/auth/auth-roles';
 })
 export class DataSetsComponent {
   protected readonly TableConstants = TableConstants;
+  protected readonly AuthRole = AuthRole;
+
   protected readonly dataSetsStore = inject(DataSetsStore);
   protected readonly pipelinesStore = inject(PipelinesStore);
 
@@ -47,6 +49,4 @@ export class DataSetsComponent {
   protected onPage(event: TablePageEvent) {
     this.dataSetsStore.changePage(event);
   }
-
-  protected readonly AuthRole = AuthRole;
 }

@@ -11,6 +11,8 @@
     "create": "Erstellen",
     "pipeline": "Pipeline",
     "timestamp": "Zeitstempel",
+    "title": "Titel",
+    "status": "Status",
     "type": "Typ",
     "description": "Beschreibung",
     "message": "Event",
@@ -83,5 +85,8 @@
     "projects": "Projekte ({{total}})",
     "organizations": "Organisationen ({{total}})",
     "grants": "Förderungen ({{total}})"
+  },
+  "dataSetObjects": {
+    "rawData": "Rohe Datenobjekte"
   }
 }

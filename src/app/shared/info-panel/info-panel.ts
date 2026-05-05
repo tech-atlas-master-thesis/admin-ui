@@ -13,4 +13,5 @@ import { TranslocoPipe } from '@jsverse/transloco';
 export class InfoPanel {
   icon = input<string>('pi pi-info-circle');
   severity = input<ButtonSeverity>('primary');
+  title = input<string>();
 }
