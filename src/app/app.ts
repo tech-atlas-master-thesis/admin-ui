@@ -42,10 +42,8 @@ export class App {
   private initErrorMessages() {
     this.errorService.httpErrors
       .pipe(
-        tap((data) => console.log(data)),
         filter((errors) => errors.length !== 0),
         tap((errors) => {
-          console.log('add messages', errors);
           this.messageService.addAll(errors);
           this.errorService.clearError();
           this.applicationRef.tick();

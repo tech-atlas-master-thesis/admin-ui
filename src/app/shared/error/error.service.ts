@@ -16,7 +16,6 @@ export class ErrorService {
   }
 
   addError(error: HttpErrorResponse) {
-    console.log('add error', error, this.httpErrorsSubject.value);
     this.httpErrorsSubject.next([...this.httpErrorsSubject.getValue(), this.getErrorMessage(error)]);
   }
 

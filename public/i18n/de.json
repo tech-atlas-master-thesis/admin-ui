@@ -9,6 +9,7 @@
     "state": "Status",
     "new": "Neu",
     "create": "Erstellen",
+    "search": "Suche",
     "pipeline": "Pipeline",
     "timestamp": "Zeitstempel",
     "title": "Titel",
@@ -87,6 +88,7 @@
     "grants": "Förderungen ({{total}})"
   },
   "dataSetObjects": {
-    "rawData": "Rohe Datenobjekte"
+    "rawData": "Rohe Datenobjekte",
+    "includeData": "Erweiterte Daten inkludieren"
   }
 }

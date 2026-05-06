@@ -8,8 +8,6 @@ export function errorInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn)
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
-      console.log('intercept', error);
-      // inject(ErrorService).addError(error);
       errorService.addError(error);
       return throwError(() => error);
     }),

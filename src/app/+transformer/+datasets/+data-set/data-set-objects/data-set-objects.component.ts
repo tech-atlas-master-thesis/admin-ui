@@ -8,16 +8,19 @@ import { InfoPanel } from '@shared/info-panel/info-panel';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { DataSetObjectsColumn } from './data-set-objects.interface';
 import { Tooltip } from 'primeng/tooltip';
+import { Checkbox } from 'primeng/checkbox';
+import { FormsModule } from '@angular/forms';
+import { InputText } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-data-set-objects',
-  imports: [TableModule, TranslocoPipe, InfoPanel, NgxJsonViewerModule, Tooltip],
+  imports: [TableModule, TranslocoPipe, InfoPanel, NgxJsonViewerModule, Tooltip, Checkbox, FormsModule, InputText],
   templateUrl: './data-set-objects.component.html',
   styleUrl: './data-set-objects.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataSetObjects {
-  private dataSetObjectStore = inject(DataSetObjectStore);
+  private readonly dataSetObjectStore = inject(DataSetObjectStore);
 
   objectType = input.required<DataSetObjectType>();
   additionalColumns = input<DataSetObjectsColumn[]>([]);
@@ -36,6 +39,14 @@ export class DataSetObjects {
 
   protected onPage(event: TablePageEvent) {
     this.dataSetObjectStore.changePage(this.objectType(), event);
+  }
+
+  protected onSearch(event: string) {
+    this.dataSetObjectStore.changeSearch(this.objectType(), event);
+  }
+
+  protected onIncludeData(event: boolean) {
+    this.dataSetObjectStore.changeIncludeData(this.objectType(), event);
   }
 
   protected readonly dispatchEvent = dispatchEvent;

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, Signal, signal } from '@angular/core';
 import { DataSetStore } from './data-set.store';
 import { DataSetObjectStore } from './data-set-object.store';
 import { TranslocoPipe } from '@jsverse/transloco';
@@ -6,8 +6,9 @@ import { Tab, TabList, TabPanel, TabPanels, Tabs } from 'primeng/tabs';
 import { DataSetObjects } from './data-set-objects/data-set-objects.component';
 import { DataSetObjectsColumn } from './data-set-objects/data-set-objects.interface';
 import { ActivatedRoute, Router } from '@angular/router';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { tap } from 'rxjs';
+import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { filter, map, startWith, take, tap } from 'rxjs';
+import { PaginatedListDto } from '@api/models/paginated-list-dto';
 
 @Component({
   selector: 'app-dataset',
@@ -23,6 +24,10 @@ export class DataSetComponent {
   protected readonly activatedRoute = inject(ActivatedRoute);
 
   selectedTab = signal<number>(0);
+
+  projectsCount = this.getFirstCountFromPaginated(this.dataSetObjectStore.projectResource.value);
+  organizationsCount = this.getFirstCountFromPaginated(this.dataSetObjectStore.organizationResource.value);
+  grantsCount = this.getFirstCountFromPaginated(this.dataSetObjectStore.grantResource.value);
 
   constructor() {
     this.initTabChangePersistence();
@@ -54,6 +59,17 @@ export class DataSetComponent {
   ];
 
   protected readonly grantColumns: DataSetObjectsColumn[] = [];
+
+  private getFirstCountFromPaginated(totalCount: Signal<PaginatedListDto<unknown> | undefined>) {
+    return toSignal(
+      toObservable(totalCount).pipe(
+        map((response) => response?.page.totalRecords),
+        filter((value) => value !== undefined),
+        take(1),
+        startWith(undefined),
+      ),
+    );
+  }
 
   private initTabChangePersistence() {
     effect(() => {

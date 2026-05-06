@@ -9,6 +9,7 @@
     "state": "State",
     "new": "New",
     "create": "Create",
+    "search": "Search",
     "pipeline": "Pipeline",
     "timestamp": "Timestamp",
     "title": "Title",
@@ -87,6 +88,7 @@
     "grants": "Grants ({{total}})"
   },
   "dataSetObjects": {
-    "rawData": "Raw Data Object"
+    "rawData": "Raw Data Object",
+    "includeData": "Include additional Data"
   }
 }

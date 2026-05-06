@@ -7,7 +7,6 @@ import { PaginatorState } from 'primeng/paginator';
 import { SortMeta } from 'primeng/api';
 import { TableConstants } from '@shared/contants/table.constants';
 import { DataSetStore } from './data-set.store';
-import { DatasetsFilterDto } from '@api/models/dataset/datasets-filter-dto';
 import { SortUtil } from '@shared/util/sort';
 
 interface DataSetObjectState {
@@ -96,26 +95,31 @@ export const DataSetObjectStore = signalStore(
     }
 
     function changePage(type: DataSetObjectType, pagination: PaginatorState) {
-      patchState(store, { [type]: { pagination } });
+      patchState(store, { [type]: { ...store[type](), pagination } });
     }
 
-    function changeFilter(type: DataSetObjectType, filter?: DatasetsFilterDto) {
-      patchState(store, { [type]: { filter } });
+    function changeSearch(type: DataSetObjectType, search?: string) {
+      patchState(store, { [type]: { ...store[type](), search } });
     }
 
     function changeSort(type: DataSetObjectType, sort: object) {
       if (!SortUtil.isMultiSort(sort)) {
         return;
       }
-      patchState(store, { [type]: { sort: sort.multisortmeta } });
+      patchState(store, { [type]: { ...store[type](), sort: sort.multisortmeta } });
+    }
+
+    function changeIncludeData(type: DataSetObjectType, includeData: boolean) {
+      patchState(store, { [type]: { ...store[type](), includeData } });
     }
 
     return {
       reload,
       getObjectTypeResource,
       changePage,
-      changeFilter,
+      changeSearch,
       changeSort,
+      changeIncludeData,
     };
   }),
 );

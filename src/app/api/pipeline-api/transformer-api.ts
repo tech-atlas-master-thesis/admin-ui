@@ -39,14 +39,14 @@ export class TransformerApi extends Api {
     pagination: PaginatorState,
     search: string | undefined,
     sort: SortMeta[] = [],
-    includeData = false,
+    includeData?: boolean,
   ) {
     const searchFilter = search !== undefined ? { search } : Object.create(null);
     return this.get<PaginatedListDto<DataSetObjectBase>>(`/datasets/${dataSetId}/${object}`, {
       params: {
         sort: SortUtil.getSortString(sort),
         ...searchFilter,
-        includeData,
+        includeData: includeData ?? false,
         offset: pagination.first ?? TableConstants.INITIAL_OFFSET,
         limit: pagination.rows ?? TableConstants.INITIAL_LIMIT,
       },
