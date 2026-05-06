@@ -64,6 +64,7 @@ export class DataSetComponent {
         },
         queryParamsHandling: 'merge',
         relativeTo: this.activatedRoute,
+        replaceUrl: true,
       });
     });
 
