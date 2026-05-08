@@ -47,6 +47,10 @@ export class MenuBar {
             label: this.i18nService.instant('pipelines.title'),
             routerLink: '/scraper/pipelines',
           },
+          {
+            label: this.i18nService.instant('configurations.title'),
+            routerLink: '/scraper/configurations',
+          },
         ],
       },
       {
@@ -55,6 +59,10 @@ export class MenuBar {
           {
             label: this.i18nService.instant('pipelines.title'),
             routerLink: '/transformer/pipelines',
+          },
+          {
+            label: this.i18nService.instant('configurations.title'),
+            routerLink: '/transformer/configurations',
           },
           {
             label: this.i18nService.instant('dataSets.title'),

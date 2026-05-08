@@ -1,58 +1,56 @@
 import { patchState, signalStore, withComputed, withMethods, withProps, withState } from '@ngrx/signals';
 import { computed, inject, resource } from '@angular/core';
-import { PipelineApi } from '@api/service/pipeline-api';
 import { firstValueFrom, tap } from 'rxjs';
-import { PipelineCreateDto } from '@api/models/pipeline/pipeline-create-dto';
 import { TableConstants } from '@shared/contants/table.constants';
 import { PaginatorState } from 'primeng/paginator';
-import { PipelineFilterDto } from '@api/models/pipeline/pipeline-filter-dto';
 import { FilterMetadata, SortMeta } from 'primeng/api';
 import { SortUtil } from '@shared/util/sort';
+import { ConfigurationFilter } from '@api/models/configuration/configuration-filter';
+import { ConfigurationApi } from '@api/service/configuration-api';
+import { CreateConfigurationDto } from '@api/models/configuration/create-configuration-dto';
 
-interface PipelineStoreState {
+interface ConfigurationsStoreState {
   pagination: PaginatorState;
-  filter: PipelineFilterDto;
+  filter: ConfigurationFilter;
   sort: SortMeta[];
 }
 
-export const PipelinesStore = signalStore(
-  withState<PipelineStoreState>({
+export const ConfigurationsStore = signalStore(
+  withState<ConfigurationsStoreState>({
     pagination: TableConstants.INITIAL_STATE,
     filter: {
       name: [],
       type: [],
-      state: [],
-      createdBy: [],
-      createdAt: [],
     },
     sort: [{ field: '_id', order: -1 }],
   }),
   withProps(() => ({
-    _scraperApi: inject(PipelineApi),
+    _configurationApi: inject(ConfigurationApi),
   })),
   withProps((store) => ({
-    _pipelineTypeResource: resource({
-      loader: () => firstValueFrom(store._scraperApi.getPipelineTypes()),
+    _configurationTypesResource: resource({
+      // TODO
+      loader: () => firstValueFrom(store._configurationApi.getConfigurationTypes()),
     }),
   })),
   withComputed((store) => ({
-    pipelineTypes: computed(() => store._pipelineTypeResource.value()),
+    configurationTypes: computed(() => store._configurationTypesResource.value()),
   })),
   withProps((store) => ({
-    _pipelinesResource: resource({
+    _configurationsResource: resource({
       params: () => ({
         pagination: store.pagination(),
         filter: store.filter(),
         sort: store.sort(),
-        allowedTypes: store.pipelineTypes()?.map((type) => type.type),
+        allowedTypes: store.configurationTypes()?.map((type) => type.type),
       }),
       loader: ({ params: { pagination, sort, filter, allowedTypes } }) =>
-        firstValueFrom(store._scraperApi.getPipelines(pagination, filter, sort, allowedTypes)),
+        firstValueFrom(store._configurationApi.getConfigurations(pagination, filter, sort, allowedTypes)),
     }),
   })),
   withComputed((store) => ({
-    pipelines: computed(() => store._pipelinesResource.value()?.items),
-    totalItems: computed(() => store._pipelinesResource.value()?.page.totalRecords),
+    configurations: computed(() => store._configurationsResource.value()?.items),
+    totalItems: computed(() => store._configurationsResource.value()?.page.totalRecords),
     filterCleaned: computed<Record<string, FilterMetadata[]>>(
       () =>
         Object.fromEntries(
@@ -61,23 +59,23 @@ export const PipelinesStore = signalStore(
           ),
         ) as Record<string, FilterMetadata[]>,
     ),
-    error: computed(() => store._pipelinesResource.error()),
-    loading: computed(() => store._pipelinesResource.isLoading()),
+    error: computed(() => store._configurationsResource.error()),
+    loading: computed(() => store._configurationsResource.isLoading()),
   })),
   withMethods((store) => {
     function reload() {
-      store._pipelinesResource.reload();
+      store._configurationsResource.reload();
     }
 
-    function createPipeline$(pipeline: PipelineCreateDto) {
-      return store._scraperApi.createPipeline(pipeline).pipe(tap(() => reload()));
+    function createPipeline$(configuration: CreateConfigurationDto) {
+      return store._configurationApi.createConfiguration(configuration).pipe(tap(() => reload()));
     }
 
     function changePage(pagination: PaginatorState) {
       patchState(store, { pagination });
     }
 
-    function changeFilter(filter?: PipelineFilterDto) {
+    function changeFilter(filter?: ConfigurationFilter) {
       patchState(store, { filter });
     }
 

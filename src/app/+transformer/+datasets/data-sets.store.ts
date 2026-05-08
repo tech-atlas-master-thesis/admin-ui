@@ -6,7 +6,7 @@ import { PaginatorState } from 'primeng/paginator';
 import { FilterMetadata, SortMeta } from 'primeng/api';
 import { SortUtil } from '@shared/util/sort';
 import { DatasetsFilterDto } from '@api/models/dataset/datasets-filter-dto';
-import { TransformerApi } from '@api/pipeline-api/transformer-api';
+import { TransformerApi } from '@api/service/transformer-api';
 
 interface DataSetsStoreState {
   pagination: PaginatorState;

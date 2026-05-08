@@ -5,7 +5,7 @@ import { TranslocoPipe } from '@jsverse/transloco';
 import { StepResultType } from '@api/models/pipeline/step-result-dto';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { PipelineStore } from '../../pipeline.store';
-import { PipelineApi } from '@api/pipeline-api/pipeline-api';
+import { PipelineApi } from '@api/service/pipeline-api';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { tap } from 'rxjs';
 import { Button } from 'primeng/button';

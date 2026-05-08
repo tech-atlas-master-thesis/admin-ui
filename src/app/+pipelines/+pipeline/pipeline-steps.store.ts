@@ -1,7 +1,7 @@
 import { signalStore, withComputed, withMethods, withProps } from '@ngrx/signals';
 import { computed, inject, resource } from '@angular/core';
 import { firstValueFrom, of } from 'rxjs';
-import { PipelineApi } from '@api/pipeline-api/pipeline-api';
+import { PipelineApi } from '@api/service/pipeline-api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { StepDto } from '@api/models/pipeline/step-dto';

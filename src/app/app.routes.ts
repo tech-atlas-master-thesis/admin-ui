@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
 import environment from '../environment/environment';
-import { API_BASE_URL } from '@api/pipeline-api/pipeline-api.token';
-import { PipelineApi } from '@api/pipeline-api/pipeline-api';
-import { ScraperApi } from '@api/pipeline-api/scraper-api';
-import { TransformerApi } from '@api/pipeline-api/transformer-api';
+import { API_BASE_URL } from '@api/service/api-base-url.token';
+import { PipelineApi } from '@api/service/pipeline-api';
+import { ScraperApi } from '@api/service/scraper-api';
+import { TransformerApi } from '@api/service/transformer-api';
 
 export const routes: Routes = [
   {
@@ -14,7 +14,7 @@ export const routes: Routes = [
     providers: [
       {
         provide: API_BASE_URL,
-        useValue: environment.baseUrl + '/api/scraper',
+        useValue: environment.baseUrl + environment.scraperBaseUrl,
       },
       PipelineApi,
       ScraperApi,
@@ -29,7 +29,7 @@ export const routes: Routes = [
     providers: [
       {
         provide: API_BASE_URL,
-        useValue: environment.baseUrl + '/api/transformer',
+        useValue: environment.baseUrl + environment.transformerBaseUrl,
       },
       PipelineApi,
       TransformerApi,

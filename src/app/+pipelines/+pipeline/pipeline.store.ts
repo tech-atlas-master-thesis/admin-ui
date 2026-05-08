@@ -1,7 +1,7 @@
 import { patchState, signalStore, withComputed, withMethods, withProps, withState } from '@ngrx/signals';
 import { computed, inject, resource } from '@angular/core';
 import { firstValueFrom, of } from 'rxjs';
-import { PipelineApi } from '@api/pipeline-api/pipeline-api';
+import { PipelineApi } from '@api/service/pipeline-api';
 
 interface PipelineStoreState {
   pipelineId: string | undefined;

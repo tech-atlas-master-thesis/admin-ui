@@ -1,7 +1,7 @@
 import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { inject, resource } from '@angular/core';
 import { firstValueFrom, of } from 'rxjs';
-import { TransformerApi } from '@api/pipeline-api/transformer-api';
+import { TransformerApi } from '@api/service/transformer-api';
 import { DataSetObjectType } from '@api/models/dataset/data-set-object-type';
 import { PaginatorState } from 'primeng/paginator';
 import { SortMeta } from 'primeng/api';

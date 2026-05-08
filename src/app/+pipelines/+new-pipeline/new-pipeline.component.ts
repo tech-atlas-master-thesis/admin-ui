@@ -22,7 +22,7 @@ import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-i
 import { firstValueFrom, map, of, startWith, switchMap, tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { I18nService } from '@shared/i18n/i18n-service';
-import { PipelineApi } from '@api/pipeline-api/pipeline-api';
+import { PipelineApi } from '@api/service/pipeline-api';
 import { UserConfigDto } from '@api/models/pipeline/user-config/user-config-dto';
 import { UserConfigDefinitionDto } from '@api/models/pipeline/user-config/user-config-definition-dto';
 import { UserConfigValueDto } from '@api/models/pipeline/user-config/user-config-value-dto';

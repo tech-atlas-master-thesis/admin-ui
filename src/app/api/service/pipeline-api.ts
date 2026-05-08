@@ -5,7 +5,7 @@ import { PipelineDto } from '../models/pipeline/pipeline-dto';
 import { StepDto } from '../models/pipeline/step-dto';
 import { PipelineCreateDto } from '../models/pipeline/pipeline-create-dto';
 import { PipelineConfigDto } from '../models/pipeline/pipeline-config-dto';
-import { API_BASE_URL } from '@api/pipeline-api/pipeline-api.token';
+import { API_BASE_URL } from './api-base-url.token';
 import { StepConfigDto } from '@api/models/pipeline/step-config-dto';
 import { PaginatorState } from 'primeng/paginator';
 import { PipelineFilterDto } from '@api/models/pipeline/pipeline-filter-dto';
