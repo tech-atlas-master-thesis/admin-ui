@@ -52,4 +52,19 @@ export class TransformerApi extends Api {
       },
     });
   }
+
+  exportDataSetObjects(
+    dataSetId: string,
+    object: DataSetObjectType,
+    search: string | undefined,
+    includeData?: boolean,
+  ) {
+    const searchFilter = search !== undefined ? { search } : Object.create(null);
+    return this.getFile(`/datasets/${dataSetId}/${object}/export`, {
+      params: {
+        ...searchFilter,
+        includeData: includeData ?? false,
+      },
+    });
+  }
 }

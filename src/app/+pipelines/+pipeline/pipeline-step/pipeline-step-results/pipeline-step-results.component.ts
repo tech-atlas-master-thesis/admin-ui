@@ -7,9 +7,8 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { PipelineStore } from '../../pipeline.store';
 import { PipelineApi } from '@api/service/pipeline-api';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { tap } from 'rxjs';
 import { Button } from 'primeng/button';
-import { HttpEvent, HttpEventType } from '@angular/common/http';
+import { FileDownload } from '@shared/file/file-download';
 
 @Component({
   selector: 'app-pipeline-step-results',
@@ -24,6 +23,7 @@ export class PipelineStepResults {
 
   private readonly pipelineStore = inject(PipelineStore);
   private readonly scraperApi = inject(PipelineApi);
+  private readonly fileDownload = inject(FileDownload);
   private readonly destroyRef = inject(DestroyRef);
 
   step = input<StepDto>();
@@ -35,34 +35,9 @@ export class PipelineStepResults {
     if (!stepId || !pipelineId) {
       return;
     }
-    this.scraperApi
-      .downloadStepResult(pipelineId, stepId)
-      .pipe(
-        tap((event: HttpEvent<Blob>) => {
-          switch (event.type) {
-            case HttpEventType.DownloadProgress:
-              // TODO: create better progress display
-              return;
-            case HttpEventType.Response: {
-              if (!event.body) {
-                return;
-              }
-              const element = document.createElement('a');
-              document.body.appendChild(element);
-              element.style.display = 'none';
-              const url = globalThis.URL.createObjectURL(event.body);
-              const contentDisposition = event.headers.get('Content-Disposition');
-              element.href = url;
-              element.download = contentDisposition?.replace('inline; filename=', '') ?? 'result.csv';
-              element.click();
-              globalThis.URL.revokeObjectURL(url);
-              element.remove();
-              return;
-            }
-          }
-        }),
-        takeUntilDestroyed(this.destroyRef),
-      )
+    this.fileDownload
+      .downloadFile$(this.scraperApi.downloadStepResult(pipelineId, stepId))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
   }
 }

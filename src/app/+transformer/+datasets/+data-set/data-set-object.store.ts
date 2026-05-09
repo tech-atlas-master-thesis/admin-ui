@@ -1,6 +1,6 @@
 import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { inject, resource } from '@angular/core';
-import { firstValueFrom, of } from 'rxjs';
+import { firstValueFrom, Observable, of } from 'rxjs';
 import { TransformerApi } from '@api/service/transformer-api';
 import { DataSetObjectType } from '@api/models/dataset/data-set-object-type';
 import { PaginatorState } from 'primeng/paginator';
@@ -8,6 +8,7 @@ import { SortMeta } from 'primeng/api';
 import { TableConstants } from '@shared/contants/table.constants';
 import { DataSetStore } from './data-set.store';
 import { SortUtil } from '@shared/util/sort';
+import { HttpEvent } from '@angular/common/http';
 
 interface DataSetObjectState {
   pagination: PaginatorState;
@@ -113,6 +114,19 @@ export const DataSetObjectStore = signalStore(
       patchState(store, { [type]: { ...store[type](), includeData } });
     }
 
+    function exportDataSet$(type: DataSetObjectType): Observable<HttpEvent<Blob> | undefined> {
+      const dataSetId = store._dataSetStore.dataSetId();
+      if (!dataSetId) {
+        return of(undefined);
+      }
+      return store._transformerApi.exportDataSetObjects(
+        dataSetId,
+        type,
+        store[type].search(),
+        store[type].includeData(),
+      );
+    }
+
     return {
       reload,
       getObjectTypeResource,
@@ -120,6 +134,7 @@ export const DataSetObjectStore = signalStore(
       changeSearch,
       changeSort,
       changeIncludeData,
+      exportDataSet$,
     };
   }),
 );

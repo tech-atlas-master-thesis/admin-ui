@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, input } from '@angular/core';
 import { DataSetObjectStore } from '../data-set-object.store';
 import { DataSetObjectType } from '@api/models/dataset/data-set-object-type';
 import { TableModule, TablePageEvent } from 'primeng/table';
@@ -11,16 +11,32 @@ import { Tooltip } from 'primeng/tooltip';
 import { Checkbox } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
 import { InputText } from 'primeng/inputtext';
+import { Button } from 'primeng/button';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { tap } from 'rxjs';
+import { FileDownload } from '@shared/file/file-download';
 
 @Component({
   selector: 'app-data-set-objects',
-  imports: [TableModule, TranslocoPipe, InfoPanel, NgxJsonViewerModule, Tooltip, Checkbox, FormsModule, InputText],
+  imports: [
+    TableModule,
+    TranslocoPipe,
+    InfoPanel,
+    NgxJsonViewerModule,
+    Tooltip,
+    Checkbox,
+    FormsModule,
+    InputText,
+    Button,
+  ],
   templateUrl: './data-set-objects.component.html',
   styleUrl: './data-set-objects.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataSetObjects {
   private readonly dataSetObjectStore = inject(DataSetObjectStore);
+  private readonly fileDownload = inject(FileDownload);
+  private readonly destroyRef = inject(DestroyRef);
 
   objectType = input.required<DataSetObjectType>();
   additionalColumns = input<DataSetObjectsColumn[]>([]);
@@ -49,5 +65,10 @@ export class DataSetObjects {
     this.dataSetObjectStore.changeIncludeData(this.objectType(), event);
   }
 
-  protected readonly dispatchEvent = dispatchEvent;
+  protected onExport() {
+    this.fileDownload
+      .downloadFile$(this.dataSetObjectStore.exportDataSet$(this.objectType()))
+      .pipe(tap(), takeUntilDestroyed(this.destroyRef))
+      .subscribe();
+  }
 }

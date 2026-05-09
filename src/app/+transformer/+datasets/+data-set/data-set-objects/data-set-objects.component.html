@@ -22,14 +22,13 @@
         ></p-check-box>
         <label [for]="includeData">{{ 'dataSetObjects.includeData' | transloco }}</label>
       </div>
-      <div>
-        <input
-          pInputText
-          [placeholder]="'label.search' | transloco"
-          [ngModel]="pageState().search"
-          (ngModelChange)="onSearch($event)"
-        />
-      </div>
+      <input
+        pInputText
+        [placeholder]="'label.search' | transloco"
+        [ngModel]="pageState().search"
+        (ngModelChange)="onSearch($event)"
+      />
+      <p-button icon="pi pi-download" [label]="'action.export' | transloco" (onClick)="onExport()"></p-button>
     </div>
   </ng-template>
   <ng-template #header>
