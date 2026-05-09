@@ -4,6 +4,7 @@ import { API_BASE_URL } from '@api/service/api-base-url.token';
 import { PipelineApi } from '@api/service/pipeline-api';
 import { ScraperApi } from '@api/service/scraper-api';
 import { TransformerApi } from '@api/service/transformer-api';
+import { ConfigurationApi } from '@api/service/configuration-api';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,7 @@ export const routes: Routes = [
       },
       PipelineApi,
       ScraperApi,
+      ConfigurationApi,
     ],
     loadChildren: () => import('./+scraper/scraper.routes').then((m) => m.routes),
   },
@@ -33,6 +35,7 @@ export const routes: Routes = [
       },
       PipelineApi,
       TransformerApi,
+      ConfigurationApi,
     ],
     loadChildren: () => import('./+transformer/transformer.routes').then((m) => m.routes),
   },

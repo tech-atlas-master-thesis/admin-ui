@@ -5,7 +5,6 @@ import { TableConstants } from '@shared/contants/table.constants';
 import { PaginatorState } from 'primeng/paginator';
 import { FilterMetadata, SortMeta } from 'primeng/api';
 import { SortUtil } from '@shared/util/sort';
-import { ConfigurationFilter } from '@api/models/configuration/configuration-filter';
 import { ConfigurationApi } from '@api/service/configuration-api';
 import { CreateConfigurationDto } from '@api/models/configuration/create-configuration-dto';
 import { ConfigurationVersionFilter } from '@api/models/configuration/configuration-version-filter';
@@ -30,13 +29,10 @@ export const ConfigurationVersionsStore = signalStore(
     _configurationApi: inject(ConfigurationApi),
     _configurationStore: inject(ConfigurationStore),
   })),
-  withComputed((store) => ({
-    _configurationId: computed(() => store._configurationStore.configurationId()),
-  })),
   withProps((store) => ({
     _configurationsResource: resource({
       params: () => ({
-        configurationId: store._configurationId(),
+        configurationId: store._configurationStore.configurationId(),
         pagination: store.pagination(),
         filter: store.filter(),
         sort: store.sort(),
@@ -68,15 +64,17 @@ export const ConfigurationVersionsStore = signalStore(
       store._configurationsResource.reload();
     }
 
-    function createVersion$(configuration: CreateConfigurationDto) {
-      return store._configurationApi.createConfiguration(configuration).pipe(tap(() => reload()));
+    function createVersion$(configurationId: string, configuration: CreateConfigurationDto) {
+      return store._configurationApi
+        .createConfigurationVersion(configurationId, configuration)
+        .pipe(tap(() => reload()));
     }
 
     function changePage(pagination: PaginatorState) {
       patchState(store, { pagination });
     }
 
-    function changeFilter(filter?: ConfigurationFilter) {
+    function changeFilter(filter?: ConfigurationVersionFilter) {
       patchState(store, { filter });
     }
 

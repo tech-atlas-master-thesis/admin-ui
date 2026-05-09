@@ -1,1 +1,43 @@
-<p>create-configuration works!</p>
+<div class="default-page">
+  <section>
+    <h3>{{ 'newConfiguration.title' | transloco }}</h3>
+    <div>
+      <p-floatlabel variant="on">
+        <p-select
+          id="new-configuration-type"
+          class="full-width"
+          [options]="typeOptions()"
+          [ngModel]="configurationForm.type()"
+          (ngModelChange)="configurationForm.type().value.set($event)"
+          dataKey="type"
+        >
+        </p-select>
+        <label for="new-configuration-type">{{ 'configuration.label.type' | transloco }}</label>
+      </p-floatlabel>
+    </div>
+  </section>
+  <section class="fluid-form">
+    <div class="fluid-form-element">
+      <label [for]="name">{{ 'label.name' | transloco }}</label>
+      <input #name pInputText [formField]="configurationForm.name" />
+    </div>
+    <div class="fluid-form-element fluid-form-full-width">
+      <label [for]="description">{{ 'label.description' | transloco }}</label>
+      <textarea
+        #description
+        rows="3"
+        pTextarea
+        [autoResize]="true"
+        [formField]="configurationForm.description"
+      ></textarea>
+    </div>
+  </section>
+  <footer>
+    <p-button
+      [label]="'label.create' | transloco"
+      icon="pi pi-plus"
+      [disabled]="configurationForm().invalid()"
+      (onClick)="onConfigurationCreate()"
+    ></p-button>
+  </footer>
+</div>

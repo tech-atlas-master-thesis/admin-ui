@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { Breadcrumb } from 'primeng/breadcrumb';
-import { ActivatedRouteSnapshot, Data, Params, Router, RoutesRecognized } from '@angular/router';
+import { ActivatedRouteSnapshot, Data, Params, ResolveEnd, Router, RoutesRecognized } from '@angular/router';
 import { BehaviorSubject, filter, tap } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { I18nService } from '@shared/i18n/i18n-service';
@@ -52,7 +52,7 @@ export class Breadcrumbs {
   constructor() {
     this.router.events
       .pipe(
-        filter((event) => event instanceof RoutesRecognized),
+        filter((event) => event instanceof RoutesRecognized || event instanceof ResolveEnd),
         tap((event) => {
           this.clear();
           this.extractData(event.state.root.firstChild);

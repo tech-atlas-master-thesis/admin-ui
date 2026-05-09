@@ -1,1 +1,21 @@
-<p>create-configuration-version works!</p>
+<div class="default-page">
+  <h1>{{ 'newConfigurationVersion.title' | transloco }}</h1>
+  <section class="fluid-form">
+    <div class="fluid-form-element">
+      <label [for]="name">{{ 'label.name' | transloco }}</label>
+      <input #name pInputText [formField]="versionForm.name" />
+    </div>
+    <div class="fluid-form-element fluid-form-full-width">
+      <label [for]="description">{{ 'label.description' | transloco }}</label>
+      <textarea #description rows="3" pTextarea [autoResize]="true" [formField]="versionForm.description"></textarea>
+    </div>
+  </section>
+  <footer>
+    <p-button
+      [label]="'label.create' | transloco"
+      icon="pi pi-plus"
+      [disabled]="versionForm().invalid()"
+      (onClick)="onVersionCreate()"
+    ></p-button>
+  </footer>
+</div>

@@ -1,1 +1,54 @@
-<p>configuration-version works!</p>
+<div class="default-page">
+  <div class="actions-header">
+    <h1>{{ 'configurationVersion.title' | transloco: { versionId: configurationVersionStore.version()?.version } }}</h1>
+    <div class="action-buttons">
+      @if (!versionForm().value().edit) {
+        <p-button
+          icon="pi pi-pen-to-square"
+          [label]="'action.edit' | transloco"
+          (onClick)="versionForm.edit().value.set(true)"
+        ></p-button>
+      }
+      @if (versionForm().value().edit) {
+        <p-button
+          icon="pi pi-times"
+          [label]="'action.cancel' | transloco"
+          [outlined]="true"
+          (onClick)="onCancel()"
+        ></p-button>
+        <p-button icon="pi pi-save" [label]="'action.save' | transloco" (onClick)="onSave()"></p-button>
+      }
+    </div>
+  </div>
+  <section class="fluid-form">
+    <div class="fluid-form-element">
+      <label [for]="version">{{ 'label.version' | transloco }}</label>
+      <input #version pInputText [formField]="versionForm.version" />
+    </div>
+    <div class="fluid-form-element">
+      <label [for]="name">{{ 'label.name' | transloco }}</label>
+      <input #name pInputText [formField]="versionForm.name" />
+    </div>
+    <div class="fluid-form-element fluid-form-full-width">
+      <label [for]="description">{{ 'label.description' | transloco }}</label>
+      <textarea
+        #description
+        rows="1"
+        pTextarea
+        [autoResize]="true"
+        [(ngModel)]="versionForm.description().value"
+      ></textarea>
+    </div>
+  </section>
+  <section>
+    @switch (configurationStore.configuration()?.type) {
+      @default {
+        @if (versionForm().value().edit) {
+          <json-editor [formField]="versionForm.configuration"></json-editor>
+        } @else {
+          <ngx-json-viewer [json]="versionForm().value().configuration"></ngx-json-viewer>
+        }
+      }
+    }
+  </section>
+</div>

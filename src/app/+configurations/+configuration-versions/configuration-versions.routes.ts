@@ -25,7 +25,7 @@ export const routes: Routes = [
       import('./+create-configuration-version/create-configuration-version').then((m) => m.CreateConfigurationVersion),
   },
   {
-    path: '/version/:versionId',
+    path: 'version/:versionId',
     providers: [ConfigurationVersionStore],
     data: {
       breadcrumbKey: 'configurationVersion.breadcrumbKey',

@@ -25,7 +25,7 @@ export const routes: Routes = [
     loadComponent: () => import('./+create-configuration/create-configuration').then((m) => m.CreateConfiguration),
   },
   {
-    path: '/configuration:configurationId',
+    path: 'configuration/:configurationId',
     providers: [ConfigurationStore, ConfigurationVersionsStore],
     data: {
       breadcrumbKey: 'configuration.breadcrumbKey',

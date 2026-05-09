@@ -29,7 +29,6 @@ export const ConfigurationsStore = signalStore(
   })),
   withProps((store) => ({
     _configurationTypesResource: resource({
-      // TODO
       loader: () => firstValueFrom(store._configurationApi.getConfigurationTypes()),
     }),
   })),

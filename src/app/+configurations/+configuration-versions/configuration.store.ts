@@ -1,9 +1,9 @@
 import { patchState, signalStore, withComputed, withMethods, withProps, withState } from '@ngrx/signals';
 import { computed, inject, resource } from '@angular/core';
-import { firstValueFrom, of, tap } from 'rxjs';
+import { firstValueFrom, Observable, of, tap } from 'rxjs';
 import { ConfigurationApi } from '@api/service/configuration-api';
-import { ConfigurationDto } from '@api/models/configuration/configuration-dto';
 import { ConfigurationsStore } from '../configurations.store';
+import { UpdateConfigurationDto } from '@api/models/configuration/update-configuration-dto';
 
 interface ConfigurationStoreState {
   configurationId: string | undefined;
@@ -36,14 +36,19 @@ export const ConfigurationStore = signalStore(
       patchState(store, { configurationId });
     }
 
-    function updateConfiguration$(configuration: ConfigurationDto) {
+    function updateConfiguration$(
+      configuration: UpdateConfigurationDto,
+    ): Observable<UpdateConfigurationDto | undefined> {
       const configurationId = store.configurationId();
       if (configurationId === undefined) {
         return of(undefined);
       }
-      return store._configurationApi
-        .updateConfiguration(configurationId, configuration)
-        .pipe(tap(() => store._configurationsStore.reload()));
+      return store._configurationApi.updateConfiguration(configurationId, configuration).pipe(
+        tap((value) => {
+          store._configurationsStore.reload();
+          store._configurationResource.set(value);
+        }),
+      );
     }
 
     return {

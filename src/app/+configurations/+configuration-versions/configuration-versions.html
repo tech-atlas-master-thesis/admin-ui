@@ -1,1 +1,146 @@
-<p>configuration-versions works!</p>
+<div class="default-page">
+  <div class="actions-header">
+    <h1>{{ 'configuration.title' | transloco: { configurationId: configurationStore.configurationId() } }}</h1>
+    <div class="action-buttons">
+      @if (!configurationForm().value().edit) {
+        <p-button
+          icon="pi pi-pen-to-square"
+          [label]="'action.edit' | transloco"
+          (onClick)="configurationForm.edit().value.set(true)"
+        ></p-button>
+      }
+      @if (configurationForm().value().edit) {
+        <p-button
+          icon="pi pi-times"
+          [label]="'action.cancel' | transloco"
+          [outlined]="true"
+          (onClick)="onCancel()"
+        ></p-button>
+        <p-button icon="pi pi-save" [label]="'action.save' | transloco" (onClick)="onSave()"></p-button>
+      }
+    </div>
+  </div>
+  @if (configurationStore.configuration()) {
+    <div class="fluid-form">
+      <div class="fluid-form-element">
+        <label [for]="name">{{ 'label.name' | transloco }}</label>
+        <input #name pInputText [formField]="configurationForm.name" />
+      </div>
+      <div class="fluid-form-element">
+        <label [for]="type">{{ 'label.type' | transloco }}</label>
+        <input #type pInputText [formField]="configurationForm.type" />
+      </div>
+      <div class="fluid-form-element fluid-form-full-width">
+        <label [for]="description">{{ 'label.description' | transloco }}</label>
+        <textarea
+          #description
+          rows="1"
+          pTextarea
+          [autoResize]="true"
+          [(ngModel)]="configurationForm.description().value"
+        ></textarea>
+      </div>
+    </div>
+  }
+  <h3>
+    {{ 'configuration.versions' | transloco }}
+  </h3>
+  <p-table
+    [value]="configurationVersionsStore.versions() ?? []"
+    [lazy]="true"
+    [paginator]="true"
+    [first]="configurationVersionsStore.pagination().first ?? TableConstants.INITIAL_OFFSET"
+    [rows]="configurationVersionsStore.pagination().rows ?? TableConstants.INITIAL_LIMIT"
+    [totalRecords]="configurationVersionsStore.totalItems() ?? 0"
+    [rowsPerPageOptions]="TableConstants.SIZE_OPTIONS"
+    sortMode="multiple"
+    [multiSortMeta]="configurationVersionsStore.sort()"
+    [filters]="configurationVersionsStore.filterCleaned()"
+    (onFilter)="onFilter($event)"
+    (onSort)="onSort($event)"
+    (onPage)="onPage($event)"
+  >
+    <ng-template #header>
+      <tr>
+        <th style="width: 33%" pSortableColumn="_id">
+          <div class="table-header-with-actions">
+            <span>{{ 'label.version' | transloco }}</span>
+            <p-sortIcon field="_id"></p-sortIcon>
+            <p-columnFilter
+              field="_id"
+              type="text"
+              display="menu"
+              matchMode="contains"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false"
+              [showButtons]="false"
+            ></p-columnFilter>
+          </div>
+        </th>
+        <th style="width: 33%" pSortableColumn="name">
+          <div class="table-header-with-actions">
+            <span>{{ 'label.name' | transloco }}</span>
+            <p-sortIcon field="name"></p-sortIcon>
+            <p-columnFilter
+              field="name"
+              type="text"
+              display="menu"
+              matchMode="contains"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false"
+              [showButtons]="false"
+            ></p-columnFilter>
+          </div>
+        </th>
+        <th style="width: 33%" pSortableColumn="state">
+          <div class="table-header-with-actions">
+            {{ 'label.state' | transloco }}
+            <p-sortIcon field="state"></p-sortIcon>
+            <p-columnFilter
+              field="state"
+              type="text"
+              display="menu"
+              matchMode="contains"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false"
+              [showButtons]="false"
+            >
+              <ng-template #filter let-value let-filter="filterCallback">
+                <p-multi-select
+                  [ngModel]="value"
+                  [options]="stateOptions"
+                  (onChange)="filter($event.value)"
+                ></p-multi-select>
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th style="width: 0">
+          <p-button
+            [label]="'label.new' | transloco"
+            icon="pi pi-plus"
+            [routerLink]="'new'"
+            [disabled]="!(AuthRole.EDIT | authorization)"
+          ></p-button>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-version>
+      <tr>
+        <td>
+          <a [routerLink]="['version', version.id]">{{ version.version }}</a>
+        </td>
+        <td>
+          <span [pTooltip]="version.description ? version.description : undefined">{{ version.name }}</span>
+        </td>
+        <td>{{ version.state }}</td>
+        <td>
+          <app-audit-panel [created]="version.created" [modified]="version.modified"></app-audit-panel>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

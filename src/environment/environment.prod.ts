@@ -2,8 +2,8 @@ import { EnvironmentInterface } from './environment.interface';
 
 export default {
   baseUrl: '.',
-  scraperBaseUrl: './api/scraper',
-  transformerBaseUrl: './api/transformer',
+  scraperBaseUrl: '/api/scraper',
+  transformerBaseUrl: '/api/transformer',
   auth: {
     issuer: 'https://auth.mooslechner.dev/application/o/tech-atlas',
     clientId: 'NjrD7i3pcLYKUPRlzdCpqLJGlbUwCq2DPY9ceeIh',

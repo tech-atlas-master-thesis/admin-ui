@@ -14,6 +14,8 @@ import { ConfigurationFilter } from '@api/models/configuration/configuration-fil
 import { ConfigurationVersionFilter } from '@api/models/configuration/configuration-version-filter';
 import { ConfigurationVersionDto } from '@api/models/configuration/configuration-version-dto';
 import { ConfigurationDefinitionDto } from '@api/models/configuration/configuration-definition-dto';
+import { UpdateConfigurationDto } from '@api/models/configuration/update-configuration-dto';
+import { UpdateConfigurationVersionDto } from '@api/models/configuration/update-configuration-version-dto';
 
 export class ConfigurationApi extends Api {
   protected readonly httpClient = inject(HttpClient);
@@ -51,11 +53,11 @@ export class ConfigurationApi extends Api {
   }
 
   getConfiguration(configurationId: string) {
-    return this.get<ConfigurationDto>(`/datasets/${configurationId}`);
+    return this.get<ConfigurationDto>(`/configuration/${configurationId}`);
   }
 
-  updateConfiguration(configurationId: string, configuration: ConfigurationDto) {
-    return this.post<ConfigurationDto>(`/datasets/${configurationId}`, configuration);
+  updateConfiguration(configurationId: string, configuration: UpdateConfigurationDto) {
+    return this.post<ConfigurationDto>(`/configuration/${configurationId}`, configuration);
   }
 
   getConfigurationVersions(
@@ -83,7 +85,7 @@ export class ConfigurationApi extends Api {
     return this.get<ConfigurationVersionDto>(`/configuration/${configurationId}/version/${versionId}`);
   }
 
-  updateConfigurationVersion(configurationId: string, versionId: string, version: ConfigurationVersionDto) {
+  updateConfigurationVersion(configurationId: string, versionId: string, version: UpdateConfigurationVersionDto) {
     return this.post<ConfigurationVersionDto>(`/configuration/${configurationId}/version/${versionId}`, version);
   }
 }

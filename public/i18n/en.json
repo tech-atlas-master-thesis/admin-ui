@@ -19,6 +19,7 @@
     "message": "Event",
     "messages": "Events",
     "results": "Results",
+    "version": "Version",
     "info": "Info",
     "created": "Created",
     "modified": "Modified",
@@ -26,6 +27,9 @@
     "by": "By"
   },
   "action": {
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "save": "Save",
     "logOut": "Log out",
     "delete": "Delete"
   },
@@ -45,6 +49,11 @@
       "WARNING": "Warning",
       "ERROR": "Error",
       "RESULT": "Result"
+    },
+    "configState": {
+      "DRAFT": "Draft",
+      "ACTIVE": "Active",
+      "ARCHIVED": "Archived"
     }
   },
   "dashboard": {
@@ -90,5 +99,26 @@
   "dataSetObjects": {
     "rawData": "Raw Data Object",
     "includeData": "Include additional Data"
+  },
+  "configurations": {
+    "breadcrumbKey": "Configurations",
+    "title": "Configurations"
+  },
+  "configuration": {
+    "breadcrumbKey": "Configuration \"{{configurationId}}\"",
+    "title": "Configuration \"{{configurationId}}\"",
+    "versions": "Configuration Versions"
+  },
+  "newConfiguration": {
+    "breadcrumbKey": "New Configuration",
+    "title": "New Configuration"
+  },
+  "configurationVersion": {
+    "breadcrumbKey": "Configuration Version",
+    "title": "Configuration Version \"{{versionId}}\""
+  },
+  "newConfigurationVersion": {
+    "breadcrumbKey": "New Configuration Version",
+    "title": "New Configuration Version"
   }
 }

@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { PipelinesStore } from '../+pipelines/pipelines.store';
 import { DataSetsStore } from './+datasets/data-sets.store';
-import { ConfigurationStore } from '../+configurations/+configuration-versions/configuration.store';
+import { ConfigurationsStore } from '../+configurations/configurations.store';
 
 export const routes: Routes = [
   {
@@ -17,7 +17,7 @@ export const routes: Routes = [
     data: {
       breadcrumbKey: 'configurations.breadcrumbKey',
     },
-    providers: [ConfigurationStore],
+    providers: [ConfigurationsStore],
     loadChildren: () => import('../+configurations/configurations.routes').then((m) => m.routes),
   },
   {

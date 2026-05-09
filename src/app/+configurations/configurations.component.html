@@ -1,1 +1,105 @@
-<p>configuration works!</p>
+<div class="default-page">
+  <h1>{{ 'configurations.title' | transloco }}</h1>
+  @if (configurationsStore.configurations(); as configurations) {
+    <p-table
+      [value]="configurations"
+      [lazy]="true"
+      [paginator]="true"
+      [first]="configurationsStore.pagination().first ?? TableConstants.INITIAL_OFFSET"
+      [rows]="configurationsStore.pagination().rows ?? TableConstants.INITIAL_LIMIT"
+      [totalRecords]="configurationsStore.totalItems() ?? 0"
+      [rowsPerPageOptions]="TableConstants.SIZE_OPTIONS"
+      sortMode="multiple"
+      [multiSortMeta]="configurationsStore.sort()"
+      [filters]="configurationsStore.filterCleaned()"
+      (onFilter)="onFilter($event)"
+      (onSort)="onSort($event)"
+      (onPage)="onPage($event)"
+    >
+      <ng-template #header>
+        <tr>
+          <th style="width: 25%" pSortableColumn="_id">
+            <div class="table-header-with-actions">
+              <span>{{ 'label.id' | transloco }}</span>
+              <p-sortIcon field="_id"></p-sortIcon>
+              <p-columnFilter
+                field="_id"
+                type="text"
+                display="menu"
+                matchMode="contains"
+                [showMatchModes]="false"
+                [showOperator]="false"
+                [showAddButton]="false"
+                [showButtons]="false"
+              ></p-columnFilter>
+            </div>
+          </th>
+          <th style="width: 25%" pSortableColumn="name">
+            <div class="table-header-with-actions">
+              <span>{{ 'label.name' | transloco }}</span>
+              <p-sortIcon field="name"></p-sortIcon>
+              <p-columnFilter
+                field="name"
+                type="text"
+                display="menu"
+                matchMode="contains"
+                [showMatchModes]="false"
+                [showOperator]="false"
+                [showAddButton]="false"
+                [showButtons]="false"
+              ></p-columnFilter>
+            </div>
+          </th>
+          <th style="width: 25%" pSortableColumn="type">
+            <div class="table-header-with-actions">
+              {{ 'label.type' | transloco }}
+              <p-sortIcon field="type"></p-sortIcon>
+              <p-columnFilter
+                field="type"
+                type="text"
+                display="menu"
+                matchMode="contains"
+                [showMatchModes]="false"
+                [showOperator]="false"
+                [showAddButton]="false"
+                [showButtons]="false"
+              >
+                <ng-template #filter let-value let-filter="filterCallback">
+                  <p-multi-select
+                    [ngModel]="value"
+                    [options]="typeOptions()"
+                    (onChange)="filter($event.value)"
+                  ></p-multi-select>
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="width: 0">
+            <p-button
+              [label]="'label.new' | transloco"
+              icon="pi pi-plus"
+              [routerLink]="'new'"
+              [disabled]="!(AuthRole.EDIT | authorization)"
+            ></p-button>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-configuration>
+        <tr>
+          <td>
+            <a [routerLink]="['configuration', configuration.id]">{{ configuration.id }}</a>
+          </td>
+          <td>
+            <span [pTooltip]="configuration.description ? configuration.description : undefined">{{
+              configuration.name
+            }}</span>
+          </td>
+          <td>{{ configuration.type }}</td>
+          <td>
+            <app-audit-panel [created]="configuration.created" [modified]="configuration.modified"></app-audit-panel>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  }
+</div>
