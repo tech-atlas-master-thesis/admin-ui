@@ -1,0 +1,30 @@
+<p-select
+  #select
+  appendTo="body"
+  [(ngModel)]="value"
+  [options]="options()"
+  [lazy]="true"
+  [virtualScroll]="true"
+  [virtualScrollItemSize]="32"
+  [virtualScrollOptions]="virtualScrollOptions()"
+  [readonly]="readonly()"
+  [disabled]="disabled()"
+  [style]="style()"
+  [showClear]="!readonly() && !disabled() && showClear()"
+  [loading]="loading()"
+  [ariaLabelledBy]="ariaLabelledBy()"
+  [ariaLabel]="ariaLabel()"
+  [dataKey]="dataKey"
+  (onShow)="onShow()"
+>
+  <ng-template #filter>
+    <input
+      #filter
+      pInputText
+      role="searchbox"
+      type="text"
+      [placeholder]="'label.filter' | transloco"
+      [(ngModel)]="search"
+    />
+  </ng-template>
+</p-select>

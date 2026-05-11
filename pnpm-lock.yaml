@@ -71,6 +71,9 @@ importers:
       tslib:
         specifier: 2.8.1
         version: 2.8.1
+      zod:
+        specifier: ^4.4.3
+        version: 4.4.3
     devDependencies:
       '@angular/build':
         specifier: 21.1.3
@@ -5178,6 +5181,9 @@ packages:
 
   zod@4.3.5:
     resolution: {integrity: sha512-k7Nwx6vuWx1IJ9Bjuf4Zt1PEllcwe7cls3VNzm4CQ1/hgtFUK2bRNG3rvnpPUhFjmqJKAKtjV576KnUkHocg/g==}
+
+  zod@4.4.3:
+    resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
 
 snapshots:
 
@@ -10530,3 +10536,5 @@ snapshots:
       zod: 4.3.5
 
   zod@4.3.5: {}
+
+  zod@4.4.3: {}

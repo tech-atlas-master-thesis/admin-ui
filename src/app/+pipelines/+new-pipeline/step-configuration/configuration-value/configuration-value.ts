@@ -11,6 +11,7 @@ import { Select } from 'primeng/select';
 import { AutoComplete } from 'primeng/autocomplete';
 import { Tooltip } from 'primeng/tooltip';
 import { InputMapping } from '@shared/input-mapping/input-mapping';
+import { ConfigCollectionInput } from './config-collection-input/config-collection-input';
 
 @Component({
   selector: 'app-configuration-value',
@@ -24,6 +25,7 @@ import { InputMapping } from '@shared/input-mapping/input-mapping';
     AutoComplete,
     Tooltip,
     InputMapping,
+    ConfigCollectionInput,
   ],
   templateUrl: './configuration-value.html',
   styleUrl: './configuration-value.scss',

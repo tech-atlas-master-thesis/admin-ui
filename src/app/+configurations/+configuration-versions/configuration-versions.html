@@ -37,6 +37,7 @@
           rows="1"
           pTextarea
           [autoResize]="true"
+          [readonly]="!configurationForm.edit().value()"
           [(ngModel)]="configurationForm.description().value"
         ></textarea>
       </div>

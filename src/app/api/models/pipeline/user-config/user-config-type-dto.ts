@@ -6,4 +6,7 @@ export enum UserConfigTypeDto {
   MAPPING = 'MAPPING',
   ENUM = 'ENUM',
   DATE = 'DATE',
+  PIPELINE = 'PIPELINE',
+  STEP = 'STEP',
+  CONFIGURATION = 'CONFIGURATION',
 }
