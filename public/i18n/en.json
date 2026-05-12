@@ -16,6 +16,7 @@
     "status": "State",
     "type": "Type",
     "description": "Description",
+    "projects": "Projects",
     "message": "Event",
     "messages": "Events",
     "results": "Results",
@@ -98,7 +99,9 @@
     "title": "Data Set \"{{dataSetId}}\"",
     "projects": "Projects ({{total}})",
     "organizations": "Organizations ({{total}})",
-    "grants": "Grants ({{total}})"
+    "grants": "Grants ({{total}})",
+    "technologies": "Technologies ({{total}})",
+    "fields": "Technology Fields ({{total}})"
   },
   "dataSetObjects": {
     "rawData": "Raw Data Object",

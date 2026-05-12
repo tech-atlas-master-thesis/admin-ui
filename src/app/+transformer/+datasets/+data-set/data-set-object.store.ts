@@ -43,6 +43,8 @@ export const DataSetObjectStore = signalStore(
     projects: DEFAULT_STATE,
     organizations: DEFAULT_STATE,
     grants: DEFAULT_STATE,
+    technologies: DEFAULT_STATE,
+    fields: DEFAULT_STATE,
   }),
   withProps(() => ({
     _transformerApi: inject(TransformerApi),
@@ -70,6 +72,20 @@ export const DataSetObjectStore = signalStore(
       }),
       loader: resourceLoader('grants', store._transformerApi),
     }),
+    technologiesResources: resource({
+      params: () => ({
+        dataSetId: store._dataSetStore.dataSetId(),
+        ...store.technologies(),
+      }),
+      loader: resourceLoader('technologies', store._transformerApi),
+    }),
+    fieldsResources: resource({
+      params: () => ({
+        dataSetId: store._dataSetStore.dataSetId(),
+        ...store.fields(),
+      }),
+      loader: resourceLoader('fields', store._transformerApi),
+    }),
   })),
   withMethods((store) => {
     function reload(type?: DataSetObjectType) {
@@ -82,6 +98,12 @@ export const DataSetObjectStore = signalStore(
       if (!type || type == 'grants') {
         store.grantResource.reload();
       }
+      if (!type || type == 'technologies') {
+        store.technologiesResources.reload();
+      }
+      if (!type || type == 'fields') {
+        store.fieldsResources.reload();
+      }
     }
 
     function getObjectTypeResource(type: DataSetObjectType) {
@@ -92,6 +114,10 @@ export const DataSetObjectStore = signalStore(
           return store.organizationResource;
         case 'grants':
           return store.grantResource;
+        case 'technologies':
+          return store.technologiesResources;
+        case 'fields':
+          return store.fieldsResources;
       }
     }
 

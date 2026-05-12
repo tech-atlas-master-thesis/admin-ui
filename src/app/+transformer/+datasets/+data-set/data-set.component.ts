@@ -28,6 +28,8 @@ export class DataSetComponent {
   projectsCount = this.getFirstCountFromPaginated(this.dataSetObjectStore.projectResource.value);
   organizationsCount = this.getFirstCountFromPaginated(this.dataSetObjectStore.organizationResource.value);
   grantsCount = this.getFirstCountFromPaginated(this.dataSetObjectStore.grantResource.value);
+  technologiesCount = this.getFirstCountFromPaginated(this.dataSetObjectStore.technologiesResources.value);
+  fieldsCount = this.getFirstCountFromPaginated(this.dataSetObjectStore.fieldsResources.value);
 
   constructor() {
     this.initTabChangePersistence();
@@ -59,6 +61,28 @@ export class DataSetComponent {
   ];
 
   protected readonly grantColumns: DataSetObjectsColumn[] = [];
+
+  protected readonly technologiesColumns: DataSetObjectsColumn[] = [
+    {
+      labelKey: 'label.name',
+      field: 'label',
+    },
+    {
+      labelKey: 'label.projects',
+      field: 'projects',
+    },
+  ];
+
+  protected readonly fieldsColumns: DataSetObjectsColumn[] = [
+    {
+      labelKey: 'label.name',
+      field: 'label',
+    },
+    {
+      labelKey: 'label.projects',
+      field: 'projects',
+    },
+  ];
 
   private getFirstCountFromPaginated(totalCount: Signal<PaginatedListDto<unknown> | undefined>) {
     return toSignal(
