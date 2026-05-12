@@ -13,10 +13,21 @@ import { ConfigurationStateDto } from '@api/models/configuration/configuration-s
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { JsonEditor } from 'ang-jsoneditor';
 import { FormsModule } from '@angular/forms';
+import { InputNumber } from 'primeng/inputnumber';
 
 @Component({
   selector: 'app-configuration-version',
-  imports: [TranslocoPipe, FormField, InputText, Textarea, Button, NgxJsonViewerModule, JsonEditor, FormsModule],
+  imports: [
+    TranslocoPipe,
+    FormField,
+    InputText,
+    Textarea,
+    Button,
+    NgxJsonViewerModule,
+    JsonEditor,
+    FormsModule,
+    InputNumber,
+  ],
   templateUrl: './configuration-version.html',
   styleUrl: './configuration-version.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,7 +43,7 @@ export class ConfigurationVersion {
   versionModel = linkedSignal(() => {
     const { version, name, state, description, configuration } = this.configurationVersionStore.version() ?? {};
     return {
-      version: version ?? '',
+      version: version ?? 0,
       name: name ?? '',
       state: state ?? ConfigurationStateDto.DRAFT,
       description: description ?? '',
@@ -49,7 +60,7 @@ export class ConfigurationVersion {
   protected onCancel() {
     const { version, name, state, description, configuration } = this.configurationVersionStore.version() ?? {};
     this.versionModel.set({
-      version: version ?? '',
+      version: version ?? 0,
       name: name ?? '',
       state: state ?? ConfigurationStateDto.DRAFT,
       description: description ?? '',

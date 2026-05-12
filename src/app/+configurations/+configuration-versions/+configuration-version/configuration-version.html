@@ -23,7 +23,11 @@
   <section class="fluid-form">
     <div class="fluid-form-element">
       <label [for]="version">{{ 'label.version' | transloco }}</label>
-      <input #version pInputText [formField]="versionForm.version" />
+      <p-input-number
+        #version
+        [disabled]="versionForm.version().disabled()"
+        [(ngModel)]="versionForm.version().value"
+      ></p-input-number>
     </div>
     <div class="fluid-form-element">
       <label [for]="name">{{ 'label.name' | transloco }}</label>
