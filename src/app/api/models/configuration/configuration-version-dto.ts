@@ -4,7 +4,7 @@ import { ConfigurationStateDto } from '@api/models/configuration/configuration-s
 export interface ConfigurationVersionDto {
   id: string;
   collection: string;
-  version: string;
+  version: number;
   name?: string;
   description?: string;
   state: ConfigurationStateDto;

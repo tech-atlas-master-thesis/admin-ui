@@ -1,6 +1,12 @@
-<div>
-  <app-lazy-configuration [formField]="configForm.configuration"></app-lazy-configuration>
+<div class="config-collection-input">
+  <app-lazy-configuration [formField]="configForm.configuration" [style]="{ width: '100%' }"></app-lazy-configuration>
   @if (configForm.configuration().value()) {
-    <!--    <p-select [formField]="configForm.versionId"></p-select>-->
+    <app-lazy-configuration-version
+      [formField]="configForm.version"
+      [configId]="configForm.configuration().value()?.id"
+      [style]="{ width: '100%' }"
+      [placeholder]="'newPipeline.config.latest' | transloco"
+      [showClear]="true"
+    ></app-lazy-configuration-version>
   }
 </div>

@@ -26,17 +26,17 @@
       <textarea #description rows="3" pTextarea [autoResize]="true" [formField]="pipelineForm.description"></textarea>
     </div>
   </section>
-  <app-step-configuration
-    [configForm]="pipelineConfigForm()"
-    [configDefinition]="stepConfigDefinition()"
-    [isLoading]="pipelineConfiguration.isLoading()"
-  ></app-step-configuration>
-  <footer>
+  <section class="sc-new-pipeline__actions">
     <p-button
       [label]="'label.create' | transloco"
       icon="pi pi-plus"
       [disabled]="pipelineForm().invalid() || !configFormValid() || pipelineConfiguration.isLoading()"
       (onClick)="onPipelineCreate()"
     ></p-button>
-  </footer>
+  </section>
+  <app-step-configuration
+    [configForm]="pipelineConfigForm()"
+    [configDefinition]="stepConfigDefinition()"
+    [isLoading]="pipelineConfiguration.isLoading()"
+  ></app-step-configuration>
 </div>

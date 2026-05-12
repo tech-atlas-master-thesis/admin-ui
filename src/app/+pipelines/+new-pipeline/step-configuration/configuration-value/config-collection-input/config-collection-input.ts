@@ -1,12 +1,21 @@
 import { ChangeDetectionStrategy, Component, effect, forwardRef, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ConfigCollection, configCollectionCodec, ConfigIdCollection } from './config-collection-input.interface';
+import { configCollectionCodec, ConfigIdCollection } from './config-collection-input.interface';
 import { disabled, form, FormField } from '@angular/forms/signals';
 import { LazyConfiguration } from '@shared/lazy-input/lazy-configuration/lazy-configuration';
+import { ConfigurationDto } from '@api/models/configuration/configuration-dto';
+import { ConfigurationVersionDto } from '@api/models/configuration/configuration-version-dto';
+import { LazyConfigurationVersion } from '@shared/lazy-input/lazy-configuration-version/lazy-configuration-version';
+import { TranslocoPipe } from '@jsverse/transloco';
+
+interface ConfigCollection {
+  configuration: ConfigurationDto | null;
+  version: ConfigurationVersionDto | null;
+}
 
 @Component({
   selector: 'app-config-collection-input',
-  imports: [LazyConfiguration, FormField],
+  imports: [LazyConfiguration, FormField, LazyConfigurationVersion, TranslocoPipe],
   templateUrl: './config-collection-input.html',
   styleUrl: './config-collection-input.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,13 +33,13 @@ export class ConfigCollectionInput implements ControlValueAccessor {
     disabled(form.version, () => !form.configuration);
   });
 
-  private onChange?: (v: ConfigCollection) => void;
+  private onChange?: (v: ConfigIdCollection) => void;
   private onTouched?: () => void;
 
   constructor() {
     effect(() => {
       const value = this.configForm().value();
-      this.onChange?.(value);
+      this.onChange?.(configCollectionCodec.encode(value));
     });
     effect(() => {
       this.configForm.configuration().value();
@@ -44,9 +53,11 @@ export class ConfigCollectionInput implements ControlValueAccessor {
   }
 
   writeValue(obj: unknown): void {
-    this.configModel.set(configCollectionCodec.parse(obj));
+    if (obj) {
+      this.configModel.set(configCollectionCodec.decode(obj as ConfigIdCollection) as ConfigCollection);
+    }
   }
-  registerOnChange(fn: (v: ConfigCollection) => void): void {
+  registerOnChange(fn: (v: ConfigIdCollection) => void): void {
     this.onChange = fn;
   }
   registerOnTouched(fn: () => void): void {

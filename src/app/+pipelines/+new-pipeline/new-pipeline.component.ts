@@ -30,6 +30,8 @@ import { InputText } from 'primeng/inputtext';
 import { Textarea } from 'primeng/textarea';
 import { StepConfiguration } from './step-configuration/step-configuration';
 import { Button } from 'primeng/button';
+import { configurationValidator } from './validators/configurationValidator';
+import { UserConfigTypeDto } from '@api/models/pipeline/user-config/user-config-type-dto';
 
 @Component({
   selector: 'app-new-pipeline',
@@ -164,15 +166,20 @@ export class NewPipeline {
           this.fb.group(
             Object.fromEntries(
               Object.entries(stepConfig).map(([configName, config]) => {
-                return [
-                  configName,
-                  this.fb.control<UserConfigValueDto | undefined>(config.defaultValue, Validators.required),
-                ];
+                return [configName, this.getConfigValueForm(config)];
               }),
             ),
           ),
         ]),
       ),
     );
+  }
+
+  private getConfigValueForm(config: UserConfigDefinitionDto) {
+    const formControl = this.fb.control<UserConfigValueDto | undefined>(config.defaultValue, Validators.required);
+    if (config.type === UserConfigTypeDto.CONFIGURATION) {
+      formControl.addValidators(configurationValidator);
+    }
+    return formControl;
   }
 }

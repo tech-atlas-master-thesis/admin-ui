@@ -1,0 +1,9 @@
+.config-collection-input {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+
+  > * {
+    flex: 1;
+  }
+}

@@ -55,7 +55,6 @@
       <textarea rows="1" pTextarea [autoResize]="true" [formControl]="configForm()"></textarea>
     }
     @case (UserConfigTypeDto.CONFIGURATION) {
-      COnfig
       <app-config-collection-input [formControl]="configForm()"></app-config-collection-input>
     }
     @default {

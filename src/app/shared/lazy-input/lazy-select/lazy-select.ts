@@ -67,7 +67,7 @@ export abstract class LazySelect<TValue, TArgs> implements FormValueControl<TVal
 
   onShow() {
     this.select()?.scrollInView(0);
-    this.filter()?.nativeElement.focus();
+    this.filter()?.nativeElement?.focus();
   }
 
   clearFilter() {

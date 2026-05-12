@@ -80,7 +80,10 @@
   },
   "newPipeline": {
     "breadcrumbKey": "New Pipeline",
-    "noConfig": "No config available for this step"
+    "noConfig": "No config available for this step",
+    "config": {
+      "latest": "Use Latest Active Version"
+    }
   },
   "step": {
     "noResult": "No Result is available for this step",

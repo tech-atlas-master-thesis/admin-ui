@@ -22,7 +22,7 @@ import { ConfigurationApi } from '@api/service/configuration-api';
 export class LazyConfiguration extends LazySelect<ConfigurationDto, string | undefined> {
   protected override readonly dataKey = 'id';
   protected override lazyInputService = inject(LazyInput<ConfigurationDto, typeof this.dataKey>);
-  private configurationApi = inject(ConfigurationApi);
+  private readonly configurationApi = inject(ConfigurationApi);
 
   configType = input<string>();
 
@@ -41,7 +41,7 @@ export class LazyConfiguration extends LazySelect<ConfigurationDto, string | und
   override convertToMenuItem(item: ConfigurationDto): SelectItem<ConfigurationDto> {
     return {
       value: item,
-      label: item.name ?? item.type,
+      label: !item.name || item.name === '' ? item.type : item.name,
     };
   }
 }
