@@ -2,7 +2,9 @@
   <app-menu-bar></app-menu-bar>
   @if (isAuthenticated()) {
     <app-breadcrumbs></app-breadcrumbs>
-    <router-outlet />
+    <div>
+      <router-outlet />
+    </div>
   }
 </div>
 <p-toast />

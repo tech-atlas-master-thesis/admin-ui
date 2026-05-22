@@ -1,0 +1,22 @@
+<ng-template #template>
+  @if (loading()) {
+    @for (row of rowsRange(); track row) {
+      @let opacity = 1 - row / rows();
+      <tr>
+        @for (cell of columnsRange(); track cell) {
+          <td>
+            <div class="table-skeleton__row-content" [style.height]="rowContentHeight()">
+              <p-skeleton [style.opacity]="opacity" [style.width]="'100%'" [style.height]="textHeight()"></p-skeleton>
+            </div>
+          </td>
+        }
+      </tr>
+    }
+  } @else {
+    <tr>
+      <td [colSpan]="columns()">
+        <span class="table-skeleton__missing-data">{{ missingTextWithFallback() }}</span>
+      </td>
+    </tr>
+  }
+</ng-template>

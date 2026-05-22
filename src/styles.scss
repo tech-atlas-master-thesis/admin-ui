@@ -11,8 +11,12 @@ a {
   text-decoration: none;
 }
 
+nav.p-breadcrumb {
+  background: transparent;
+}
+
 .default-page {
-  padding: 1rem;
+  padding: 0 1rem;
 
   display: flex;
   flex-direction: column;

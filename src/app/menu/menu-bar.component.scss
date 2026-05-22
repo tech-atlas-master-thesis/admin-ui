@@ -1,4 +1,12 @@
 .menu {
+  ::ng-deep {
+    .p-menubar {
+      border: none;
+      border-bottom: 1px solid var(--p-menubar-border-color);
+      border-radius: 0;
+    }
+  }
+
   &__user {
     display: flex;
     flex-direction: column;

@@ -16,6 +16,8 @@ import { I18nService } from '@shared/i18n/i18n-service';
 import { StateDto } from '@api/models/pipeline/state-dto';
 import { AuthRole } from '@shared/auth/auth-roles';
 import { AuthorizationPipe } from '@shared/auth/authorization.pipe';
+import { TableSkeleton } from '@shared/table/table-skeleton/table-skeleton';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'app-pipelines',
@@ -30,6 +32,8 @@ import { AuthorizationPipe } from '@shared/auth/authorization.pipe';
     MultiSelect,
     FormsModule,
     AuthorizationPipe,
+    TableSkeleton,
+    NgTemplateOutlet,
   ],
   templateUrl: './pipelines.component.html',
   styleUrl: './pipelines.component.scss',

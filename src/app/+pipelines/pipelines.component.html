@@ -1,6 +1,6 @@
-@if (pipelinesStore.pipelines(); as pipelines) {
+<div class="default-page">
   <p-table
-    [value]="pipelines"
+    [value]="pipelinesStore.pipelines() ?? []"
     [lazy]="true"
     [paginator]="true"
     [first]="pipelinesStore.pagination().first ?? TableConstants.INITIAL_OFFSET"
@@ -123,5 +123,9 @@
         </td>
       </tr>
     </ng-template>
+    <ng-template #emptymessage>
+      <app-table-skeleton #tableSkeleton [columns]="5" [loading]="pipelinesStore.loading()"></app-table-skeleton>
+      <ng-container *ngTemplateOutlet="tableSkeleton.template()"></ng-container>
+    </ng-template>
   </p-table>
-}
+</div>

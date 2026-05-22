@@ -1,0 +1,14 @@
+.table-skeleton {
+  &__row-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__missing-data {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+}

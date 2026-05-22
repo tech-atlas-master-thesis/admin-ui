@@ -38,6 +38,9 @@
   "format": {
     "dateTime": "yyyy-MM-dd HH:mm:ss"
   },
+  "table": {
+    "missingData": "No Data found"
+  },
   "enum": {
     "state": {
       "OPEN": "Open",
