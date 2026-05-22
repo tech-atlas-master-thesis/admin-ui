@@ -1,6 +1,11 @@
-@if (dataSetStore.dataSet(); as dataSet) {
-  <div class="dataset">
-    <h1>{{ 'dataSet.title' | transloco: { dataSetId: dataSet.id } }}</h1>
+<div class="default-page">
+  @if (dataSetStore.dataSet(); as dataSet) {
+    <h1 class="actions-header">
+      <span>{{ 'dataSet.title' | transloco: { dataSetId: dataSet.id } }}</span>
+      <div class="action-buttons">
+        <p-button icon="pi pi-download" [label]="'dataSet.export' | transloco" (onClick)="exportDataSet()"></p-button>
+      </div>
+    </h1>
     <p-tabs [(value)]="selectedTab">
       <p-tablist>
         <p-tab [value]="0">{{ 'dataSet.projects' | transloco: { total: projectsCount() } }}</p-tab>
@@ -33,5 +38,5 @@
         </p-tabpanel>
       </p-tabpanels>
     </p-tabs>
-  </div>
-}
+  }
+</div>

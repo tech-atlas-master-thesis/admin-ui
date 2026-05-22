@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, inject, Signal, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, effect, inject, Signal, signal } from '@angular/core';
 import { DataSetStore } from './data-set.store';
 import { DataSetObjectStore } from './data-set-object.store';
 import { TranslocoPipe } from '@jsverse/transloco';
@@ -9,10 +9,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { filter, map, startWith, take, tap } from 'rxjs';
 import { PaginatedListDto } from '@api/models/paginated-list-dto';
+import { Button } from 'primeng/button';
+import { FileDownload } from '@shared/file/file-download';
 
 @Component({
   selector: 'app-dataset',
-  imports: [TranslocoPipe, Tab, TabList, Tabs, TabPanels, TabPanel, DataSetObjects],
+  imports: [TranslocoPipe, Tab, TabList, Tabs, TabPanels, TabPanel, DataSetObjects, Button],
   templateUrl: './data-set.component.html',
   styleUrl: './data-set.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,8 +22,10 @@ import { PaginatedListDto } from '@api/models/paginated-list-dto';
 export class DataSetComponent {
   protected readonly dataSetStore = inject(DataSetStore);
   protected readonly dataSetObjectStore = inject(DataSetObjectStore);
+  protected readonly fileDownload = inject(FileDownload);
   protected readonly router = inject(Router);
   protected readonly activatedRoute = inject(ActivatedRoute);
+  protected readonly destroyRef = inject(DestroyRef);
 
   selectedTab = signal<number>(0);
 
@@ -117,6 +121,13 @@ export class DataSetComponent {
         }),
         takeUntilDestroyed(),
       )
+      .subscribe();
+  }
+
+  protected exportDataSet() {
+    this.fileDownload
+      .downloadFile$(this.dataSetStore.exportDataSet$())
+      .pipe(tap(), takeUntilDestroyed(this.destroyRef))
       .subscribe();
   }
 }

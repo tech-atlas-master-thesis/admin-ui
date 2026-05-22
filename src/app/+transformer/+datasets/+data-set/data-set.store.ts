@@ -33,8 +33,17 @@ export const DataSetStore = signalStore(
       patchState(store, { dataSetId: dataSetId ?? undefined });
     }
 
+    function exportDataSet$() {
+      const dataSetId = store.dataSetId();
+      if (!dataSetId) {
+        return of(undefined);
+      }
+      return store._transformerApi.exportDataSetFull(dataSetId);
+    }
+
     return {
       setDataSetId,
+      exportDataSet$,
     };
   }),
 );

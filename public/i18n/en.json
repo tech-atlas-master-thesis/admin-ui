@@ -101,7 +101,8 @@
     "organizations": "Organizations ({{total}})",
     "grants": "Grants ({{total}})",
     "technologies": "Technologies ({{total}})",
-    "fields": "Technology Fields ({{total}})"
+    "fields": "Technology Fields ({{total}})",
+    "export": "Export Dataset"
   },
   "dataSetObjects": {
     "rawData": "Raw Data Object",

@@ -53,6 +53,10 @@ export class TransformerApi extends Api {
     });
   }
 
+  exportDataSetFull(dataSetId: string) {
+    return this.getFile(`/datasets/${dataSetId}/export`);
+  }
+
   exportDataSetObjects(
     dataSetId: string,
     object: DataSetObjectType,
