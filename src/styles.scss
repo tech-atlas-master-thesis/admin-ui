@@ -73,3 +73,12 @@ nav.p-breadcrumb {
     margin-left: 0.5rem;
   }
 }
+
+.tree-with-full-width-nodes {
+  .p-tree-node-label {
+    width: 100%;
+    > span {
+      width: 100%;
+    }
+  }
+}

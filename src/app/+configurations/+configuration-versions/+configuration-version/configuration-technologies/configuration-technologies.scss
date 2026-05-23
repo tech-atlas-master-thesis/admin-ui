@@ -1,0 +1,27 @@
+.configuration-technologies {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+
+  &__node {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+
+    > div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+  }
+
+  &__color-preview {
+    height: 1rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border-width: 0.2rem;
+    border-style: solid;
+  }
+}

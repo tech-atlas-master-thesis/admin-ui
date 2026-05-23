@@ -1,0 +1,130 @@
+<div class="configuration-technologies">
+  <div class="configuration-technologies__tree">
+    <p-tree
+      class="tree-with-full-width-nodes"
+      [value]="treeNodes()"
+      selectionMode="single"
+      [(selection)]="currentSelection"
+      (onNodeExpand)="onNodeExpand($event, true)"
+      (onNodeCollapse)="onNodeExpand($event, false)"
+    >
+      <ng-template pTemplate="fieldNode" let-node>
+        <div class="configuration-technologies__node">
+          <div>
+            @if (node.data.color) {
+              <div
+                class="configuration-technologies__color-preview"
+                [style.background]="node.data.color"
+                [style.border-color]="node.data.accent"
+              ></div>
+            }
+            {{ node.label }}
+          </div>
+          <div>
+            @if (edit()) {
+              <p-button
+                icon="pi pi-plus-circle"
+                [text]="true"
+                [title]="'configuration.technologies.newTechnology' | transloco"
+                (onClick)="addNewTechnology(node.data.fieldIndex, $event)"
+              ></p-button>
+              <p-button
+                severity="danger"
+                icon="pi pi-trash"
+                [text]="true"
+                [title]="'action.delete' | transloco"
+                (onClick)="deleteField(node.data.fieldIndex, $event)"
+              ></p-button>
+            }
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="techNode" let-node>
+        <div class="configuration-technologies__node">
+          <div>
+            @if (node.data.color) {
+              <div class="configuration-technologies__color-preview" [style.background]="node.data.color"></div>
+            }
+            {{ node.label }}
+          </div>
+          <div>
+            @if (edit()) {
+              <p-button
+                severity="danger"
+                icon="pi pi-trash"
+                [text]="true"
+                [title]="'action.delete' | transloco"
+                (onClick)="deleteTech(node.data.fieldIndex, node.data.techIndex, $event)"
+              ></p-button>
+            }
+          </div>
+        </div>
+      </ng-template>
+      <ng-template #footer>
+        @if (edit()) {
+          <div>
+            <p-button
+              icon="pi pi-plus-circle"
+              [label]="'configuration.technologies.newField' | transloco"
+              [text]="true"
+              (onClick)="addNewField()"
+            ></p-button>
+          </div>
+        }
+      </ng-template>
+    </p-tree>
+  </div>
+  <div class="configuration-technologies__config">
+    <div class="fluid-form">
+      @if (selectedFieldForm(); as form) {
+        <div class="fluid-form-element">
+          <label [for]="name">{{ 'label.name' | transloco }}</label>
+          <input #name pInputText [formField]="$any(form.label)" />
+        </div>
+        <div class="fluid-form-element">
+          <label [for]="name">{{ 'label.short' | transloco }}</label>
+          <input #name pInputText [formField]="$any(form.short)" />
+        </div>
+        <!--        TODO: create color picker forms-->
+        <div class="fluid-form-element">
+          <label [for]="name">{{ 'label.primary' | transloco }}</label>
+          <input #name pInputText [formField]="$any(form.style.color)" />
+        </div>
+        <div class="fluid-form-element">
+          <label [for]="name">{{ 'label.accent' | transloco }}</label>
+          <input #name pInputText [formField]="$any(form.style.accent)" />
+        </div>
+      }
+      @if (selectedTechForm(); as form) {
+        <div class="fluid-form-element">
+          <label [for]="name">{{ 'label.name' | transloco }}</label>
+          <input #name pInputText [formField]="$any(form.label)" />
+        </div>
+        <div class="fluid-form-element">
+          <label [for]="name">{{ 'label.short' | transloco }}</label>
+          <input #name pInputText [formField]="$any(form.short)" />
+        </div>
+        <!--        TODO: create color picker forms-->
+        <div class="fluid-form-element">
+          <label [for]="name">{{ 'label.primary' | transloco }}</label>
+          <input #name pInputText [formField]="$any(form.style.color)" />
+        </div>
+        <div class="fluid-form-element">
+          <label [for]="name">{{ 'label.accent' | transloco }}</label>
+          <input #name pInputText [formField]="$any(form.style.accent)" />
+        </div>
+        <div class="fluid-form-element">
+          <label [for]="searchTerms">{{ 'configuration.technologies.searchTerms' | transloco }}</label>
+          <p-auto-complete
+            #searchTerms
+            [formField]="$any(form.searchTerms)"
+            inputId="multiple-ac-2"
+            multiple
+            fluid
+            [typeahead]="false"
+          />
+        </div>
+      }
+    </div>
+  </div>
+</div>

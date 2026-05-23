@@ -47,6 +47,12 @@
   </section>
   <section>
     @switch (configurationStore.configuration()?.type) {
+      @case ('technologies') {
+        <app-configuration-technologies
+          [formField]="versionForm.configuration"
+          [edit]="versionForm.edit().value()"
+        ></app-configuration-technologies>
+      }
       @default {
         @if (versionForm().value().edit) {
           <json-editor [formField]="versionForm.configuration"></json-editor>

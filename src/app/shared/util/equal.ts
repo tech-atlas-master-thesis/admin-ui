@@ -15,7 +15,7 @@ export class EqualityCheckUtil {
         if (!Array.isArray(o2)) return false;
         if ((length = o1.length) === o2.length) {
           for (key = 0; key < length; key++) {
-            if (!this.deepEqual(o1[key], o2[key])) return false;
+            if (!EqualityCheckUtil.deepEqual(o1[key], o2[key])) return false;
           }
           return true;
         }
@@ -25,7 +25,7 @@ export class EqualityCheckUtil {
         }
         keySet = Object.create(null);
         for (key in o1) {
-          if (!this.deepEqual(o1[key], o2[key])) {
+          if (!EqualityCheckUtil.deepEqual(o1[key], o2[key])) {
             return false;
           }
           keySet[key] = true;

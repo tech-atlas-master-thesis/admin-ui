@@ -6,6 +6,7 @@
   "label": {
     "id": "ID",
     "name": "Name",
+    "short": "Kurzname",
     "state": "Status",
     "new": "Neu",
     "create": "Erstellen",
@@ -22,6 +23,8 @@
     "results": "Ergebnisse",
     "version": "Version",
     "info": "Info",
+    "primary": "Primärfarbe",
+    "accent": "Akzentfarbe",
     "created": "Erstellt",
     "modified": "Verändert",
     "at": "Um",
@@ -122,7 +125,12 @@
   "configuration": {
     "breadcrumbKey": "Konfiguration \"{{configurationId}}\"",
     "title": "Konfiguration \"{{configurationId}}\"",
-    "versions": "Konfiguration Versionen"
+    "versions": "Konfiguration Versionen",
+    "technologies": {
+      "newField": "Neues Technologiefeld",
+      "newTechnology": "Neue Technologie",
+      "searchTerms": "Suchbegriffe"
+    }
   },
   "configurationVersion": {
     "breadcrumbKey": "Konfiguration Version",

@@ -14,6 +14,7 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { JsonEditor } from 'ang-jsoneditor';
 import { FormsModule } from '@angular/forms';
 import { InputNumber } from 'primeng/inputnumber';
+import { ConfigurationTechnologies } from './configuration-technologies/configuration-technologies';
 
 @Component({
   selector: 'app-configuration-version',
@@ -27,6 +28,7 @@ import { InputNumber } from 'primeng/inputnumber';
     JsonEditor,
     FormsModule,
     InputNumber,
+    ConfigurationTechnologies,
   ],
   templateUrl: './configuration-version.html',
   styleUrl: './configuration-version.scss',
