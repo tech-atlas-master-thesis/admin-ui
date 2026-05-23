@@ -16,7 +16,12 @@
           [outlined]="true"
           (onClick)="onCancel()"
         ></p-button>
-        <p-button icon="pi pi-save" [label]="'action.save' | transloco" (onClick)="onSave()"></p-button>
+        <p-button
+          icon="pi pi-save"
+          [disabled]="!valid()"
+          [label]="'action.save' | transloco"
+          (onClick)="onSave()"
+        ></p-button>
       }
     </div>
   </div>
@@ -50,7 +55,7 @@
       @case ('technologies') {
         <app-configuration-technologies
           [formField]="versionForm.configuration"
-          [edit]="versionForm.edit().value()"
+          [(valid)]="valid"
         ></app-configuration-technologies>
       }
       @default {

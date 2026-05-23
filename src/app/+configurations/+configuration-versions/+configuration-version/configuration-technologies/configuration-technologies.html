@@ -19,6 +19,11 @@
               ></div>
             }
             {{ node.label }}
+            @if (node.data.invalid) {
+              <p-button icon="pi pi-exclamation-triangle" severity="danger" [text]="true"></p-button>
+            } @else if (node.data.childInvalid) {
+              <p-button icon="pi pi-exclamation-circle" severity="warn" [text]="true"></p-button>
+            }
           </div>
           <div>
             @if (edit()) {
@@ -46,6 +51,9 @@
               <div class="configuration-technologies__color-preview" [style.background]="node.data.color"></div>
             }
             {{ node.label }}
+            @if (node.data.invalid) {
+              <p-button icon="pi pi-exclamation-triangle" severity="danger" [text]="true"></p-button>
+            }
           </div>
           <div>
             @if (edit()) {

@@ -1,7 +1,15 @@
-import { ChangeDetectionStrategy, Component, computed, effect, forwardRef, input, signal } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  input,
+  linkedSignal,
+  model,
+  signal,
+} from '@angular/core';
 import { ConfigurationTechnologyField, ConfigurationTechnologyFieldCodex } from './configuration-technologies.codec';
-import { applyEach, disabled, form, FormField, readonly, required } from '@angular/forms/signals';
+import { applyEach, form, FormField, FormValueControl, readonly, required } from '@angular/forms/signals';
 import { PrimeTemplate, TreeNode } from 'primeng/api';
 import { Tree, TreeNodeExpandEvent } from 'primeng/tree';
 import { EqualityCheckUtil } from '@shared/util/equal';
@@ -15,12 +23,13 @@ interface ConfigurationTechnologySelection {
   techIndex?: number;
   color?: string;
   accent?: string;
+  invalid?: boolean;
+  childInvalid?: boolean;
 }
 
 interface ConfigurationTechnologyForm {
   technologyFields: ConfigurationTechnologyField[];
-  edit: boolean;
-  disabled: boolean;
+  readonly: boolean;
 }
 
 @Component({
@@ -29,28 +38,28 @@ interface ConfigurationTechnologyForm {
   templateUrl: './configuration-technologies.html',
   styleUrl: './configuration-technologies.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ConfigurationTechnologies),
-      multi: true,
-    },
-  ],
 })
-export class ConfigurationTechnologies implements ControlValueAccessor {
+export class ConfigurationTechnologies implements FormValueControl<object> {
   private expandedNodes = new Map<number, boolean>();
 
-  edit = input(false);
+  value = model<object>({});
+  readonly = input(false);
+  valid = model<boolean>(true);
 
   currentSelection = signal<TreeNode<ConfigurationTechnologySelection> | undefined>(undefined);
 
-  configuration = signal<ConfigurationTechnologyForm>(
-    { technologyFields: [], edit: false, disabled: false },
+  configuration = linkedSignal<ConfigurationTechnologyForm>(
+    () => {
+      const input = this.value();
+      const configuration = Array.isArray(input)
+        ? input.map((field) => ConfigurationTechnologyFieldCodex.decode(field))
+        : [];
+      return { technologyFields: configuration, readonly: this.readonly() };
+    },
     { equal: EqualityCheckUtil.deepEqual },
   );
   configForm = form(this.configuration, (path) => {
-    readonly(path, (value) => !value.value().edit);
-    disabled(path, (value) => value.value().disabled);
+    readonly(path, (value) => value.value().readonly);
     applyEach(path.technologyFields, (fieldPath) => {
       required(fieldPath.label);
       required(fieldPath.style);
@@ -62,13 +71,21 @@ export class ConfigurationTechnologies implements ControlValueAccessor {
     });
   });
 
+  edit = computed(() => !this.configForm().readonly());
+
   treeNodes = computed<TreeNode<ConfigurationTechnologySelection>[]>(() =>
     this.configForm
       .technologyFields()
       .value()
       .map((field, fieldIndex) => ({
         label: field.label ?? '',
-        data: { fieldIndex, color: field.style.color ?? undefined, accent: field.style.accent ?? undefined },
+        data: {
+          fieldIndex,
+          color: field.style.color ?? undefined,
+          accent: field.style.accent ?? undefined,
+          invalid: !field.label,
+          childInvalid: field.technologies.some((tech) => !tech.label),
+        },
         expanded: this.expandedNodes.get(fieldIndex) ?? false,
         type: 'fieldNode',
         children: field.technologies.map((tech, techIndex) => ({
@@ -78,6 +95,7 @@ export class ConfigurationTechnologies implements ControlValueAccessor {
             techIndex,
             color: tech.style.color ?? undefined,
             accent: tech.style.accent ?? undefined,
+            invalid: !tech.label,
           },
           type: 'techNode',
         })),
@@ -102,59 +120,24 @@ export class ConfigurationTechnologies implements ControlValueAccessor {
 
   constructor() {
     this.initWriteback();
-
-    effect(() => {
-      this.configForm.edit().setControlValue(this.edit());
-    });
-
-    effect(() => {
-      console.log(
-        this.configForm().readonly(),
-        this.configForm.technologyFields().readonly(),
-        this.configForm.technologyFields[0].label().readonly(),
-      );
-    });
-  }
-
-  private onChange?: (v: object) => void;
-  private onTouched?: () => void;
-
-  writeValue(input: unknown): void {
-    const configuration = Array.isArray(input)
-      ? input.map((field) => ConfigurationTechnologyFieldCodex.decode(field))
-      : [];
-    this.configuration.update((config) => ({ ...config, technologyFields: configuration }));
-  }
-  registerOnChange(fn: (v: object) => void): void {
-    this.onChange = fn;
-  }
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-  setDisabledState?(isDisabled: boolean): void {
-    this.configForm.disabled().setControlValue(isDisabled);
   }
 
   private initWriteback() {
     effect(() => {
-      this.onChange?.(this.configForm().value().technologyFields);
+      this.value.set(this.configForm.technologyFields().value());
     });
 
     effect(() => {
-      if (this.configForm().touched()) {
-        this.onTouched?.();
-      }
+      this.valid.set(this.configForm().valid());
     });
   }
 
   protected onNodeExpand(event: TreeNodeExpandEvent, expanded: boolean) {
-    console.log(event);
     const index = (event.node as TreeNode<ConfigurationTechnologySelection>).data?.fieldIndex;
     if (index === undefined) {
       return;
     }
     this.expandedNodes.set(index, expanded);
-    console.log(this.expandedNodes);
   }
 
   protected addNewField() {

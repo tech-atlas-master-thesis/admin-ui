@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, linkedSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, linkedSignal, signal } from '@angular/core';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { disabled, form, FormField, readonly } from '@angular/forms/signals';
 import { InputText } from 'primeng/inputtext';
@@ -41,6 +41,8 @@ export class ConfigurationVersion {
   protected readonly configurationStore = inject(ConfigurationStore);
   protected readonly configurationVersionStore = inject(ConfigurationVersionStore);
   private readonly destroyRef = inject(DestroyRef);
+
+  valid = signal(true);
 
   versionModel = linkedSignal(() => {
     const { version, name, state, description, configuration } = this.configurationVersionStore.version() ?? {};
