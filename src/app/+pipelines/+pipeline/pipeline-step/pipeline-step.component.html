@@ -2,7 +2,7 @@
   @if (pipelineStepsStore.selectedStep(); as step) {
     <h1>{{ step.displayName | localised: step.name }}</h1>
     <h3>{{ 'label.messages' | transloco }}</h3>
-    <div>
+    <div class="pipeline-steps__items">
       <p-table [value]="step.events">
         <ng-template #header>
           <tr>
@@ -31,6 +31,8 @@
       </p-table>
     </div>
     <h3>{{ 'label.results' | transloco }}</h3>
-    <app-pipeline-step-results [step]="step"></app-pipeline-step-results>
+    <div class="pipeline-steps__items">
+      <app-pipeline-step-results [step]="step"></app-pipeline-step-results>
+    </div>
   }
 </div>

@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  max-height: 75dvh;
   overflow: auto;
   padding: 0.5rem;
 
@@ -70,12 +69,12 @@
     }
 
     &--selected {
-      outline: dashed 3px white;
+      outline: solid 3px white;
       outline-offset: 3px;
     }
 
     &:hover {
-      outline: solid 3px white;
+      outline: dashed 3px white;
       outline-offset: 3px;
     }
   }
