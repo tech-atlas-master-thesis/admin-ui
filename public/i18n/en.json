@@ -126,6 +126,11 @@
       "newField": "New Technology Field",
       "newTechnology": "New Technology",
       "searchTerms": "Search Terms"
+    },
+    "advanceState": {
+      "DRAFT": "Activate",
+      "ACTIVE": "Archive",
+      "ARCHIVED": "No changes to state possible"
     }
   },
   "newConfiguration": {
@@ -138,6 +143,7 @@
   },
   "newConfigurationVersion": {
     "breadcrumbKey": "New Configuration Version",
-    "title": "New Configuration Version"
+    "title": "New Configuration Version",
+    "baseVersion": "Base Version"
   }
 }

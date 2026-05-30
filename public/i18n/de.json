@@ -118,10 +118,6 @@
     "breadcrumbKey": "Konfigurationen",
     "title": "Konfigurationen"
   },
-  "newConfiguration": {
-    "breadcrumbKey": "Neue Konfiguration",
-    "title": "Neue Konfiguration"
-  },
   "configuration": {
     "breadcrumbKey": "Konfiguration \"{{configurationId}}\"",
     "title": "Konfiguration \"{{configurationId}}\"",
@@ -130,7 +126,16 @@
       "newField": "Neues Technologiefeld",
       "newTechnology": "Neue Technologie",
       "searchTerms": "Suchbegriffe"
+    },
+    "advanceState": {
+      "DRAFT": "Aktivieren",
+      "ACTIVE": "Archivieren",
+      "ARCHIVED": "Keine Statusänderungen möglich"
     }
+  },
+  "newConfiguration": {
+    "breadcrumbKey": "Neue Konfiguration",
+    "title": "Neue Konfiguration"
   },
   "configurationVersion": {
     "breadcrumbKey": "Konfiguration Version",
@@ -138,6 +143,7 @@
   },
   "newConfigurationVersion": {
     "breadcrumbKey": "Neue Konfiguration Version",
-    "title": "Neue Konfiguration Version"
+    "title": "Neue Konfiguration Version",
+    "baseVersion": "Basis Version"
   }
 }

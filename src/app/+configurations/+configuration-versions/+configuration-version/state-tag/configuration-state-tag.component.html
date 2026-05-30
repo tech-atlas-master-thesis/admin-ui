@@ -1,0 +1,9 @@
+<div class="action-buttons">
+  @let currentState = this.currentState();
+  @let previousState = this.previousState();
+  @if (currentState !== previousState && previousState) {
+    <p-tag [value]="'' + previousState | transloco" [severity]="severityMap[previousState]"></p-tag>
+    <span class="pi pi-arrow-right"></span>
+  }
+  <p-tag [value]="'' + currentState | transloco" [severity]="severityMap[currentState]"></p-tag>
+</div>

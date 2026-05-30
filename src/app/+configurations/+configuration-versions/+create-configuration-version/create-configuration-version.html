@@ -5,9 +5,24 @@
       <label [for]="name">{{ 'label.name' | transloco }}</label>
       <input #name pInputText [formField]="versionForm.name" />
     </div>
+    <div class="fluid-form-element">
+      <label [for]="base">{{ 'newConfigurationVersion.baseVersion' | transloco }}</label>
+      <app-lazy-configuration-version
+        class="full-width"
+        #base
+        [configId]="configurationStore.configurationId()"
+        [formField]="versionForm.baseVersion"
+      ></app-lazy-configuration-version>
+    </div>
     <div class="fluid-form-element fluid-form-full-width">
       <label [for]="description">{{ 'label.description' | transloco }}</label>
-      <textarea #description rows="3" pTextarea [autoResize]="true" [formField]="versionForm.description"></textarea>
+      <textarea
+        #description
+        rows="3"
+        pTextarea
+        [autoResize]="true"
+        [(ngModel)]="versionForm.description().value"
+      ></textarea>
     </div>
   </section>
   <footer>

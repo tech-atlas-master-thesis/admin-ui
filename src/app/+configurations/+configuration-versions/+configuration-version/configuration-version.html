@@ -1,7 +1,22 @@
 <div class="default-page">
   <div class="actions-header">
-    <h1>{{ 'configurationVersion.title' | transloco: { versionId: configurationVersionStore.version()?.version } }}</h1>
     <div class="action-buttons">
+      <h1>
+        {{ 'configurationVersion.title' | transloco: { versionId: configurationVersionStore.version()?.version } }}
+      </h1>
+      <app-configuration-state-tag
+        [currentState]="versionForm.state().value()"
+        [previousState]="configurationVersionStore.version()?.state"
+      ></app-configuration-state-tag>
+    </div>
+    <div class="action-buttons">
+      @if (canAdvanceState()) {
+        <p-button
+          [label]="'configuration.advanceState.' + configurationVersionStore.version()?.state | transloco"
+          [outlined]="true"
+          (onClick)="onStateAdvance()"
+        ></p-button>
+      }
       @if (!versionForm().value().edit) {
         <p-button
           icon="pi pi-pen-to-square"

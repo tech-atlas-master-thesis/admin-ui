@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, linkedSignal, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, linkedSignal, signal } from '@angular/core';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { disabled, form, FormField, readonly } from '@angular/forms/signals';
 import { InputText } from 'primeng/inputtext';
@@ -15,6 +15,7 @@ import { JsonEditor } from 'ang-jsoneditor';
 import { FormsModule } from '@angular/forms';
 import { InputNumber } from 'primeng/inputnumber';
 import { ConfigurationTechnologies } from './configuration-technologies/configuration-technologies';
+import { ConfigurationStateTag } from './state-tag/configuration-state-tag.component';
 
 @Component({
   selector: 'app-configuration-version',
@@ -29,6 +30,7 @@ import { ConfigurationTechnologies } from './configuration-technologies/configur
     FormsModule,
     InputNumber,
     ConfigurationTechnologies,
+    ConfigurationStateTag,
   ],
   templateUrl: './configuration-version.html',
   styleUrl: './configuration-version.scss',
@@ -61,6 +63,13 @@ export class ConfigurationVersion {
     disabled(form.state);
   });
 
+  canAdvanceState = computed(() => {
+    if (this.versionForm.state().value() !== this.configurationVersionStore.version()?.state) {
+      return false;
+    }
+    return this.getNextState(this.versionForm.state().value()) !== undefined;
+  });
+
   protected onCancel() {
     const { version, name, state, description, configuration } = this.configurationVersionStore.version() ?? {};
     this.versionModel.set({
@@ -79,5 +88,25 @@ export class ConfigurationVersion {
       .updateVersion$(this.versionForm().value())
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
+  }
+
+  protected onStateAdvance() {
+    const nextState = this.getNextState(this.versionForm.state().value());
+    if (!nextState) {
+      return;
+    }
+    this.versionForm.edit().setControlValue(true);
+    this.versionForm.state().setControlValue(nextState);
+  }
+
+  private getNextState(state?: ConfigurationStateDto) {
+    switch (state) {
+      case ConfigurationStateDto.DRAFT:
+        return ConfigurationStateDto.ACTIVE;
+      case ConfigurationStateDto.ACTIVE:
+        return ConfigurationStateDto.ARCHIVED;
+      default:
+        return undefined;
+    }
   }
 }
