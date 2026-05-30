@@ -176,7 +176,10 @@ export class NewPipeline {
   }
 
   private getConfigValueForm(config: UserConfigDefinitionDto) {
-    const formControl = this.fb.control<UserConfigValueDto | undefined>(config.defaultValue, Validators.required);
+    const formControl = this.fb.control<UserConfigValueDto | undefined>(
+      config.defaultValue,
+      config.required ? Validators.required : undefined,
+    );
     if (config.type === UserConfigTypeDto.CONFIGURATION) {
       formControl.addValidators(configurationValidator);
     }

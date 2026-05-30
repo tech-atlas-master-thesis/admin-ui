@@ -12,6 +12,7 @@ import { AutoComplete } from 'primeng/autocomplete';
 import { Tooltip } from 'primeng/tooltip';
 import { InputMapping } from '@shared/input-mapping/input-mapping';
 import { ConfigCollectionInput } from './config-collection-input/config-collection-input';
+import { DatePicker } from 'primeng/datepicker';
 
 @Component({
   selector: 'app-configuration-value',
@@ -26,6 +27,7 @@ import { ConfigCollectionInput } from './config-collection-input/config-collecti
     Tooltip,
     InputMapping,
     ConfigCollectionInput,
+    DatePicker,
   ],
   templateUrl: './configuration-value.html',
   styleUrl: './configuration-value.scss',

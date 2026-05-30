@@ -11,4 +11,6 @@ export interface UserConfigDefinitionDto {
   enumValues?: UserConfigEnumDto[];
   pipelineType?: string;
   configurationType?: string;
+  required?: boolean;
+  format?: string;
 }
