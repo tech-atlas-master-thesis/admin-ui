@@ -8,10 +8,14 @@ import {
   model,
   signal,
 } from '@angular/core';
-import { ConfigurationTechnologyField, ConfigurationTechnologyFieldCodex } from './configuration-technologies.codec';
+import {
+  ConfigurationTechnology,
+  ConfigurationTechnologyField,
+  ConfigurationTechnologyFieldCodex,
+} from './configuration-technologies.codec';
 import { applyEach, form, FormField, FormValueControl, readonly, required } from '@angular/forms/signals';
-import { PrimeTemplate, TreeNode } from 'primeng/api';
-import { Tree, TreeNodeExpandEvent } from 'primeng/tree';
+import { PrimeTemplate, TreeDragDropService, TreeNode } from 'primeng/api';
+import { Tree, TreeNodeDropEvent, TreeNodeExpandEvent } from 'primeng/tree';
 import { EqualityCheckUtil } from '@shared/util/equal';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { InputText } from 'primeng/inputtext';
@@ -38,6 +42,7 @@ interface ConfigurationTechnologyForm {
   templateUrl: './configuration-technologies.html',
   styleUrl: './configuration-technologies.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [TreeDragDropService],
 })
 export class ConfigurationTechnologies implements FormValueControl<object> {
   private expandedNodes = new Map<number, boolean>();
@@ -205,5 +210,50 @@ export class ConfigurationTechnologies implements FormValueControl<object> {
         ),
       ],
     }));
+  }
+
+  protected onNodeDrop(event: TreeNodeDropEvent) {
+    console.log(event);
+    console.log(event.dropNode?.parent, event.dragNode?.parent);
+    if (event.dropNode?.parent === undefined && event.dragNode?.parent === undefined) {
+      this.configuration.update((config) => {
+        const field = config.technologyFields[event.dragNode?.data.fieldIndex];
+        const beforeInsert = config.technologyFields.slice(0, event.index).filter((f) => !this.nodesEqual(field, f));
+        const afterInsert = config.technologyFields.slice(event.index).filter((f) => !this.nodesEqual(field, f));
+        console.log(config.technologyFields, [...beforeInsert, field, ...afterInsert]);
+        return { ...config, technologyFields: [...beforeInsert, field, ...afterInsert] };
+      });
+    }
+    if (event.dragNode?.parent !== undefined) {
+      const fieldIndex = event.dropNode?.data.fieldIndex;
+      if (!fieldIndex) {
+        return;
+      }
+      this.configuration.update((config) => {
+        const field = config.technologyFields[fieldIndex];
+        const tech = field.technologies[event.dragNode?.data.techIndex];
+        const beforeInsert = field.technologies.slice(0, event.index).filter((t) => !this.nodesEqual(t, tech));
+        const afterInsert = field.technologies.slice(event.index).filter((t) => !this.nodesEqual(t, tech));
+        return {
+          ...config,
+          technologyFields: config.technologyFields.map((f) => {
+            if (!this.nodesEqual(f, field)) {
+              return f;
+            }
+            return {
+              ...f,
+              technologies: [...beforeInsert, tech, ...afterInsert],
+            };
+          }),
+        };
+      });
+    }
+  }
+
+  private nodesEqual(
+    a: ConfigurationTechnologyField | ConfigurationTechnology,
+    b: ConfigurationTechnologyField | ConfigurationTechnology,
+  ) {
+    return a.label === b.label && a.short === b.short;
   }
 }

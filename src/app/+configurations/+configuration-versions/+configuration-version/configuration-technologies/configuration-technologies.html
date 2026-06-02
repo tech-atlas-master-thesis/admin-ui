@@ -5,8 +5,14 @@
       [value]="treeNodes()"
       selectionMode="single"
       [(selection)]="currentSelection"
+      [draggableNodes]="true"
+      [droppableNodes]="true"
+      [validateDrop]="true"
+      draggableScope="self"
+      droppableScope="self"
       (onNodeExpand)="onNodeExpand($event, true)"
       (onNodeCollapse)="onNodeExpand($event, false)"
+      (onNodeDrop)="onNodeDrop($event)"
     >
       <ng-template pTemplate="fieldNode" let-node>
         <div class="configuration-technologies__node">
