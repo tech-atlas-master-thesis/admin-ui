@@ -16,6 +16,7 @@
     "title": "Titel",
     "status": "Status",
     "type": "Typ",
+    "programme": "Programm",
     "description": "Beschreibung",
     "projects": "Projekte",
     "message": "Event",

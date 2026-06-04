@@ -64,7 +64,10 @@ export class DataSetComponent {
     },
   ];
 
-  protected readonly grantColumns: DataSetObjectsColumn[] = [];
+  protected readonly grantColumns: DataSetObjectsColumn[] = [
+    { labelKey: 'label.name', field: 'name' },
+    { labelKey: 'label.programme', field: 'programme' },
+  ];
 
   protected readonly technologiesColumns: DataSetObjectsColumn[] = [
     {
