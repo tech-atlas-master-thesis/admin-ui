@@ -21,6 +21,7 @@ export const ConfigurationTechnologyObject = z.object({
   label: z.string().nullable(),
   short: z.string().nullable(),
   style: ConfigurationTechnologyStyleObject,
+  programmes: z.array(z.string()),
   searchTerms: z.array(z.string()),
 });
 export type ConfigurationTechnology = z.infer<typeof ConfigurationTechnologyObject>;
@@ -38,6 +39,10 @@ export const ConfigurationTechnologyCodec = z.codec(z.looseObject({}), Configura
         ConfigurationTechnologyStyleCodec.safeDecode(tech['style'] as Record<string, unknown>),
         { color: null, accent: null },
       ),
+      programmes: safeDecodeWithFallback(
+        z.array(z.string()).safeDecode(tech['programmes'] as string[]),
+        [] as string[],
+      ),
       searchTerms: safeDecodeWithFallback(
         z.array(z.string()).safeDecode(tech['searchTerms'] as string[]),
         [] as string[],
@@ -50,6 +55,7 @@ export const ConfigurationTechnologyFieldObject = z.object({
   label: z.string().nullable(),
   short: z.string().nullable(),
   style: ConfigurationTechnologyStyleObject,
+  programmes: z.array(z.string()),
   technologies: z.array(ConfigurationTechnologyObject),
 });
 export type ConfigurationTechnologyField = z.infer<typeof ConfigurationTechnologyFieldObject>;
@@ -67,6 +73,10 @@ export const ConfigurationTechnologyFieldCodex = z.codec(z.looseObject({}), Conf
     return {
       label: safeDecodeWithFallback(z.string().safeDecode(field['label'] as string), null),
       short: safeDecodeWithFallback(z.string().safeDecode(field['short'] as string), null),
+      programmes: safeDecodeWithFallback(
+        z.array(z.string()).safeDecode(field['programmes'] as string[]),
+        [] as string[],
+      ),
       style: safeDecodeWithFallback(
         ConfigurationTechnologyStyleCodec.safeDecode(field['style'] as Record<string, unknown>),
         { color: null, accent: null },

@@ -108,6 +108,17 @@
           <label [for]="name">{{ 'label.accent' | transloco }}</label>
           <input #name pInputText [formField]="$any(form.style.accent)" />
         </div>
+        <div class="fluid-form-element">
+          <label [for]="programmes">{{ 'configuration.technologies.programmes' | transloco }}</label>
+          <p-auto-complete
+            #programmes
+            [formField]="$any(form.programmes)"
+            inputId="multiple-ac-2"
+            multiple
+            fluid
+            [typeahead]="false"
+          />
+        </div>
       }
       @if (selectedTechForm(); as form) {
         <div class="fluid-form-element">
@@ -126,6 +137,17 @@
         <div class="fluid-form-element">
           <label [for]="name">{{ 'label.accent' | transloco }}</label>
           <input #name pInputText [formField]="$any(form.style.accent)" />
+        </div>
+        <div class="fluid-form-element">
+          <label [for]="programmes">{{ 'configuration.technologies.programmes' | transloco }}</label>
+          <p-auto-complete
+            #programmes
+            [formField]="$any(form.programmes)"
+            inputId="multiple-ac-2"
+            multiple
+            fluid
+            [typeahead]="false"
+          />
         </div>
         <div class="fluid-form-element">
           <label [for]="searchTerms">{{ 'configuration.technologies.searchTerms' | transloco }}</label>

@@ -151,7 +151,7 @@ export class ConfigurationTechnologies implements FormValueControl<object> {
       ...config,
       technologyFields: [
         ...config.technologyFields,
-        { label: null, short: null, style: { color: null, accent: null }, technologies: [] },
+        { label: null, short: null, style: { color: null, accent: null }, programmes: [], technologies: [] },
       ],
     }));
     this.currentSelection.set({ data: { fieldIndex: this.configuration().technologyFields.length - 1 } });
@@ -170,7 +170,7 @@ export class ConfigurationTechnologies implements FormValueControl<object> {
               ...field,
               technologies: [
                 ...field.technologies,
-                { label: null, short: null, style: { color: null, accent: null }, searchTerms: [] },
+                { label: null, short: null, style: { color: null, accent: null }, programmes: [], searchTerms: [] },
               ],
             }
           : field,
