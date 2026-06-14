@@ -43,6 +43,7 @@ export const DataSetObjectStore = signalStore(
     projects: DEFAULT_STATE,
     organizations: DEFAULT_STATE,
     grants: DEFAULT_STATE,
+    programmes: DEFAULT_STATE,
     technologies: DEFAULT_STATE,
     fields: DEFAULT_STATE,
   }),
@@ -72,6 +73,13 @@ export const DataSetObjectStore = signalStore(
       }),
       loader: resourceLoader('grants', store._transformerApi),
     }),
+    programmesResources: resource({
+      params: () => ({
+        dataSetId: store._dataSetStore.dataSetId(),
+        ...store.fields(),
+      }),
+      loader: resourceLoader('programmes', store._transformerApi),
+    }),
     technologiesResources: resource({
       params: () => ({
         dataSetId: store._dataSetStore.dataSetId(),
@@ -98,6 +106,9 @@ export const DataSetObjectStore = signalStore(
       if (!type || type == 'grants') {
         store.grantResource.reload();
       }
+      if (!type || type == 'programmes') {
+        store.programmesResources.reload();
+      }
       if (!type || type == 'technologies') {
         store.technologiesResources.reload();
       }
@@ -114,6 +125,8 @@ export const DataSetObjectStore = signalStore(
           return store.organizationResource;
         case 'grants':
           return store.grantResource;
+        case 'programmes':
+          return store.programmesResources;
         case 'technologies':
           return store.technologiesResources;
         case 'fields':

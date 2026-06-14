@@ -11,6 +11,7 @@ import { filter, map, startWith, take, tap } from 'rxjs';
 import { PaginatedListDto } from '@api/models/paginated-list-dto';
 import { Button } from 'primeng/button';
 import { FileDownload } from '@shared/file/file-download';
+import { DataSetObjectType } from '@api/models/dataset/data-set-object-type';
 
 @Component({
   selector: 'app-dataset',
@@ -27,11 +28,12 @@ export class DataSetComponent {
   protected readonly activatedRoute = inject(ActivatedRoute);
   protected readonly destroyRef = inject(DestroyRef);
 
-  selectedTab = signal<number>(0);
+  selectedTab = signal<DataSetObjectType>('projects');
 
   projectsCount = this.getFirstCountFromPaginated(this.dataSetObjectStore.projectResource.value);
   organizationsCount = this.getFirstCountFromPaginated(this.dataSetObjectStore.organizationResource.value);
   grantsCount = this.getFirstCountFromPaginated(this.dataSetObjectStore.grantResource.value);
+  programmesCount = this.getFirstCountFromPaginated(this.dataSetObjectStore.programmesResources.value);
   technologiesCount = this.getFirstCountFromPaginated(this.dataSetObjectStore.technologiesResources.value);
   fieldsCount = this.getFirstCountFromPaginated(this.dataSetObjectStore.fieldsResources.value);
 
@@ -66,13 +68,28 @@ export class DataSetComponent {
 
   protected readonly grantColumns: DataSetObjectsColumn[] = [
     { labelKey: 'label.name', field: 'name' },
-    { labelKey: 'label.programme', field: 'programme' },
+    {
+      labelKey: 'label.programme',
+      field: 'programme',
+      displayFn: (field) => (Array.isArray(field) ? field.at(0).name : field),
+    },
+    { labelKey: 'label.projects', field: 'projects' },
+  ];
+
+  protected readonly programmeColumns: DataSetObjectsColumn[] = [
+    { labelKey: 'label.name', field: 'name' },
+    { labelKey: 'label.projects', field: 'projects' },
   ];
 
   protected readonly technologiesColumns: DataSetObjectsColumn[] = [
     {
       labelKey: 'label.name',
       field: 'label',
+    },
+    {
+      labelKey: 'label.field',
+      field: 'field',
+      displayFn: (field) => (Array.isArray(field) ? field.at(0).label : field),
     },
     {
       labelKey: 'label.projects',
@@ -117,11 +134,7 @@ export class DataSetComponent {
 
     this.activatedRoute.queryParamMap
       .pipe(
-        tap((params) => {
-          const param = params.get('object');
-          const tab = Number.parseInt(param ?? '');
-          this.selectedTab.set(Number.isNaN(tab) ? 0 : tab);
-        }),
+        tap((params) => this.selectedTab.set((params.get('object') as DataSetObjectType) ?? 'projects')),
         takeUntilDestroyed(),
       )
       .subscribe();

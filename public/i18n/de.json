@@ -17,6 +17,7 @@
     "status": "Status",
     "type": "Typ",
     "programme": "Programm",
+    "field": "Feld",
     "description": "Beschreibung",
     "projects": "Projekte",
     "message": "Event",
@@ -107,6 +108,7 @@
     "projects": "Projekte ({{total}})",
     "organizations": "Organisationen ({{total}})",
     "grants": "Förderungen ({{total}})",
+    "programmes": "Programme ({{total}})",
     "technologies": "Technologien ({{total}})",
     "fields": "Technologiefelder ({{total}})",
     "export": "Datensatz exportieren"
