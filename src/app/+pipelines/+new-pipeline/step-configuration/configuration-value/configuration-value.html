@@ -13,6 +13,9 @@
     @case (UserConfigTypeDto.FLOAT) {
       <p-input-number [formControl]="configForm()" />
     }
+    @case (UserConfigTypeDto.BOOLEAN) {
+      <p-check-box [formControl]="configForm()" [binary]="true" />
+    }
     @case (UserConfigTypeDto.LIST) {
       <p-auto-complete
         [formControl]="configForm()"

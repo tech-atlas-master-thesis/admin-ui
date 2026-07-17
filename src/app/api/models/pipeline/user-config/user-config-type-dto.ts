@@ -2,6 +2,7 @@ export enum UserConfigTypeDto {
   STRING = 'STRING',
   INTEGER = 'INTEGER',
   FLOAT = 'FLOAT',
+  BOOLEAN = 'BOOLEAN',
   LIST = 'LIST',
   MAPPING = 'MAPPING',
   ENUM = 'ENUM',

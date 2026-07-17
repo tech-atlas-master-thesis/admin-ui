@@ -8,6 +8,10 @@
     overflow: auto;
   }
 
+  &__message {
+    white-space: pre-line;
+  }
+
   h1 {
     margin: 0;
   }
