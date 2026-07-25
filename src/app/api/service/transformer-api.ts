@@ -33,6 +33,14 @@ export class TransformerApi extends Api {
     return this.get<DataSetDto>(`/datasets/${dataSetId}`);
   }
 
+  updateDataSet(dataSetId: string, dataSet: DataSetDto) {
+    return this.put<DataSetDto>(`/datasets/${dataSetId}`, dataSet);
+  }
+
+  deleteDataSet(dataSetId: string) {
+    return this.delete<DataSetDto>(`/datasets/${dataSetId}`);
+  }
+
   getDataSetObject(
     dataSetId: string,
     object: DataSetObjectType,

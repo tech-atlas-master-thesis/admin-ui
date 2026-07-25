@@ -38,7 +38,9 @@
     "save": "Speichern",
     "export": "Exportieren",
     "logOut": "Ausloggen",
-    "delete": "Löschen"
+    "delete": "Löschen",
+    "setVisible": "Sichtbar Setzen",
+    "setHidden": "Versteckt Setzen"
   },
   "format": {
     "dateTime": "yyyy-MM-dd HH:mm:ss"

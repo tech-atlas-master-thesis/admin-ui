@@ -91,12 +91,30 @@
         <td>
           <div class="action-buttons">
             <app-audit-panel [created]="dataSet.created"></app-audit-panel>
+            @if (dataSet.active) {
+              <p-button
+                [title]="'action.setHidden' | transloco"
+                [text]="true"
+                icon="pi pi-eye"
+                [disabled]="!(AuthRole.EDIT | authorization)"
+                (onClick)="onSetDataSetActive(dataSet, false)"
+              ></p-button>
+            } @else {
+              <p-button
+                [title]="'action.setVisible' | transloco"
+                [text]="true"
+                icon="pi pi-eye-slash"
+                [disabled]="!(AuthRole.EDIT | authorization)"
+                (onClick)="onSetDataSetActive(dataSet, true)"
+              ></p-button>
+            }
             <p-button
               [title]="'action.delete' | transloco"
               [text]="true"
               icon="pi pi-trash"
               severity="danger"
               [disabled]="!(AuthRole.EDIT | authorization)"
+              (onClick)="onDeleteDataSet(dataSet)"
             ></p-button>
           </div>
         </td>

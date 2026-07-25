@@ -5,5 +5,6 @@ export interface DataSetDto {
   pipelineType: string;
   pipelineName: string;
   pipeline: string;
+  active: boolean;
   created: AuditInfoDto;
 }

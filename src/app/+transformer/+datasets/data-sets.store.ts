@@ -7,6 +7,7 @@ import { FilterMetadata, SortMeta } from 'primeng/api';
 import { SortUtil } from '@shared/util/sort';
 import { DatasetsFilterDto } from '@api/models/dataset/datasets-filter-dto';
 import { TransformerApi } from '@api/service/transformer-api';
+import { DataSetDto } from '@api/models/dataset/data-set-dto';
 
 interface DataSetsStoreState {
   pagination: PaginatorState;
@@ -71,11 +72,21 @@ export const DataSetsStore = signalStore(
       patchState(store, { sort: sort.multisortmeta });
     }
 
+    function toggleDataSetActive$(dataSet: DataSetDto, active: boolean) {
+      return store._transformerApi.updateDataSet(dataSet.id, { ...dataSet, active });
+    }
+
+    function deleteDataSet$(dataSet: DataSetDto) {
+      return store._transformerApi.deleteDataSet(dataSet.id);
+    }
+
     return {
       reload,
       changePage,
       changeFilter,
       changeSort,
+      toggleDataSetActive$,
+      deleteDataSet$,
     };
   }),
 );

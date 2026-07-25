@@ -38,7 +38,9 @@
     "save": "Save",
     "export": "Export",
     "logOut": "Log out",
-    "delete": "Delete"
+    "delete": "Delete",
+    "setVisible": "Set Visible",
+    "setHidden": "Set Hidden"
   },
   "format": {
     "dateTime": "yyyy-MM-dd HH:mm:ss"

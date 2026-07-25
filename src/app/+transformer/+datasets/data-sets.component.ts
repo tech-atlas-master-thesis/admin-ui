@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject } from '@angular/core';
 import { TableFilterEvent, TableModule, TablePageEvent } from 'primeng/table';
 import { TableConstants } from '@shared/contants/table.constants';
 import { DataSetsStore } from './data-sets.store';
@@ -14,6 +14,9 @@ import { SelectItem } from 'primeng/api';
 import { I18nService } from '@shared/i18n/i18n-service';
 import { AuthorizationPipe } from '@shared/auth/authorization.pipe';
 import { AuthRole } from '@shared/auth/auth-roles';
+import { DataSetDto } from '@api/models/dataset/data-set-dto';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-datasets',
@@ -30,6 +33,7 @@ export class DataSetsComponent {
   protected readonly pipelinesStore = inject(PipelinesStore);
 
   private readonly i18nService = inject(I18nService);
+  private readonly destroyRef = inject(DestroyRef);
 
   typeOptions = computed<SelectItem<string>[]>(
     () =>
@@ -48,5 +52,25 @@ export class DataSetsComponent {
 
   protected onPage(event: TablePageEvent) {
     this.dataSetsStore.changePage(event);
+  }
+
+  protected onSetDataSetActive(dataSet: DataSetDto, active: boolean) {
+    this.dataSetsStore
+      .toggleDataSetActive$(dataSet, active)
+      .pipe(
+        tap(() => this.dataSetsStore.reload()),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe();
+  }
+
+  protected onDeleteDataSet(dataSet: DataSetDto) {
+    this.dataSetsStore
+      .deleteDataSet$(dataSet)
+      .pipe(
+        tap(() => this.dataSetsStore.reload()),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe();
   }
 }
