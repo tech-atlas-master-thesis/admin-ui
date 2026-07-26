@@ -3,21 +3,23 @@
     @for (step of Object.entries(configDefinition()); track step[0]) {
       @let stepName = step[0];
       @let stepDefinition = step[1];
-      @if (configForm().controls[stepName]; as stepForm) {
-        <h3>{{ stepDefinition.displayName | localised: stepName }}</h3>
-        <div class="fluid-form">
-          @for (configDefinition of stepDefinition?.userConfig; track $index) {
-            @let configName = configDefinition.name;
-            @if (stepForm.controls[configName]; as configForm) {
-              <app-configuration-value
-                [configForm]="configForm"
-                [configDefinition]="configDefinition"
-              ></app-configuration-value>
+      @if (stepDefinition.userConfig && stepDefinition.userConfig.length > 0) {
+        @if (configForm().controls[stepName]; as stepForm) {
+          <h3>{{ stepDefinition.displayName | localised: stepName }}</h3>
+          <div class="fluid-form">
+            @for (configDefinition of stepDefinition?.userConfig; track $index) {
+              @let configName = configDefinition.name;
+              @if (stepForm.controls[configName]; as configForm) {
+                <app-configuration-value
+                  [configForm]="configForm"
+                  [configDefinition]="configDefinition"
+                ></app-configuration-value>
+              }
+            } @empty {
+              {{ 'newPipeline.noConfig' | transloco }}
             }
-          } @empty {
-            {{ 'newPipeline.noConfig' | transloco }}
-          }
-        </div>
+          </div>
+        }
       }
     }
   } @else {
