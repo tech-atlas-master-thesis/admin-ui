@@ -1,6 +1,6 @@
 import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { inject, resource } from '@angular/core';
-import { firstValueFrom, Observable, of } from 'rxjs';
+import { firstValueFrom, Observable, of, Subject, takeUntil } from 'rxjs';
 import { TransformerApi } from '@api/service/transformer-api';
 import { DataSetObjectType } from '@api/models/dataset/data-set-object-type';
 import { PaginatorState } from 'primeng/paginator';
@@ -28,14 +28,22 @@ const DEFAULT_STATE = {
 function resourceLoader(objectType: DataSetObjectType, transformerApi: TransformerApi) {
   return ({
     params: { dataSetId, pagination, sort, search, includeData },
+    abortSignal,
   }: {
     params: { dataSetId: string | undefined } & DataSetObjectState;
-  }) =>
-    firstValueFrom(
+    abortSignal: AbortSignal;
+  }) => {
+    const abort = new Subject();
+    abortSignal.addEventListener('abort', () => abort.next(true));
+    // TODO: make this mode universal and apply elsewhere
+    return firstValueFrom(
       dataSetId !== undefined
-        ? transformerApi.getDataSetObject(dataSetId, objectType, pagination, search, sort, includeData)
+        ? transformerApi
+            .getDataSetObject(dataSetId, objectType, pagination, search, sort, includeData)
+            .pipe(takeUntil(abort))
         : of(),
     );
+  };
 }
 
 export const DataSetObjectStore = signalStore(
