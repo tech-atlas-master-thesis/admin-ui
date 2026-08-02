@@ -149,11 +149,25 @@
             [typeahead]="false"
           />
         </div>
+        <h3 class="fluid-form-full-width">
+          {{ 'configuration.technologies.searchTerms' | transloco }}
+        </h3>
         <div class="fluid-form-element">
-          <label [for]="searchTerms">{{ 'configuration.technologies.searchTerms' | transloco }}</label>
+          <label [for]="searchTermsAnyOf">{{ 'configuration.technologies.anyOf' | transloco }}</label>
           <p-auto-complete
-            #searchTerms
-            [formField]="$any(form.searchTerms)"
+            #searchTermsAnyOf
+            [formField]="$any(form.searchTerms.anyOf)"
+            inputId="multiple-ac-2"
+            multiple
+            fluid
+            [typeahead]="false"
+          />
+        </div>
+        <div class="fluid-form-element">
+          <label [for]="searchTermsExclude">{{ 'configuration.technologies.exclude' | transloco }}</label>
+          <p-auto-complete
+            #searchTermsExclude
+            [formField]="$any(form.searchTerms.excluded)"
             inputId="multiple-ac-2"
             multiple
             fluid

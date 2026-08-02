@@ -170,7 +170,13 @@ export class ConfigurationTechnologies implements FormValueControl<object> {
               ...field,
               technologies: [
                 ...field.technologies,
-                { label: null, short: null, style: { color: null, accent: null }, programmes: [], searchTerms: [] },
+                {
+                  label: null,
+                  short: null,
+                  style: { color: null, accent: null },
+                  programmes: [],
+                  searchTerms: { anyOf: [], excluded: [] },
+                },
               ],
             }
           : field,

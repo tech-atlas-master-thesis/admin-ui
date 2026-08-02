@@ -130,7 +130,10 @@
     "technologies": {
       "newField": "Neues Technologiefeld",
       "newTechnology": "Neue Technologie",
-      "searchTerms": "Suchbegriffe"
+      "programmes": "Förderprogramme",
+      "searchTerms": "Suchbegriffe",
+      "anyOf": "Eines davon",
+      "exclude": "Ausgeschlossen"
     },
     "advanceState": {
       "DRAFT": "Aktivieren",

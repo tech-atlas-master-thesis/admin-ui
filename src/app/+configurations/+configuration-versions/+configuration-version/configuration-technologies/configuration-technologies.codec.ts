@@ -17,12 +17,29 @@ export const ConfigurationTechnologyStyleCodec = z.codec(z.looseObject({}), Conf
   },
 });
 
+export const ConfigurationTechnologySearchTermsObject = z.object({
+  anyOf: z.array(z.string()),
+  excluded: z.array(z.string()),
+});
+export type ConfigurationTechnologySearchTerms = z.infer<typeof ConfigurationTechnologySearchTermsObject>;
+export const ConfigurationTechnologySearchTermsCodec = z.codec(
+  z.looseObject({}),
+  ConfigurationTechnologySearchTermsObject,
+  {
+    encode: (searchTerms) => searchTerms,
+    decode: (searchTerms) => {
+      const result = ConfigurationTechnologySearchTermsObject.safeParse(searchTerms);
+      return result.success ? result.data : { anyOf: [], excluded: [] };
+    },
+  },
+);
+
 export const ConfigurationTechnologyObject = z.object({
   label: z.string().nullable(),
   short: z.string().nullable(),
   style: ConfigurationTechnologyStyleObject,
   programmes: z.array(z.string()),
-  searchTerms: z.array(z.string()),
+  searchTerms: ConfigurationTechnologySearchTermsObject,
 });
 export type ConfigurationTechnology = z.infer<typeof ConfigurationTechnologyObject>;
 export const ConfigurationTechnologyCodec = z.codec(z.looseObject({}), ConfigurationTechnologyObject, {
@@ -44,8 +61,8 @@ export const ConfigurationTechnologyCodec = z.codec(z.looseObject({}), Configura
         [] as string[],
       ),
       searchTerms: safeDecodeWithFallback(
-        z.array(z.string()).safeDecode(tech['searchTerms'] as string[]),
-        [] as string[],
+        ConfigurationTechnologySearchTermsCodec.safeDecode(tech['searchTerms'] as Record<string, unknown>),
+        { anyOf: [], excluded: [] },
       ),
     };
   },
