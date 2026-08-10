@@ -5,8 +5,18 @@ import { ConfigurationApi } from '@api/service/configuration-api';
 import { PipelinesStore } from './+pipelines/pipelines.store';
 import { ConfigurationsStore } from './+configurations/configurations.store';
 import { DataSetsStore } from './+datasets/data-sets.store';
+import { SchedulesApi } from '@api/service/schedules-api';
+import { SchedulesStore } from './+schedules/schedules.store';
 
 export const routes: Routes = [
+  {
+    path: 'schedules',
+    data: {
+      breadcrumbKey: 'schedules.breadcrumbKey',
+    },
+    providers: [SchedulesApi, PipelineApi, SchedulesStore, PipelinesStore],
+    loadChildren: () => import('./+schedules/schedules.routes').then((m) => m.routes),
+  },
   {
     path: 'pipelines',
     data: {

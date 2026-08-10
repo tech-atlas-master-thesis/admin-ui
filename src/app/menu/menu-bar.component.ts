@@ -39,6 +39,11 @@ export class MenuBar {
         routerLink: '/',
       },
       {
+        label: this.i18nService.instant('schedules.title'),
+        icon: 'pi pi-clock',
+        routerLink: '/schedules',
+      },
+      {
         label: this.i18nService.instant('pipelines.title'),
         icon: 'pi pi-play-circle',
         routerLink: '/pipelines',

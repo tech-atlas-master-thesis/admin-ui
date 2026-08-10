@@ -71,13 +71,9 @@
   "dashboard": {
     "title": "Dashboard"
   },
-  "scraper": {
-    "title": "Scraper",
-    "breadcrumbKey": "Scraper"
-  },
-  "transformer": {
-    "title": "Transformer",
-    "breadcrumbKey": "Transformer"
+  "schedules": {
+    "title": "Schedules",
+    "breadcrumbKey": "Schedules"
   },
   "pipelines": {
     "title": "Pipelines",

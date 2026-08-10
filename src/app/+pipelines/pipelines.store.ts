@@ -28,11 +28,11 @@ export const PipelinesStore = signalStore(
     sort: [{ field: '_id', order: -1 }],
   }),
   withProps(() => ({
-    _scraperApi: inject(PipelineApi),
+    _pipelineApi: inject(PipelineApi),
   })),
   withProps((store) => ({
     _pipelineTypeResource: resource({
-      loader: () => firstValueFrom(store._scraperApi.getPipelineTypes()),
+      loader: () => firstValueFrom(store._pipelineApi.getPipelineTypes()),
     }),
   })),
   withComputed((store) => ({
@@ -47,7 +47,7 @@ export const PipelinesStore = signalStore(
         allowedTypes: store.pipelineTypes()?.map((type) => type.type),
       }),
       loader: ({ params: { pagination, sort, filter, allowedTypes } }) =>
-        firstValueFrom(store._scraperApi.getPipelines(pagination, filter, sort, allowedTypes)),
+        firstValueFrom(store._pipelineApi.getPipelines(pagination, filter, sort, allowedTypes)),
     }),
   })),
   withComputed((store) => ({
@@ -70,7 +70,7 @@ export const PipelinesStore = signalStore(
     }
 
     function createPipeline$(pipeline: PipelineCreateDto) {
-      return store._scraperApi.createPipeline(pipeline).pipe(tap(() => reload()));
+      return store._pipelineApi.createPipeline(pipeline).pipe(tap(() => reload()));
     }
 
     function changePage(pagination: PaginatorState) {
