@@ -11,11 +11,11 @@ import { DatasetsFilterDto } from '@api/models/dataset/datasets-filter-dto';
 import { DataSetObjectBase } from '@api/models/dataset/data-set-object-base';
 import { DataSetDto } from '@api/models/dataset/data-set-dto';
 import { DataSetObjectType } from '@api/models/dataset/data-set-object-type';
-import environment from '../../../environment/environment';
+import { API_BASE_URL } from '@api/service/api-base-url.token';
 
-export class TransformerApi extends Api {
+export class DataSetsApi extends Api {
   protected readonly httpClient = inject(HttpClient);
-  protected readonly baseUrl = environment.baseUrl + environment.transformerBaseUrl;
+  protected readonly baseUrl = inject(API_BASE_URL);
 
   getDataSets(pagination: PaginatorState, filter: DatasetsFilterDto, sort: SortMeta[]) {
     const filterObject = FilterUtil.getFilter(filter) as Record<string, unknown>;

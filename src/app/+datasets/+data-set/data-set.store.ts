@@ -1,7 +1,7 @@
 import { patchState, signalStore, withComputed, withMethods, withProps, withState } from '@ngrx/signals';
 import { computed, inject, resource } from '@angular/core';
 import { firstValueFrom, of } from 'rxjs';
-import { TransformerApi } from '@api/service/transformer-api';
+import { DataSetsApi } from '@api/service/data-sets-api';
 
 interface DataSetStoreState {
   dataSetId: string | undefined;
@@ -12,7 +12,7 @@ export const DataSetStore = signalStore(
     dataSetId: undefined,
   }),
   withProps(() => ({
-    _transformerApi: inject(TransformerApi),
+    _transformerApi: inject(DataSetsApi),
   })),
   withProps((store) => ({
     _dataSetResource: resource({

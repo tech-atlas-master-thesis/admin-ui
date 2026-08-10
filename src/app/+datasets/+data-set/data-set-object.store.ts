@@ -1,7 +1,7 @@
 import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { inject, resource } from '@angular/core';
 import { firstValueFrom, fromEvent, Observable, of, takeUntil } from 'rxjs';
-import { TransformerApi } from '@api/service/transformer-api';
+import { DataSetsApi } from '@api/service/data-sets-api';
 import { DataSetObjectType } from '@api/models/dataset/data-set-object-type';
 import { PaginatorState } from 'primeng/paginator';
 import { SortMeta } from 'primeng/api';
@@ -25,7 +25,7 @@ const DEFAULT_STATE = {
   includeData: false,
 };
 
-function resourceLoader(objectType: DataSetObjectType, transformerApi: TransformerApi) {
+function resourceLoader(objectType: DataSetObjectType, transformerApi: DataSetsApi) {
   return ({
     params: { dataSetId, pagination, sort, search, includeData },
     abortSignal,
@@ -52,7 +52,7 @@ export const DataSetObjectStore = signalStore(
     fields: DEFAULT_STATE,
   }),
   withProps(() => ({
-    _transformerApi: inject(TransformerApi),
+    _transformerApi: inject(DataSetsApi),
     _dataSetStore: inject(DataSetStore),
   })),
   withProps((store) => ({

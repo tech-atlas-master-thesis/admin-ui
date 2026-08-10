@@ -1,11 +1,6 @@
 {
-  "/api/scraper/": {
-    "target": "http://localhost:8050",
-    "secure": false,
-    "logLevel": "debug"
-  },
-  "/api/transformer/": {
-    "target": "http://localhost:8060",
+  "/api/admin/": {
+    "target": "http://localhost:8070",
     "secure": false,
     "logLevel": "debug"
   }

@@ -1,43 +1,35 @@
 import { Routes } from '@angular/router';
-import environment from '../environment/environment';
-import { API_BASE_URL } from '@api/service/api-base-url.token';
 import { PipelineApi } from '@api/service/pipeline-api';
-import { ScraperApi } from '@api/service/scraper-api';
-import { TransformerApi } from '@api/service/transformer-api';
+import { DataSetsApi } from '@api/service/data-sets-api';
 import { ConfigurationApi } from '@api/service/configuration-api';
+import { PipelinesStore } from './+pipelines/pipelines.store';
+import { ConfigurationsStore } from './+configurations/configurations.store';
+import { DataSetsStore } from './+datasets/data-sets.store';
 
 export const routes: Routes = [
   {
-    path: 'scraper',
+    path: 'pipelines',
     data: {
-      breadcrumbKey: 'scraper.breadcrumbKey',
+      breadcrumbKey: 'pipelines.breadcrumbKey',
     },
-    providers: [
-      {
-        provide: API_BASE_URL,
-        useValue: environment.baseUrl + environment.scraperBaseUrl,
-      },
-      PipelineApi,
-      ScraperApi,
-      ConfigurationApi,
-    ],
-    loadChildren: () => import('./+scraper/scraper.routes').then((m) => m.routes),
+    providers: [PipelineApi, PipelinesStore],
+    loadChildren: () => import('./+pipelines/pipelines.routes').then((m) => m.routes),
   },
   {
-    path: 'transformer',
+    path: 'configurations',
     data: {
-      breadcrumbKey: 'transformer.breadcrumbKey',
+      breadcrumbKey: 'configurations.breadcrumbKey',
     },
-    providers: [
-      {
-        provide: API_BASE_URL,
-        useValue: environment.baseUrl + environment.transformerBaseUrl,
-      },
-      PipelineApi,
-      TransformerApi,
-      ConfigurationApi,
-    ],
-    loadChildren: () => import('./+transformer/transformer.routes').then((m) => m.routes),
+    providers: [ConfigurationApi, ConfigurationsStore],
+    loadChildren: () => import('./+configurations/configurations.routes').then((m) => m.routes),
+  },
+  {
+    path: 'datasets',
+    data: {
+      breadcrumbKey: 'dataSets.breadcrumbKey',
+    },
+    providers: [DataSetsApi, PipelineApi, DataSetsStore, PipelinesStore],
+    loadChildren: () => import('./+datasets/data-sets.routes').then((m) => m.routes),
   },
   {
     path: '',

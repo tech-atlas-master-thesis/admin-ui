@@ -3,7 +3,6 @@ import { I18nService } from '@shared/i18n/i18n-service';
 import { MenuItem } from 'primeng/api';
 import { Menubar } from 'primeng/menubar';
 import { Button } from 'primeng/button';
-import environment from '../../environment/environment';
 import { Menu } from 'primeng/menu';
 import { NgOptimizedImage } from '@angular/common';
 import { Popover } from 'primeng/popover';
@@ -23,7 +22,6 @@ import { AuthRole } from '@shared/auth/auth-roles';
 export class MenuBar {
   private readonly i18nService = inject(I18nService);
   private readonly authService = inject(AuthService);
-  protected readonly BASE_URL = environment.baseUrl;
 
   isAuthenticated = toSignal(this.authService.isAuthenticated$);
   userInfo = toSignal(this.authService.userInfo$);
@@ -41,34 +39,19 @@ export class MenuBar {
         routerLink: '/',
       },
       {
-        label: this.i18nService.instant('scraper.title'),
-        items: [
-          {
-            label: this.i18nService.instant('pipelines.title'),
-            routerLink: '/scraper/pipelines',
-          },
-          {
-            label: this.i18nService.instant('configurations.title'),
-            routerLink: '/scraper/configurations',
-          },
-        ],
+        label: this.i18nService.instant('pipelines.title'),
+        icon: 'pi pi-play-circle',
+        routerLink: '/pipelines',
       },
       {
-        label: this.i18nService.instant('transformer.title'),
-        items: [
-          {
-            label: this.i18nService.instant('pipelines.title'),
-            routerLink: '/transformer/pipelines',
-          },
-          {
-            label: this.i18nService.instant('configurations.title'),
-            routerLink: '/transformer/configurations',
-          },
-          {
-            label: this.i18nService.instant('dataSets.title'),
-            routerLink: '/transformer/datasets',
-          },
-        ],
+        label: this.i18nService.instant('configurations.title'),
+        icon: 'pi pi-wrench',
+        routerLink: '/configurations',
+      },
+      {
+        label: this.i18nService.instant('dataSets.title'),
+        icon: 'pi pi-database',
+        routerLink: '/datasets',
       },
     ];
   });

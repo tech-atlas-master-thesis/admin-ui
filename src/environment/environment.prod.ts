@@ -4,6 +4,7 @@ export default {
   baseUrl: '.',
   scraperBaseUrl: '/api/scraper',
   transformerBaseUrl: '/api/transformer',
+  adminBackendBaseUrl: '/api/admin',
   auth: {
     issuer: 'https://auth.mooslechner.dev/application/o/tech-atlas/',
     clientId: 'NjrD7i3pcLYKUPRlzdCpqLJGlbUwCq2DPY9ceeIh',

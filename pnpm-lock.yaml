@@ -30,8 +30,8 @@ importers:
         specifier: 21.1.3
         version: 21.1.3(@angular/common@21.1.3(@angular/core@21.1.3(@angular/compiler@21.1.3)(rxjs@7.8.0))(rxjs@7.8.0))(@angular/core@21.1.3(@angular/compiler@21.1.3)(rxjs@7.8.0))(@angular/platform-browser@21.1.3(@angular/common@21.1.3(@angular/core@21.1.3(@angular/compiler@21.1.3)(rxjs@7.8.0))(rxjs@7.8.0))(@angular/core@21.1.3(@angular/compiler@21.1.3)(rxjs@7.8.0)))(rxjs@7.8.0)
       '@dagrejs/dagre':
-        specifier: ^1.1.4
-        version: 1.1.8
+        specifier: 1.1.4
+        version: 1.1.4
       '@jsverse/transloco':
         specifier: 7.6.1
         version: 7.6.1(@angular/core@21.1.3(@angular/compiler@21.1.3)(rxjs@7.8.0))(typescript@5.9.2)
@@ -54,7 +54,7 @@ importers:
         specifier: 2.0.2
         version: 2.0.2
       d3:
-        specifier: ^7.9.0
+        specifier: 7.9.0
         version: 7.9.0
       jsoneditor:
         specifier: ^10.4.3
@@ -721,8 +721,8 @@ packages:
     peerDependencies:
       postcss-selector-parser: ^7.1.1
 
-  '@dagrejs/dagre@1.1.8':
-    resolution: {integrity: sha512-5SEDlndt4W/LaVzPYJW+bSmSEZc9EzTf8rJ20WCKvjS5EAZAN0b+x0Yww7VMT4R3Wootkg+X9bUfUxazYw6Blw==}
+  '@dagrejs/dagre@1.1.4':
+    resolution: {integrity: sha512-QUTc54Cg/wvmlEUxB+uvoPVKFazM1H18kVHBQNmK2NbrDR5ihOCR6CXLnDSZzMcSQKJtabPUWridBOlJM3WkDg==}
 
   '@dagrejs/graphlib@2.2.4':
     resolution: {integrity: sha512-mepCf/e9+SKYy1d02/UkvSy6+6MoyXhVxP8lLDfA7BPE1X1d4dR0sZznmbM8/XVJ1GPM+Svnx7Xj6ZweByWUkw==}
@@ -6095,7 +6095,7 @@ snapshots:
     dependencies:
       postcss-selector-parser: 7.1.1
 
-  '@dagrejs/dagre@1.1.8':
+  '@dagrejs/dagre@1.1.4':
     dependencies:
       '@dagrejs/graphlib': 2.2.4
 

@@ -14,6 +14,8 @@ import { providePrimeNG } from 'primeng/config';
 import { provideOAuthClient } from 'angular-oauth2-oidc';
 import { Preset } from './preset';
 import { errorInterceptor } from '@shared/error/error.interceptor';
+import { API_BASE_URL } from '@api/service/api-base-url.token';
+import environment from '../environment/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -49,5 +51,9 @@ export const appConfig: ApplicationConfig = {
         allowedUrls: ['./api/'],
       },
     }),
+    {
+      provide: API_BASE_URL,
+      useValue: environment.baseUrl + environment.adminBackendBaseUrl,
+    },
   ],
 };

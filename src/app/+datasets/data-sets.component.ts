@@ -9,7 +9,7 @@ import { Button } from 'primeng/button';
 import { AuditPanel } from '@shared/info-panel/audit-info-panel/audit-panel.component';
 import { RouterLink } from '@angular/router';
 import { PipelineFilterDto } from '@api/models/pipeline/pipeline-filter-dto';
-import { PipelinesStore } from '../../+pipelines/pipelines.store';
+import { PipelinesStore } from '../+pipelines/pipelines.store';
 import { SelectItem } from 'primeng/api';
 import { I18nService } from '@shared/i18n/i18n-service';
 import { AuthorizationPipe } from '@shared/auth/authorization.pipe';

@@ -6,7 +6,7 @@ import { PaginatorState } from 'primeng/paginator';
 import { FilterMetadata, SortMeta } from 'primeng/api';
 import { SortUtil } from '@shared/util/sort';
 import { DatasetsFilterDto } from '@api/models/dataset/datasets-filter-dto';
-import { TransformerApi } from '@api/service/transformer-api';
+import { DataSetsApi } from '@api/service/data-sets-api';
 import { DataSetDto } from '@api/models/dataset/data-set-dto';
 
 interface DataSetsStoreState {
@@ -25,7 +25,7 @@ export const DataSetsStore = signalStore(
     sort: [{ field: '_id', order: -1 }],
   }),
   withProps(() => ({
-    _transformerApi: inject(TransformerApi),
+    _transformerApi: inject(DataSetsApi),
   })),
   withProps((store) => ({
     _dataSetsResource: resource({
