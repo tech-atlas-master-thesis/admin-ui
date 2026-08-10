@@ -11,4 +11,5 @@ export interface StepDto {
   state: StateDto;
   events: StepEventDto[];
   result: StepResultDto;
+  dependencies?: string[];
 }

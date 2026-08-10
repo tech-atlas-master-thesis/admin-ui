@@ -1,0 +1,15 @@
+<p-button
+  icon="pi pi-sitemap"
+  [label]="'pipeline.showDependencies' | transloco"
+  [outlined]="true"
+  (onClick)="po.toggle($event)"
+></p-button>
+<p-popover #po>
+  <div class="pipeline-dependency-graph">
+    @if (layout().nodes.length > 0) {
+      <svg #graph class="pipeline-dependency-graph__canvas"></svg>
+    } @else {
+      <span class="pipeline-dependency-graph__empty">{{ 'pipeline.noDependencies' | transloco }}</span>
+    }
+  </div>
+</p-popover>

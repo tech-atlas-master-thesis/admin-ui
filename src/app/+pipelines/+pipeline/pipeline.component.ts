@@ -3,10 +3,11 @@ import { PipelineStore } from './pipeline.store';
 import { TableModule } from 'primeng/table';
 import { PipelineStep } from './pipeline-step/pipeline-step.component';
 import { PipelineTimeline } from './pipeline-timeline/pipeline-timeline';
+import { PipelineDependencyGraph } from './pipeline-dependency-graph/pipeline-dependency-graph';
 
 @Component({
   selector: 'app-pipeline',
-  imports: [TableModule, PipelineStep, PipelineTimeline],
+  imports: [TableModule, PipelineStep, PipelineTimeline, PipelineDependencyGraph],
   templateUrl: './pipeline.component.html',
   styleUrl: './pipeline.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

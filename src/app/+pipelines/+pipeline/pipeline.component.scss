@@ -6,9 +6,16 @@
   gap: 2rem;
   padding: 1rem;
 
-  > h1 {
+  &__title {
     grid-column: 1/-1;
-    margin: 0;
+
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    > h1 {
+      margin: 0;
+    }
   }
 
   &__details {

@@ -6,4 +6,5 @@ export interface StepConfigDto {
   displayName?: LocalisedStringDto;
   description?: LocalisedStringDto;
   userConfig?: UserConfigDefinitionDto[];
+  dependencies?: string[];
 }

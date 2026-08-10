@@ -87,7 +87,9 @@
     "breadcrumbKey": "Pipeline {{pipelineId}}",
     "label": {
       "type": "Pipeline Type"
-    }
+    },
+    "showDependencies": "Show Dependencies",
+    "noDependencies": "No steps available"
   },
   "newPipeline": {
     "breadcrumbKey": "New Pipeline",

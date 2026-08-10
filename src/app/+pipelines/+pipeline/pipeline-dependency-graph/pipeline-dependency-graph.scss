@@ -1,0 +1,82 @@
+.pipeline-dependency-graph {
+  overflow: auto;
+  padding: 0.5rem;
+  max-width: 85vw;
+  max-height: 75vh;
+
+  &__empty {
+    display: block;
+    padding: 0.5rem;
+  }
+
+  &__canvas {
+    display: block;
+  }
+
+  &__edges {
+    path {
+      fill: none;
+      stroke: #999;
+      stroke-width: 2px;
+    }
+  }
+
+  &__arrow {
+    fill: #999;
+  }
+
+  &__node-group foreignObject {
+    overflow: visible;
+  }
+
+  &__node {
+    box-sizing: border-box;
+    margin: 6px;
+    height: calc(100% - 12px);
+
+    display: grid;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    grid-template-columns: min-content minmax(0, 1fr);
+
+    border: 2px gray solid;
+    border-radius: 1rem;
+    cursor: pointer;
+
+    padding: 0.5rem 1rem;
+    background-color: lightgray;
+    color: black;
+
+    &__name {
+      font-size: 1.2rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &--running {
+      background-color: blue;
+      color: white;
+    }
+
+    &--finished {
+      background-color: green;
+      color: white;
+    }
+
+    &--error {
+      background-color: darkred;
+      color: white;
+    }
+
+    &--selected {
+      outline: solid 3px white;
+      outline-offset: 3px;
+    }
+
+    &:hover {
+      outline: dashed 3px white;
+      outline-offset: 3px;
+    }
+  }
+}

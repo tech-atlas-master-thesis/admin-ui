@@ -1,6 +1,9 @@
 @if (pipelineStore.pipeline(); as pipeline) {
   <div class="pipeline">
-    <h1>{{ pipeline.name }}</h1>
+    <div class="pipeline__title">
+      <h1>{{ pipeline.name }}</h1>
+      <app-pipeline-dependency-graph></app-pipeline-dependency-graph>
+    </div>
     <div class="pipeline__details">
       <app-pipeline-timeline></app-pipeline-timeline>
     </div>
