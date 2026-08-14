@@ -7,7 +7,6 @@ import { PipelineFilterDto } from '@api/models/pipeline/pipeline-filter-dto';
 import { FilterMetadata, SortMeta } from 'primeng/api';
 import { SortUtil } from '@shared/util/sort';
 import { SchedulesApi } from '@api/service/schedules-api';
-import { PipelinesStore } from '../+pipelines/pipelines.store';
 import { ScheduleCreateDto } from '@api/models/schedule/schedule-create-dto';
 
 interface SchedulesStoreState {
@@ -30,10 +29,6 @@ export const SchedulesStore = signalStore(
   }),
   withProps(() => ({
     _schedulesApi: inject(SchedulesApi),
-    _pipelinesStore: inject(PipelinesStore),
-  })),
-  withComputed((store) => ({
-    pipelineTypes: computed(() => store._pipelinesStore.pipelineTypes()),
   })),
   withProps((store) => ({
     _schedulesResource: resource({
@@ -41,10 +36,9 @@ export const SchedulesStore = signalStore(
         pagination: store.pagination(),
         filter: store.filter(),
         sort: store.sort(),
-        allowedTypes: store.pipelineTypes()?.map((type) => type.type),
       }),
-      loader: ({ params: { pagination, sort, filter, allowedTypes } }) =>
-        firstValueFrom(store._schedulesApi.getSchedules(pagination, filter, sort, allowedTypes)),
+      loader: ({ params: { pagination, sort, filter } }) =>
+        firstValueFrom(store._schedulesApi.getSchedules(pagination, filter, sort)),
     }),
   })),
   withComputed((store) => ({
@@ -74,6 +68,10 @@ export const SchedulesStore = signalStore(
       return store._schedulesApi.deleteSchedule(scheduleId).pipe(tap(() => reload()));
     }
 
+    function triggerSchedule$(scheduleId: string) {
+      return store._schedulesApi.triggerSchedule(scheduleId).pipe(tap(() => reload()));
+    }
+
     function changePage(pagination: PaginatorState) {
       patchState(store, { pagination });
     }
@@ -93,6 +91,7 @@ export const SchedulesStore = signalStore(
       reload,
       createSchedule$,
       deleteSchedule$,
+      triggerSchedule$,
       changePage,
       changeFilter,
       changeSort,

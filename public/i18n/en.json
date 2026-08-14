@@ -15,6 +15,11 @@
     "timestamp": "Timestamp",
     "title": "Title",
     "status": "State",
+    "general": "General",
+    "schedule": "Schedule",
+    "cron": "CRON time",
+    "active": "Active",
+    "inactive": "Inactive",
     "type": "Type",
     "programme": "Programme",
     "field": "Field",
@@ -36,6 +41,7 @@
     "edit": "Edit",
     "cancel": "Cancel",
     "save": "Save",
+    "trigger": "Trigger",
     "export": "Export",
     "logOut": "Log out",
     "delete": "Delete",
@@ -66,6 +72,11 @@
       "DRAFT": "Draft",
       "ACTIVE": "Active",
       "ARCHIVED": "Archived"
+    },
+    "cron": {
+      "everyDay": "Every Day",
+      "everyWeek": "Every Week",
+      "everyMonth": "Every Month"
     }
   },
   "dashboard": {
@@ -74,6 +85,15 @@
   "schedules": {
     "title": "Schedules",
     "breadcrumbKey": "Schedules"
+  },
+  "schedule": {
+    "title": "Schedule {{scheduleId}}",
+    "breadcrumbKey": "Schedule {{scheduleId}}",
+    "cronDescription": "CRON format: * * * * * (min hour day month weekDay) - e.g. 0 0 * * 1 = every Monday at midnight"
+  },
+  "newSchedule": {
+    "title": "New Schedule",
+    "breadcrumbKey": "New Schedule"
   },
   "pipelines": {
     "title": "Pipelines",

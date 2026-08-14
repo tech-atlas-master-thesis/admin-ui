@@ -8,17 +8,18 @@
   </div>
   @switch (configDefinition().type) {
     @case (UserConfigTypeDto.INTEGER) {
-      <p-input-number inputId="integeronly" [formControl]="configForm()" />
+      <p-input-number inputId="integeronly" [formControl]="configForm()" [readonly]="!edit()" />
     }
     @case (UserConfigTypeDto.FLOAT) {
-      <p-input-number [formControl]="configForm()" />
+      <p-input-number [formControl]="configForm()" [readonly]="!edit()" />
     }
     @case (UserConfigTypeDto.BOOLEAN) {
-      <p-check-box [formControl]="configForm()" [binary]="true" />
+      <p-check-box [formControl]="configForm()" [binary]="true" [readonly]="!edit()" />
     }
     @case (UserConfigTypeDto.LIST) {
       <p-auto-complete
         [formControl]="configForm()"
+        [readonly]="!edit()"
         inputId="chips-combined"
         multiple
         fluid
@@ -31,7 +32,12 @@
     }
     @case (UserConfigTypeDto.ENUM) {
       <input type="text" pInputText [formControl]="configForm()" />
-      <p-select [options]="configDefinition().enumValues" [formControl]="configForm()" dataKey="name">
+      <p-select
+        [options]="configDefinition().enumValues"
+        [formControl]="configForm()"
+        [readonly]="!edit()"
+        dataKey="name"
+      >
         <ng-template #item let-item>
           <span>
             {{ item.displayName | localised }}
@@ -46,22 +52,26 @@
       </p-select>
     }
     @case (UserConfigTypeDto.MAPPING) {
-      <app-input-mapping [formControl]="configForm()" [enumValues]="configDefinition().enumValues"></app-input-mapping>
+      <app-input-mapping
+        [formControl]="configForm()"
+        [enumValues]="configDefinition().enumValues"
+        [readonly]="!edit()"
+      ></app-input-mapping>
     }
     @case (UserConfigTypeDto.DATE) {
-      <p-date-picker [dateFormat]="configDefinition().format" [formControl]="configForm()" />
+      <p-date-picker [dateFormat]="configDefinition().format" [formControl]="configForm()" [readonlyInput]="!edit()" />
     }
     @case (UserConfigTypeDto.PIPELINE) {
-      <textarea rows="1" pTextarea [autoResize]="true" [formControl]="configForm()"></textarea>
+      <textarea rows="1" pTextarea [autoResize]="true" [formControl]="configForm()" [readonly]="!edit()"></textarea>
     }
     @case (UserConfigTypeDto.STEP) {
-      <textarea rows="1" pTextarea [autoResize]="true" [formControl]="configForm()"></textarea>
+      <textarea rows="1" pTextarea [autoResize]="true" [formControl]="configForm()" [readonly]="!edit()"></textarea>
     }
     @case (UserConfigTypeDto.CONFIGURATION) {
-      <app-config-collection-input [formControl]="configForm()"></app-config-collection-input>
+      <app-config-collection-input [formControl]="configForm()" [readonly]="!edit()"></app-config-collection-input>
     }
     @default {
-      <textarea rows="1" pTextarea [autoResize]="true" [formControl]="configForm()"></textarea>
+      <textarea rows="1" pTextarea [autoResize]="true" [formControl]="configForm()" [readonly]="!edit()"></textarea>
     }
   }
 </div>

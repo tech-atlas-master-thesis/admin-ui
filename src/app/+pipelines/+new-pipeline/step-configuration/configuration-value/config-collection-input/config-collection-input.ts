@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, effect, forwardRef, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, forwardRef, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { configCollectionCodec, ConfigIdCollection } from './config-collection-input.interface';
-import { disabled, form, FormField } from '@angular/forms/signals';
+import { disabled, form, FormField, readonly } from '@angular/forms/signals';
 import { LazyConfiguration } from '@shared/lazy-input/lazy-configuration/lazy-configuration';
 import { ConfigurationDto } from '@api/models/configuration/configuration-dto';
 import { ConfigurationVersionDto } from '@api/models/configuration/configuration-version-dto';
@@ -11,6 +11,7 @@ import { TranslocoPipe } from '@jsverse/transloco';
 interface ConfigCollection {
   configuration: ConfigurationDto | null;
   version: ConfigurationVersionDto | null;
+  readonly: boolean;
 }
 
 @Component({
@@ -28,9 +29,12 @@ interface ConfigCollection {
   ],
 })
 export class ConfigCollectionInput implements ControlValueAccessor {
-  configModel = signal<ConfigCollection>({ configuration: null, version: null });
+  readonly = input<boolean>(false);
+
+  configModel = signal<ConfigCollection>({ configuration: null, version: null, readonly: false });
   configForm = form(this.configModel, (form) => {
     disabled(form.version, () => !form.configuration);
+    readonly(form, (path) => path.value().readonly);
   });
 
   private onChange?: (v: ConfigIdCollection) => void;
@@ -49,6 +53,9 @@ export class ConfigCollectionInput implements ControlValueAccessor {
       if (this.configForm().touched()) {
         this.onTouched?.();
       }
+    });
+    effect(() => {
+      this.configForm.readonly().value.set(this.readonly());
     });
   }
 

@@ -33,6 +33,12 @@ nav.p-breadcrumb {
   }
 }
 
+.default-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .full-width {
   width: 100%;
 
@@ -45,6 +51,14 @@ nav.p-breadcrumb {
   display: flex;
   gap: 0.5rem;
   align-items: center;
+
+  &--start {
+    justify-content: flex-start;
+  }
+
+  &--end {
+    justify-content: flex-end;
+  }
 }
 
 .fluid-form {

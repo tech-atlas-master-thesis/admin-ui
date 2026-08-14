@@ -1,4 +1,4 @@
-<div>
+<div class="step-configuration">
   @if (!isLoading()) {
     @for (step of Object.entries(configDefinition()); track step[0]) {
       @let stepName = step[0];
@@ -13,6 +13,7 @@
                 <app-configuration-value
                   [configForm]="configForm"
                   [configDefinition]="configDefinition"
+                  [edit]="edit()"
                 ></app-configuration-value>
               }
             } @empty {

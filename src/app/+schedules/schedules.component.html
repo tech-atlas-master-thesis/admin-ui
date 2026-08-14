@@ -1,1 +1,142 @@
-<p>schedules works!</p>
+<div class="default-page">
+  <p-table
+    [value]="schedulesStore.schedules() ?? []"
+    [lazy]="true"
+    [paginator]="true"
+    [first]="schedulesStore.pagination().first ?? TableConstants.INITIAL_OFFSET"
+    [rows]="schedulesStore.pagination().rows ?? TableConstants.INITIAL_LIMIT"
+    [totalRecords]="schedulesStore.totalItems() ?? 0"
+    [rowsPerPageOptions]="TableConstants.SIZE_OPTIONS"
+    sortMode="multiple"
+    [multiSortMeta]="schedulesStore.sort()"
+    [filters]="schedulesStore.filterCleaned()"
+    (onFilter)="onFilter($event)"
+    (onSort)="onSort($event)"
+    (onPage)="onPage($event)"
+  >
+    <ng-template #header>
+      <tr>
+        <th style="width: 25%" pSortableColumn="_id">
+          <div class="table-header-with-actions">
+            <span>{{ 'label.id' | transloco }}</span>
+            <p-sortIcon field="_id"></p-sortIcon>
+            <p-columnFilter
+              field="_id"
+              type="text"
+              display="menu"
+              matchMode="contains"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false"
+              [showButtons]="false"
+            ></p-columnFilter>
+          </div>
+        </th>
+        <th style="width: 25%" pSortableColumn="name">
+          <div class="table-header-with-actions">
+            <span>{{ 'label.name' | transloco }}</span>
+            <p-sortIcon field="name"></p-sortIcon>
+            <p-columnFilter
+              field="name"
+              type="text"
+              display="menu"
+              matchMode="contains"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false"
+              [showButtons]="false"
+            ></p-columnFilter>
+          </div>
+        </th>
+        <th style="width: 25%" pSortableColumn="type">
+          <div class="table-header-with-actions">
+            {{ 'label.type' | transloco }}
+            <p-sortIcon field="type"></p-sortIcon>
+            <p-columnFilter
+              field="type"
+              type="text"
+              display="menu"
+              matchMode="contains"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false"
+              [showButtons]="false"
+            >
+              <ng-template #filter let-value let-filter="filterCallback">
+                <p-multi-select
+                  [ngModel]="value"
+                  [options]="typeOptions()"
+                  (onChange)="filter($event.value)"
+                ></p-multi-select>
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th style="width: 25%" pSortableColumn="state">
+          <div class="table-header-with-actions">
+            {{ 'label.state' | transloco }}
+            <p-sortIcon field="state"></p-sortIcon>
+            <p-columnFilter
+              field="state"
+              type="text"
+              display="menu"
+              matchMode="contains"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false"
+              [showButtons]="false"
+            >
+              <ng-template #filter let-value let-filter="filterCallback">
+                <p-multi-select
+                  [ngModel]="value"
+                  [options]="stateOptions"
+                  (onChange)="filter($event.value)"
+                ></p-multi-select>
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th style="width: 0">
+          <p-button
+            [label]="'label.new' | transloco"
+            icon="pi pi-plus"
+            [routerLink]="'new'"
+            [disabled]="!(AuthRole.EDIT | authorization)"
+          ></p-button>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-schedule>
+      <tr>
+        <td>
+          <a [routerLink]="['schedule', schedule.id]">{{ schedule.id }}</a>
+        </td>
+        <td>
+          <span [pTooltip]="schedule.description ? schedule.description : undefined">{{ schedule.pipeline.name }}</span>
+        </td>
+        <td>{{ schedule.pipeline.name }}</td>
+        <td>{{ schedule.active ? ('label.active' | transloco) : ('label.inactive' | transloco) }}</td>
+        <td class="action-buttons">
+          <app-audit-panel [created]="schedule.created" [modified]="schedule.modified"></app-audit-panel>
+          <p-button
+            icon="pi pi-play"
+            [title]="'action.trigger' | transloco"
+            [text]="true"
+            (onClick)="onScheduleTrigger(schedule.id)"
+          ></p-button>
+          <p-button
+            icon="pi pi-trash"
+            severity="danger"
+            [text]="true"
+            [title]="'action.delete' | transloco"
+            (onClick)="onScheduleDelete(schedule.id)"
+          ></p-button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #emptymessage>
+      <app-table-skeleton #tableSkeleton [columns]="5" [loading]="schedulesStore.loading()"></app-table-skeleton>
+      <ng-container *ngTemplateOutlet="tableSkeleton.template()"></ng-container>
+    </ng-template>
+  </p-table>
+</div>

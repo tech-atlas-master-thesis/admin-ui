@@ -1,37 +1,20 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  DestroyRef,
-  effect,
-  inject,
-  linkedSignal,
-  resource,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, effect, inject, signal } from '@angular/core';
 import { PipelinesStore } from '../pipelines.store';
 import { Select } from 'primeng/select';
-import { SelectItem } from 'primeng/api';
-import { PipelineConfigDto } from '@api/models/pipeline/pipeline-config-dto';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { FloatLabel } from 'primeng/floatlabel';
-import { NewPipelineForm, PipelineConfigForm } from './new-pipeline.interface';
+import { NewPipelineForm } from './new-pipeline.interface';
 import { form, FormField, required, schema } from '@angular/forms/signals';
-import { FormsModule, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { firstValueFrom, map, of, startWith, switchMap, tap } from 'rxjs';
+import { map, startWith, switchMap, tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { I18nService } from '@shared/i18n/i18n-service';
-import { PipelineApi } from '@api/service/pipeline-api';
-import { UserConfigDto } from '@api/models/pipeline/user-config/user-config-dto';
-import { UserConfigDefinitionDto } from '@api/models/pipeline/user-config/user-config-definition-dto';
-import { UserConfigValueDto } from '@api/models/pipeline/user-config/user-config-value-dto';
 import { InputText } from 'primeng/inputtext';
 import { Textarea } from 'primeng/textarea';
 import { StepConfiguration } from './step-configuration/step-configuration';
 import { Button } from 'primeng/button';
-import { configurationValidator } from './validators/configurationValidator';
-import { UserConfigTypeDto } from '@api/models/pipeline/user-config/user-config-type-dto';
+import { PipelineService } from '../pipeline.service';
 
 @Component({
   selector: 'app-new-pipeline',
@@ -42,22 +25,13 @@ import { UserConfigTypeDto } from '@api/models/pipeline/user-config/user-config-
 })
 export class NewPipeline {
   pipelinesStore = inject(PipelinesStore);
-  pipelineApi = inject(PipelineApi);
+  pipelineService = inject(PipelineService);
   router = inject(Router);
   i18nService = inject(I18nService);
   activatedRoute = inject(ActivatedRoute);
   destroyRef = inject(DestroyRef);
-  fb = inject(NonNullableFormBuilder);
 
-  typeOptions = computed<SelectItem<PipelineConfigDto>[]>(() => {
-    this.i18nService.currentLanguage();
-    return (
-      this.pipelinesStore.pipelineTypes()?.map((type) => ({
-        label: this.i18nService.localised(type.displayName, type.type),
-        value: type,
-      })) ?? []
-    );
-  });
+  typeOptions = this.pipelineService.typeOptions;
 
   creationModel = signal<NewPipelineForm>({
     pipelineType: null,
@@ -73,44 +47,17 @@ export class NewPipeline {
   );
 
   pipelineType = computed(() => this.pipelineForm.pipelineType().value()?.type);
-  pipelineConfiguration = resource({
-    params: this.pipelineType,
-    loader: (pipelineType) =>
-      firstValueFrom(
-        pipelineType.params
-          ? this.pipelineApi.getPipelineTypeConfigDefinition(pipelineType.params ?? '')
-          : of(undefined),
-      ),
-  });
+  pipelineConfiguration = this.pipelineService.getPipelineConfigDefinition(this.pipelineType);
 
-  userConfigDefinition = computed(() => {
-    const userConfig = this.pipelineConfiguration.value();
-    return Object.fromEntries(
-      userConfig?.map((stepConfig) => [
-        stepConfig.name,
-        Object.fromEntries(stepConfig.userConfig?.map((config) => [config.name, config]) ?? []),
-      ]) ?? [],
-    );
-  });
+  userConfigDefinition = computed(() =>
+    this.pipelineService.getUserConfigDefinition(this.pipelineConfiguration.value()),
+  );
   stepConfigDefinition = computed(() => {
     const userConfig = this.pipelineConfiguration.value();
     return Object.fromEntries(userConfig?.map((stepConfig) => [stepConfig.name, stepConfig]) ?? []);
   });
 
-  userConfig = linkedSignal<UserConfigDto>(() => {
-    const userConfig = this.pipelineConfiguration.value();
-    if (!userConfig) {
-      return {};
-    }
-    return Object.fromEntries(
-      userConfig.map((stepConfig) => [
-        stepConfig.name,
-        Object.fromEntries(stepConfig.userConfig?.map((config) => [config.name, config.defaultValue ?? null]) ?? []),
-      ]),
-    );
-  });
-
-  pipelineConfigForm = computed(() => this.getPipelineForm(this.userConfigDefinition()));
+  pipelineConfigForm = computed(() => this.pipelineService.getPipelineForm(this.userConfigDefinition()));
   configFormValid = toSignal(
     toObservable(this.pipelineConfigForm).pipe(
       switchMap((form) => form.statusChanges.pipe(startWith(form.status))),
@@ -133,14 +80,7 @@ export class NewPipeline {
         type,
         name,
         description,
-        config: Object.fromEntries(
-          Object.entries(this.pipelineConfigForm().value)
-            .filter(([, value]) => value !== undefined && value !== null)
-            .map(([key, value]) => [
-              key,
-              Object.fromEntries(Object.entries(value ?? {}).filter(([, value]) => value !== undefined)),
-            ]),
-        ),
+        config: this.pipelineService.serializePipelineConfig(this.pipelineConfigForm()),
       })
       .pipe(
         takeUntilDestroyed(this.destroyRef),
@@ -156,33 +96,5 @@ export class NewPipeline {
         this.pipelineForm.name().value.set(this.i18nService.localised(pipelineType.displayName));
       }
     });
-  }
-
-  private getPipelineForm(userConfig: Record<string, Record<string, UserConfigDefinitionDto>>): PipelineConfigForm {
-    return this.fb.group(
-      Object.fromEntries(
-        Object.entries(userConfig).map(([stepName, stepConfig]) => [
-          stepName,
-          this.fb.group(
-            Object.fromEntries(
-              Object.entries(stepConfig).map(([configName, config]) => {
-                return [configName, this.getConfigValueForm(config)];
-              }),
-            ),
-          ),
-        ]),
-      ),
-    );
-  }
-
-  private getConfigValueForm(config: UserConfigDefinitionDto) {
-    const formControl = this.fb.control<UserConfigValueDto | undefined>(
-      config.defaultValue,
-      config.required ? Validators.required : undefined,
-    );
-    if (config.type === UserConfigTypeDto.CONFIGURATION) {
-      formControl.addValidators(configurationValidator);
-    }
-    return formControl;
   }
 }

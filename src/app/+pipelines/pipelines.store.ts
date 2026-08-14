@@ -34,23 +34,18 @@ export const PipelinesStore = signalStore(
     _pipelineTypeResource: resource({
       loader: () => firstValueFrom(store._pipelineApi.getPipelineTypes()),
     }),
-  })),
-  withComputed((store) => ({
-    pipelineTypes: computed(() => store._pipelineTypeResource.value()),
-  })),
-  withProps((store) => ({
     _pipelinesResource: resource({
       params: () => ({
         pagination: store.pagination(),
         filter: store.filter(),
         sort: store.sort(),
-        allowedTypes: store.pipelineTypes()?.map((type) => type.type),
       }),
-      loader: ({ params: { pagination, sort, filter, allowedTypes } }) =>
-        firstValueFrom(store._pipelineApi.getPipelines(pagination, filter, sort, allowedTypes)),
+      loader: ({ params: { pagination, sort, filter } }) =>
+        firstValueFrom(store._pipelineApi.getPipelines(pagination, filter, sort)),
     }),
   })),
   withComputed((store) => ({
+    pipelineTypes: computed(() => store._pipelineTypeResource.value()),
     pipelines: computed(() => store._pipelinesResource.value()?.items),
     totalItems: computed(() => store._pipelinesResource.value()?.page.totalRecords),
     filterCleaned: computed<Record<string, FilterMetadata[]>>(

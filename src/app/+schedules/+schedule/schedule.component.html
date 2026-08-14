@@ -1,0 +1,85 @@
+<div class="default-page schedule">
+  <h1 class="actions-header">
+    {{ 'schedule.title' | transloco: { scheduleId: scheduleForm.id().value() } }}
+    <div class="action-buttons action-buttons--end">
+      <p-button
+        [label]="'action.trigger' | transloco"
+        icon="pi pi-play"
+        [outlined]="true"
+        (onClick)="onTrigger()"
+      ></p-button>
+      @if (!scheduleForm.edit().value()) {
+        <p-button [label]="'action.edit' | transloco" icon="pi pi-pencil" (onClick)="onEdit()"></p-button>
+      } @else {
+        <p-button [label]="'action.cancel' | transloco" icon="pi pi-times" (onClick)="onCancel()"></p-button>
+        <p-button
+          [label]="'action.save' | transloco"
+          icon="pi pi-save"
+          [disabled]="scheduleForm().invalid() || !configFormValid() || pipelineConfiguration.isLoading()"
+          (onClick)="onScheduleUpdate()"
+        ></p-button>
+      }
+    </div>
+  </h1>
+  <section>
+    <div class="fluid-form">
+      <div class="fluid-form-element">
+        <label [for]="pipelineType">{{ 'pipeline.label.type' | transloco }}</label>
+        <p-select
+          #pipelineType
+          class="full-width"
+          [options]="typeOptions()"
+          [ngModel]="scheduleForm.pipelineType().value()"
+          [disabled]="true"
+          dataKey="type"
+        >
+        </p-select>
+      </div>
+    </div>
+  </section>
+  <section>
+    <h3>{{ 'label.general' | transloco }}</h3>
+    <div class="fluid-form">
+      <div class="fluid-form-element">
+        <label [for]="name">{{ 'label.name' | transloco }}</label>
+        <input #name pInputText [formField]="scheduleForm.name" />
+      </div>
+      <div class="fluid-form-element fluid-form-full-width">
+        <label [for]="description">{{ 'label.description' | transloco }}</label>
+        <textarea #description rows="3" pTextarea [autoResize]="true" [formField]="scheduleForm.description"></textarea>
+      </div>
+    </div>
+  </section>
+  <section>
+    <h3>{{ 'label.schedule' | transloco }}</h3>
+    <div class="fluid-form">
+      <div class="fluid-form-element">
+        <label [for]="cron" class="action-buttons">
+          {{ 'label.cron' | transloco }}
+          @if (scheduleForm.edit().value()) {
+            <span class="pi pi-info-circle" [pTooltip]="'schedule.cronDescription' | transloco"></span>
+          }
+        </label>
+        <p-select
+          #cron
+          [ngModel]="scheduleForm.cron().value()"
+          [options]="cronOptions()"
+          [editable]="true"
+          [invalid]="scheduleForm.cron().invalid()"
+          [readonly]="!scheduleForm.edit().value()"
+          (ngModelChange)="scheduleForm.cron().value.set($event)"
+        ></p-select>
+      </div>
+      <div class="fluid-form-element">
+        <label [for]="active">{{ 'label.active' | transloco }}</label>
+        <p-check-box #active [formField]="scheduleForm.active" [binary]="true"></p-check-box>
+      </div>
+    </div>
+  </section>
+  <app-step-configuration
+    [configForm]="pipelineConfigForm()"
+    [configDefinition]="stepConfigDefinition()"
+    [isLoading]="pipelineConfiguration.isLoading()"
+    [edit]="scheduleForm.edit().value()"
+  ></app-step-configuration>
+</div>

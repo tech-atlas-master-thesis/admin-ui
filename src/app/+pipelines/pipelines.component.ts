@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { PipelinesStore } from './pipelines.store';
 import { TableFilterEvent, TableModule, TablePageEvent } from 'primeng/table';
 import { RouterLink } from '@angular/router';
@@ -11,13 +11,12 @@ import { AuditPanel } from '@shared/info-panel/audit-info-panel/audit-panel.comp
 import { PipelineFilterDto } from '@api/models/pipeline/pipeline-filter-dto';
 import { MultiSelect } from 'primeng/multiselect';
 import { FormsModule } from '@angular/forms';
-import { SelectItem } from 'primeng/api';
-import { I18nService } from '@shared/i18n/i18n-service';
 import { StateDto } from '@api/models/pipeline/state-dto';
 import { AuthRole } from '@shared/auth/auth-roles';
 import { AuthorizationPipe } from '@shared/auth/authorization.pipe';
 import { TableSkeleton } from '@shared/table/table-skeleton/table-skeleton';
 import { NgTemplateOutlet } from '@angular/common';
+import { PipelineService } from './pipeline.service';
 
 @Component({
   selector: 'app-pipelines',
@@ -44,14 +43,9 @@ export class Pipelines {
   protected readonly AuthRole = AuthRole;
 
   protected readonly pipelinesStore = inject(PipelinesStore);
-  private readonly i18nService = inject(I18nService);
+  private readonly pipelineService = inject(PipelineService);
 
-  typeOptions = computed<SelectItem<string>[]>(
-    () =>
-      this.pipelinesStore
-        .pipelineTypes()
-        ?.map((type) => ({ value: type.type, label: this.i18nService.localised(type.displayName, type.type) })) ?? [],
-  );
+  typeOptions = this.pipelineService.typeOptions;
   stateOptions = Object.values(StateDto);
 
   protected onFilter(event: TableFilterEvent) {

@@ -7,6 +7,7 @@ import { ConfigurationsStore } from './+configurations/configurations.store';
 import { DataSetsStore } from './+datasets/data-sets.store';
 import { SchedulesApi } from '@api/service/schedules-api';
 import { SchedulesStore } from './+schedules/schedules.store';
+import { PipelineService } from './+pipelines/pipeline.service';
 
 export const routes: Routes = [
   {
@@ -14,7 +15,7 @@ export const routes: Routes = [
     data: {
       breadcrumbKey: 'schedules.breadcrumbKey',
     },
-    providers: [SchedulesApi, PipelineApi, SchedulesStore, PipelinesStore],
+    providers: [SchedulesApi, PipelineApi, PipelineService, SchedulesStore, PipelinesStore],
     loadChildren: () => import('./+schedules/schedules.routes').then((m) => m.routes),
   },
   {
@@ -22,7 +23,7 @@ export const routes: Routes = [
     data: {
       breadcrumbKey: 'pipelines.breadcrumbKey',
     },
-    providers: [PipelineApi, PipelinesStore],
+    providers: [PipelineApi, PipelineService, PipelinesStore],
     loadChildren: () => import('./+pipelines/pipelines.routes').then((m) => m.routes),
   },
   {
@@ -38,7 +39,7 @@ export const routes: Routes = [
     data: {
       breadcrumbKey: 'dataSets.breadcrumbKey',
     },
-    providers: [DataSetsApi, PipelineApi, DataSetsStore, PipelinesStore],
+    providers: [DataSetsApi, PipelineApi, PipelineService, DataSetsStore, PipelinesStore],
     loadChildren: () => import('./+datasets/data-sets.routes').then((m) => m.routes),
   },
   {

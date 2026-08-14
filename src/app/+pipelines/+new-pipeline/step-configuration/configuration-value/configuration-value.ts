@@ -36,7 +36,9 @@ import { Checkbox } from 'primeng/checkbox';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfigurationValue {
+  protected readonly UserConfigTypeDto = UserConfigTypeDto;
+
   configForm = input.required<ConfigValueForm>();
   configDefinition = input.required<UserConfigDefinitionDto>();
-  protected readonly UserConfigTypeDto = UserConfigTypeDto;
+  edit = input<boolean>();
 }

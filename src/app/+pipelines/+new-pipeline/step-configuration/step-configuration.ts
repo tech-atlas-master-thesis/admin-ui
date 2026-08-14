@@ -18,4 +18,5 @@ export class StepConfiguration {
   configForm = input.required<PipelineConfigForm>();
   configDefinition = input.required<Record<string, StepConfigDto>>();
   isLoading = input<boolean>();
+  edit = input<boolean>(false);
 }

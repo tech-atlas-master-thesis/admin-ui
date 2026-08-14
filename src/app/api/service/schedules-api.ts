@@ -43,6 +43,14 @@ export class SchedulesApi extends Api {
     return this.post<PipelineDto>(`/schedules`, pipelineConfig);
   }
 
+  updateSchedule(pipelineId: string, pipelineConfig: ScheduleCreateDto) {
+    return this.put<PipelineDto>(`/schedules/${pipelineId}`, pipelineConfig);
+  }
+
+  triggerSchedule(pipelineId: string) {
+    return this.post<null>(`/schedules/${pipelineId}/trigger`, null);
+  }
+
   deleteSchedule(pipelineId: string) {
     return this.delete<PipelineDto>(`/schedules/${pipelineId}`);
   }
