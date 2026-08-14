@@ -113,13 +113,24 @@
         </td>
         <td>
           <span [pTooltip]="pipeline.description ? pipeline.description : undefined">{{
-            pipeline.displayName | localised: pipeline.name
+            pipeline.displayName | localised: pipeline.type
           }}</span>
         </td>
         <td>{{ pipeline.name }}</td>
         <td>{{ pipeline.state }}</td>
         <td>
-          <app-audit-panel [created]="pipeline.created"></app-audit-panel>
+          <div class="action-buttons action-buttons--end">
+            @if (pipeline.scheduleId) {
+              <p-button
+                icon="pi pi-clock"
+                [routerLink]="['/', 'schedules', 'schedule', pipeline.scheduleId]"
+                [title]="'label.schedule' | transloco"
+                [text]="true"
+                [link]="true"
+              ></p-button>
+            }
+            <app-audit-panel [created]="pipeline.created"></app-audit-panel>
+          </div>
         </td>
       </tr>
     </ng-template>
