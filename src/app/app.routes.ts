@@ -15,7 +15,7 @@ export const routes: Routes = [
     data: {
       breadcrumbKey: 'schedules.breadcrumbKey',
     },
-    providers: [SchedulesApi, PipelineApi, PipelineService, SchedulesStore, PipelinesStore],
+    providers: [SchedulesApi, ConfigurationApi, PipelineApi, PipelineService, SchedulesStore, PipelinesStore],
     loadChildren: () => import('./+schedules/schedules.routes').then((m) => m.routes),
   },
   {
@@ -23,7 +23,7 @@ export const routes: Routes = [
     data: {
       breadcrumbKey: 'pipelines.breadcrumbKey',
     },
-    providers: [PipelineApi, PipelineService, PipelinesStore],
+    providers: [ConfigurationApi, PipelineApi, PipelineService, PipelinesStore],
     loadChildren: () => import('./+pipelines/pipelines.routes').then((m) => m.routes),
   },
   {
