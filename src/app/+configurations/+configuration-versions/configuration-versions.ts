@@ -88,4 +88,11 @@ export class ConfigurationVersions {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
   }
+
+  protected onDelete(versionId: string) {
+    this.configurationVersionsStore
+      .deleteConfiguration$(versionId)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
+  }
 }

@@ -114,7 +114,7 @@ export class NewScheduleComponent {
       })
       .pipe(
         takeUntilDestroyed(this.destroyRef),
-        tap((pipeline) => this.router.navigate(['pipeline', pipeline.id], { relativeTo: this.activatedRoute.parent })),
+        tap((schedule) => this.router.navigate(['schedule', schedule.id], { relativeTo: this.activatedRoute.parent })),
       )
       .subscribe();
   }

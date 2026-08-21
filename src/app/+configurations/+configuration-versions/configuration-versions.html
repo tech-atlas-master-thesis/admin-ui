@@ -139,7 +139,16 @@
         </td>
         <td>{{ version.state }}</td>
         <td>
-          <app-audit-panel [created]="version.created" [modified]="version.modified"></app-audit-panel>
+          <div class="action-buttons">
+            <p-button
+              icon="pi pi-trash"
+              severity="danger"
+              [text]="true"
+              [disabled]="!(AuthRole.EDIT | authorization)"
+              (onClick)="onDelete(version.id)"
+            ></p-button>
+            <app-audit-panel [created]="version.created" [modified]="version.modified"></app-audit-panel>
+          </div>
         </td>
       </tr>
     </ng-template>

@@ -88,4 +88,8 @@ export class ConfigurationApi extends Api {
   updateConfigurationVersion(configurationId: string, versionId: string, version: UpdateConfigurationVersionDto) {
     return this.post<ConfigurationVersionDto>(`/configuration/${configurationId}/version/${versionId}`, version);
   }
+
+  deleteConfigurationVersion(configurationId: string, versionId: string) {
+    return this.delete(`/configuration/${configurationId}/version/${versionId}`);
+  }
 }

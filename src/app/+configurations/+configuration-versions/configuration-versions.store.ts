@@ -70,6 +70,14 @@ export const ConfigurationVersionsStore = signalStore(
         .pipe(tap(() => reload()));
     }
 
+    function deleteConfiguration$(versionId: string) {
+      const configurationId = store._configurationStore.configurationId();
+      if (!configurationId) {
+        return of();
+      }
+      return store._configurationApi.deleteConfigurationVersion(configurationId, versionId).pipe(tap(() => reload()));
+    }
+
     function changePage(pagination: PaginatorState) {
       patchState(store, { pagination });
     }
@@ -88,6 +96,7 @@ export const ConfigurationVersionsStore = signalStore(
     return {
       reload,
       createVersion$,
+      deleteConfiguration$,
       changePage,
       changeFilter,
       changeSort,
