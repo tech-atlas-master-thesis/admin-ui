@@ -75,9 +75,11 @@
       "ARCHIVED": "Archived"
     },
     "cron": {
-      "everyDay": "Every Day",
-      "everyWeek": "Every Week",
-      "everyMonth": "Every Month"
+      "everyDay0000": "Every Day at 00:00",
+      "everyDay0100": "Every Day at 01:00",
+      "everyWeekSun0000": "Every Week on Sunday 00:00",
+      "everyWeekSun0100": "Every Week on Sunday 01:00",
+      "everyMonth01": "Every Month on the 1st"
     }
   },
   "dashboard": {
