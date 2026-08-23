@@ -8,7 +8,9 @@
     [readonly]="true"
     (onFocus)="onInputTouched()"
   ></p-auto-complete>
-  <p-button icon="pi pi-plus" severity="secondary" (onClick)="popover.toggle($event)"></p-button>
+  @if (!readonly()) {
+    <p-button icon="pi pi-plus" severity="secondary" (onClick)="popover.toggle($event)"></p-button>
+  }
 </p-input-group>
 <p-popover #popover>
   <div class="input-mapping__add">

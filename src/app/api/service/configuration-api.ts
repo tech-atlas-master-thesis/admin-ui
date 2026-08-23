@@ -25,19 +25,8 @@ export class ConfigurationApi extends Api {
     return this.get<ConfigurationDefinitionDto[]>('/configuration-types');
   }
 
-  getConfigurations(
-    pagination: PaginatorState,
-    filter: ConfigurationFilter,
-    sort: SortMeta[],
-    allowedTypes?: string[],
-  ) {
+  getConfigurations(pagination: PaginatorState, filter: ConfigurationFilter, sort: SortMeta[]) {
     const filterObject = FilterUtil.getFilter(filter) as Record<string, unknown>;
-    if (
-      allowedTypes &&
-      (!('type' in filterObject) || (Array.isArray(filterObject['type']) && filterObject['type'].length < 1))
-    ) {
-      filterObject['type'] = allowedTypes;
-    }
     return this.get<PaginatedListDto<ConfigurationDto>>('/configuration', {
       params: {
         sort: SortUtil.getSortString(sort),
@@ -67,6 +56,12 @@ export class ConfigurationApi extends Api {
     sort: SortMeta[],
   ) {
     const filterObject = FilterUtil.getFilter(filter) as Record<string, unknown>;
+    console.log(filterObject, filter, {
+      sort: SortUtil.getSortString(sort),
+      ...filterObject,
+      offset: pagination.first ?? TableConstants.INITIAL_OFFSET,
+      limit: pagination.rows ?? TableConstants.INITIAL_LIMIT,
+    });
     return this.get<PaginatedListDto<ConfigurationVersionDto>>(`/configuration/${configurationId}/version`, {
       params: {
         sort: SortUtil.getSortString(sort),

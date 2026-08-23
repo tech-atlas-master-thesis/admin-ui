@@ -1,5 +1,9 @@
 <div class="config-collection-input">
-  <app-lazy-configuration [formField]="configForm.configuration" [style]="{ width: '100%' }"></app-lazy-configuration>
+  <app-lazy-configuration
+    [formField]="configForm.configuration"
+    [style]="{ width: '100%' }"
+    [configTypes]="configTypes()"
+  ></app-lazy-configuration>
   @if (configForm.configuration().value()) {
     <app-lazy-configuration-version
       [formField]="configForm.version"

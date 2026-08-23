@@ -68,7 +68,12 @@
       <textarea rows="1" pTextarea [autoResize]="true" [formControl]="configForm()" [readonly]="!edit()"></textarea>
     }
     @case (UserConfigTypeDto.CONFIGURATION) {
-      <app-config-collection-input [formControl]="configForm()" [readonly]="!edit()"></app-config-collection-input>
+      @let configType = configDefinition().configurationType;
+      <app-config-collection-input
+        [formControl]="configForm()"
+        [readonly]="!edit()"
+        [configTypes]="configType ? [configType] : undefined"
+      ></app-config-collection-input>
     }
     @default {
       <textarea rows="1" pTextarea [autoResize]="true" [formControl]="configForm()" [readonly]="!edit()"></textarea>

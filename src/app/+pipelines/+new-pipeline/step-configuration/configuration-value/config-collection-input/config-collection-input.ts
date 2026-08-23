@@ -11,7 +11,6 @@ import { TranslocoPipe } from '@jsverse/transloco';
 interface ConfigCollection {
   configuration: ConfigurationDto | null;
   version: ConfigurationVersionDto | null;
-  readonly: boolean;
 }
 
 @Component({
@@ -30,11 +29,12 @@ interface ConfigCollection {
 })
 export class ConfigCollectionInput implements ControlValueAccessor {
   readonly = input<boolean>(false);
+  configTypes = input<string[]>();
 
-  configModel = signal<ConfigCollection>({ configuration: null, version: null, readonly: false });
+  configModel = signal<ConfigCollection>({ configuration: null, version: null });
   configForm = form(this.configModel, (form) => {
     disabled(form.version, () => !form.configuration);
-    readonly(form, (path) => path.value().readonly);
+    readonly(form, () => this.readonly());
   });
 
   private onChange?: (v: ConfigIdCollection) => void;
@@ -53,9 +53,6 @@ export class ConfigCollectionInput implements ControlValueAccessor {
       if (this.configForm().touched()) {
         this.onTouched?.();
       }
-    });
-    effect(() => {
-      this.configForm.readonly().value.set(this.readonly());
     });
   }
 

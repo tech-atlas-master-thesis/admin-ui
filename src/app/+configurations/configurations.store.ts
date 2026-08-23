@@ -41,10 +41,9 @@ export const ConfigurationsStore = signalStore(
         pagination: store.pagination(),
         filter: store.filter(),
         sort: store.sort(),
-        allowedTypes: store.configurationTypes()?.map((type) => type.type),
       }),
-      loader: ({ params: { pagination, sort, filter, allowedTypes } }) =>
-        firstValueFrom(store._configurationApi.getConfigurations(pagination, filter, sort, allowedTypes)),
+      loader: ({ params: { pagination, sort, filter } }) =>
+        firstValueFrom(store._configurationApi.getConfigurations(pagination, filter, sort)),
     }),
   })),
   withComputed((store) => ({

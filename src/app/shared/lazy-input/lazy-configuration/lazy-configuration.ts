@@ -19,23 +19,23 @@ import { ConfigurationApi } from '@api/service/configuration-api';
   styleUrl: '../lazy-select/lazy-select.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LazyConfiguration extends LazySelect<ConfigurationDto, string | undefined> {
+export class LazyConfiguration extends LazySelect<ConfigurationDto, string[] | undefined> {
   protected override readonly dataKey = 'id';
   protected override lazyInputService = inject(LazyInput<ConfigurationDto, typeof this.dataKey>);
   private readonly configurationApi = inject(ConfigurationApi);
 
-  configType = input<string>();
+  configTypes = input<string[]>();
 
   override getArgs() {
-    return this.configType();
+    return this.configTypes();
   }
   override fetchOptions(
-    args: string | undefined,
+    args: string[] | undefined,
     page: PaginatorState,
     filter: string,
   ): Observable<PaginatedListDto<ConfigurationDto>> {
     return this.configurationApi
-      .getConfigurations(page, { name: [{ value: filter }], type: [{ value: args }] }, [])
+      .getConfigurations(page, { name: [{ value: filter }], types: [{ value: args }] }, [])
       .pipe(catchError(() => of({ items: [], page: { totalRecords: 0 } })));
   }
   override convertToMenuItem(item: ConfigurationDto): SelectItem<ConfigurationDto> {

@@ -1,4 +1,4 @@
-import { computed, Directive, ElementRef, input, model, signal, viewChild } from '@angular/core';
+import { computed, Directive, effect, ElementRef, input, model, signal, viewChild } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
 import { ScrollerOptions, SelectItem } from 'primeng/api';
 import { PaginatorState } from 'primeng/paginator';
@@ -59,6 +59,10 @@ export abstract class LazySelect<TValue, TArgs> implements FormValueControl<TVal
 
   constructor() {
     this.initFetch();
+
+    effect(() => {
+      console.log('readonly', this.readonly());
+    });
   }
 
   abstract fetchOptions(args: TArgs, page: PaginatorState, filter: string): Observable<PaginatedListDto<TValue>>;
