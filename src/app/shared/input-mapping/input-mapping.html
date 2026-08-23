@@ -1,13 +1,20 @@
 <p-input-group>
-  <p-auto-complete
-    [ngModel]="mappingStrings()"
-    inputId="chips-combined"
-    multiple
-    fluid
-    [forceSelection]="true"
-    [readonly]="true"
-    (onFocus)="onInputTouched()"
-  ></p-auto-complete>
+  <div class="p-component p-textarea input-mapping">
+    @for (mapping of mappings(); track mapping.key) {
+      <p-tag rounded severity="secondary">
+        {{ 'pipelineConfig.mappingString' | transloco: mapping }}
+        @if (!readonly()) {
+          <p-button
+            icon="pi pi-times"
+            [text]="true"
+            size="small"
+            severity="secondary"
+            (onClick)="removeMapping(mapping.key)"
+          ></p-button>
+        }
+      </p-tag>
+    }
+  </div>
   @if (!readonly()) {
     <p-button icon="pi pi-plus" severity="secondary" (onClick)="popover.toggle($event)"></p-button>
   }

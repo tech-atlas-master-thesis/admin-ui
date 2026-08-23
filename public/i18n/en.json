@@ -117,6 +117,9 @@
       "latest": "Use Latest Active Version"
     }
   },
+  "pipelineConfig": {
+    "mappingString": "{{key}} -> {{value}}"
+  },
   "step": {
     "noResult": "No Result is available for this step",
     "downloadResult": "Download full result"

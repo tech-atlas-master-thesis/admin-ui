@@ -10,7 +10,6 @@ import {
   viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { AutoComplete } from 'primeng/autocomplete';
 import { Button } from 'primeng/button';
 import { Popover } from 'primeng/popover';
 import { InputGroup } from 'primeng/inputgroup';
@@ -22,6 +21,7 @@ import { UserConfigEnumDto } from '@api/models/pipeline/user-config/user-config-
 import { Select } from 'primeng/select';
 import { LocalisedPipe } from '@shared/i18n/localised.pipe';
 import { Tooltip } from 'primeng/tooltip';
+import { Tag } from 'primeng/tag';
 
 type Mapping = Record<string, string>;
 
@@ -34,7 +34,6 @@ interface AddMappingForm {
   selector: 'app-input-mapping',
   imports: [
     FormsModule,
-    AutoComplete,
     Button,
     Popover,
     InputGroup,
@@ -45,6 +44,7 @@ interface AddMappingForm {
     Select,
     LocalisedPipe,
     Tooltip,
+    Tag,
   ],
   templateUrl: './input-mapping.html',
   styleUrl: './input-mapping.scss',
@@ -64,7 +64,7 @@ export class InputMapping implements ControlValueAccessor {
   readonly = input<boolean>();
 
   value = signal<Mapping>({});
-  mappingStrings = computed(() => Object.entries(this.value()).map(([key, value]) => `${key} -> ${value}`));
+  mappings = computed(() => Object.entries(this.value()).map(([key, value]) => ({ key, value })));
   disabled = signal(false);
 
   addMappingValue = signal<AddMappingForm>({ key: '', value: '' });
@@ -83,6 +83,9 @@ export class InputMapping implements ControlValueAccessor {
         this.onTouched?.();
       }
     });
+    effect(() => {
+      this.onChange?.(this.value());
+    });
   }
 
   writeValue(v: Mapping): void {
@@ -98,10 +101,6 @@ export class InputMapping implements ControlValueAccessor {
     this.disabled.set(isDisabled);
   }
 
-  protected onInputTouched() {
-    this.onTouched?.();
-  }
-
   protected onMappingAdded() {
     if (this.addMappingForm().invalid()) {
       this.addMappingForm().markAsDirty();
@@ -109,8 +108,11 @@ export class InputMapping implements ControlValueAccessor {
     }
     const { key, value } = this.addMappingForm().value();
     this.value.update((mapping) => ({ ...mapping, [key]: value }));
-    this.onChange?.(this.value());
     this.addMappingValue.set({ key: '', value: '' });
     this.mappingAddKey()?.nativeElement?.focus();
+  }
+
+  protected removeMapping(mappingKey: string) {
+    this.value.update((mapping) => Object.fromEntries(Object.entries(mapping).filter(([key]) => key !== mappingKey)));
   }
 }

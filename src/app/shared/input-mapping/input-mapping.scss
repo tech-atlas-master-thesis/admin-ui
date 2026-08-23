@@ -1,4 +1,14 @@
 .input-mapping {
+  display: flex;
+  gap: 1ch;
+  flex-wrap: wrap;
+
+  ::ng-deep {
+    button {
+      padding: 0;
+    }
+  }
+
   &__add {
     display: flex;
     gap: 0.5rem;
