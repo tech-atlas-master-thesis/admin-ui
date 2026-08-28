@@ -73,6 +73,12 @@
           [(valid)]="valid"
         ></app-configuration-technologies>
       }
+      @case ('organisation_type') {
+        <app-configuration-regex-map
+          [formField]="versionForm.configuration"
+          [(valid)]="valid"
+        ></app-configuration-regex-map>
+      }
       @default {
         @if (versionForm().value().edit) {
           <json-editor [formField]="versionForm.configuration"></json-editor>

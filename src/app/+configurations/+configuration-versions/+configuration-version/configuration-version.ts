@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { InputNumber } from 'primeng/inputnumber';
 import { ConfigurationTechnologies } from './configuration-technologies/configuration-technologies';
 import { ConfigurationStateTag } from './state-tag/configuration-state-tag.component';
+import { ConfigurationRegexMapComponent } from './configuration-regex-map/configuration-regex-map.component';
 
 @Component({
   selector: 'app-configuration-version',
@@ -31,6 +32,7 @@ import { ConfigurationStateTag } from './state-tag/configuration-state-tag.compo
     InputNumber,
     ConfigurationTechnologies,
     ConfigurationStateTag,
+    ConfigurationRegexMapComponent,
   ],
   templateUrl: './configuration-version.html',
   styleUrl: './configuration-version.scss',

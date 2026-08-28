@@ -56,12 +56,6 @@ export class ConfigurationApi extends Api {
     sort: SortMeta[],
   ) {
     const filterObject = FilterUtil.getFilter(filter) as Record<string, unknown>;
-    console.log(filterObject, filter, {
-      sort: SortUtil.getSortString(sort),
-      ...filterObject,
-      offset: pagination.first ?? TableConstants.INITIAL_OFFSET,
-      limit: pagination.rows ?? TableConstants.INITIAL_LIMIT,
-    });
     return this.get<PaginatedListDto<ConfigurationVersionDto>>(`/configuration/${configurationId}/version`, {
       params: {
         sort: SortUtil.getSortString(sort),
