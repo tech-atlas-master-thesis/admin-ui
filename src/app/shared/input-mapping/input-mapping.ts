@@ -9,19 +9,20 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Button } from 'primeng/button';
-import { Popover } from 'primeng/popover';
-import { InputGroup } from 'primeng/inputgroup';
-import { InputText } from 'primeng/inputtext';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Button } from '@openng/optimus-ui/button';
+import { Popover } from '@openng/optimus-ui/popover';
+import { InputGroup } from '@openng/optimus-ui/inputgroup';
+import { InputText } from '@openng/optimus-ui/inputtext';
 import { TranslocoPipe } from '@jsverse/transloco';
-import { AutoFocus } from 'primeng/autofocus';
+import { AutoFocus } from '@openng/optimus-ui/autofocus';
 import { form, FormField, required } from '@angular/forms/signals';
 import { UserConfigEnumDto } from '@api/models/pipeline/user-config/user-config-enum-dto';
-import { Select } from 'primeng/select';
+import { Select } from '@openng/optimus-ui/select';
 import { LocalisedPipe } from '@shared/i18n/localised.pipe';
-import { Tooltip } from 'primeng/tooltip';
-import { Tag } from 'primeng/tag';
+import { Tooltip } from '@openng/optimus-ui/tooltip';
+import { Tag } from '@openng/optimus-ui/tag';
+import { OptimusFormFieldSync } from '@shared/forms/optimus-form-field-sync';
 
 type Mapping = Record<string, string>;
 
@@ -33,7 +34,6 @@ interface AddMappingForm {
 @Component({
   selector: 'app-input-mapping',
   imports: [
-    FormsModule,
     Button,
     Popover,
     InputGroup,
@@ -41,6 +41,7 @@ interface AddMappingForm {
     TranslocoPipe,
     AutoFocus,
     FormField,
+    OptimusFormFieldSync,
     Select,
     LocalisedPipe,
     Tooltip,
@@ -63,8 +64,8 @@ export class InputMapping implements ControlValueAccessor {
   enumValues = input<UserConfigEnumDto[]>();
   readonly = input<boolean>();
 
-  value = signal<Mapping>({});
-  mappings = computed(() => Object.entries(this.value()).map(([key, value]) => ({ key, value })));
+  value = signal<Mapping | null>({});
+  mappings = computed(() => Object.entries(this.value() ?? {}).map(([key, value]) => ({ key, value })));
   disabled = signal(false);
 
   addMappingValue = signal<AddMappingForm>({ key: '', value: '' });
@@ -74,7 +75,7 @@ export class InputMapping implements ControlValueAccessor {
     // TODO: add validation for duplicate keys
   });
 
-  private onChange?: (v: Mapping) => void;
+  private onChange?: (v: Mapping | null) => void;
   private onTouched?: () => void;
 
   constructor() {
@@ -88,10 +89,10 @@ export class InputMapping implements ControlValueAccessor {
     });
   }
 
-  writeValue(v: Mapping): void {
+  writeValue(v: Mapping | null): void {
     this.value.set(v);
   }
-  registerOnChange(fn: (v: Mapping) => void): void {
+  registerOnChange(fn: (v: Mapping | null) => void): void {
     this.onChange = fn;
   }
   registerOnTouched(fn: () => void): void {
@@ -113,6 +114,8 @@ export class InputMapping implements ControlValueAccessor {
   }
 
   protected removeMapping(mappingKey: string) {
-    this.value.update((mapping) => Object.fromEntries(Object.entries(mapping).filter(([key]) => key !== mappingKey)));
+    this.value.update((mapping) =>
+      Object.fromEntries(Object.entries(mapping ?? {}).filter(([key]) => key !== mappingKey)),
+    );
   }
 }

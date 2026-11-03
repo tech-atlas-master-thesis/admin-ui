@@ -2,9 +2,9 @@ import { patchState, signalStore, withComputed, withMethods, withProps, withStat
 import { computed, inject, resource } from '@angular/core';
 import { firstValueFrom, tap } from 'rxjs';
 import { TableConstants } from '@shared/contants/table.constants';
-import { PaginatorState } from 'primeng/paginator';
+import { PaginatorState } from '@openng/optimus-ui/paginator';
 import { PipelineFilterDto } from '@api/models/pipeline/pipeline-filter-dto';
-import { FilterMetadata, SortMeta } from 'primeng/api';
+import { FilterMetadata, SortMeta } from '@openng/optimus-ui/api';
 import { SortUtil } from '@shared/util/sort';
 import { SchedulesApi } from '@api/service/schedules-api';
 import { ScheduleCreateDto } from '@api/models/schedule/schedule-create-dto';

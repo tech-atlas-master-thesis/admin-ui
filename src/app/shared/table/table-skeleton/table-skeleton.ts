@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input, TemplateRef, viewChild } from '@angular/core';
-import { Skeleton } from 'primeng/skeleton';
+import { Skeleton } from '@openng/optimus-ui/skeleton';
 import { I18nService } from '@shared/i18n/i18n-service';
 
 @Component({

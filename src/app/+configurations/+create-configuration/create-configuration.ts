@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, DestroyRef, effect, inject, signal } from '@angular/core';
-import { Button } from 'primeng/button';
-import { FloatLabel } from 'primeng/floatlabel';
-import { InputText } from 'primeng/inputtext';
-import { Select } from 'primeng/select';
-import { Textarea } from 'primeng/textarea';
+import { Button } from '@openng/optimus-ui/button';
+import { FloatLabel } from '@openng/optimus-ui/floatlabel';
+import { InputText } from '@openng/optimus-ui/inputtext';
+import { Select } from '@openng/optimus-ui/select';
+import { Textarea } from '@openng/optimus-ui/textarea';
 import { TranslocoPipe } from '@jsverse/transloco';
-import { SelectItem } from 'primeng/api';
+import { SelectItem } from '@openng/optimus-ui/api';
 import { PipelineConfigDto } from '@api/models/pipeline/pipeline-config-dto';
 import { form, FormField, required, schema } from '@angular/forms/signals';
 import { tap } from 'rxjs';
@@ -14,7 +14,7 @@ import { I18nService } from '@shared/i18n/i18n-service';
 import { ConfigurationsStore } from '../configurations.store';
 import { ConfigurationDefinitionDto } from '@api/models/configuration/configuration-definition-dto';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { OptimusFormFieldSync } from '@shared/forms/optimus-form-field-sync';
 
 interface NewConfigurationForm {
   type: ConfigurationDefinitionDto | null;
@@ -24,7 +24,7 @@ interface NewConfigurationForm {
 
 @Component({
   selector: 'app-create-configuration',
-  imports: [Button, FloatLabel, InputText, Select, Textarea, TranslocoPipe, FormsModule, FormField],
+  imports: [Button, FloatLabel, InputText, Select, Textarea, TranslocoPipe, FormField, OptimusFormFieldSync],
   templateUrl: './create-configuration.html',
   styleUrl: './create-configuration.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

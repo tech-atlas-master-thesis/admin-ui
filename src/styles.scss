@@ -1,4 +1,4 @@
-@use "primeicons/primeicons.css";
+@use "@openng/icons/openng-icons.css";
 @use 'jsoneditor/dist/jsoneditor.min.css';
 
 body {
@@ -9,6 +9,27 @@ body {
 a {
   color: var(--p-text-color);
   text-decoration: none;
+}
+
+// Signal Forms flags required fields as invalid from the start. Only show the invalid styling once the
+// user has touched the field (openng-org/optimus-ui#162). `app-untouched` is set by OptimusFormFieldSync.
+.app-untouched {
+  --p-inputtext-invalid-border-color: var(--p-inputtext-border-color);
+  --p-inputtext-invalid-placeholder-color: var(--p-inputtext-placeholder-color);
+  --p-textarea-invalid-border-color: var(--p-textarea-border-color);
+  --p-textarea-invalid-placeholder-color: var(--p-textarea-placeholder-color);
+  --p-select-invalid-border-color: var(--p-select-border-color);
+  --p-select-invalid-placeholder-color: var(--p-select-placeholder-color);
+  --p-multiselect-invalid-border-color: var(--p-multiselect-border-color);
+  --p-multiselect-invalid-placeholder-color: var(--p-multiselect-placeholder-color);
+  --p-autocomplete-invalid-border-color: var(--p-autocomplete-border-color);
+  --p-autocomplete-invalid-placeholder-color: var(--p-autocomplete-placeholder-color);
+  --p-checkbox-invalid-border-color: var(--p-checkbox-border-color);
+  --p-listbox-invalid-border-color: var(--p-listbox-border-color);
+}
+
+.p-floatlabel:has(> .app-untouched) {
+  --p-floatlabel-invalid-color: var(--p-floatlabel-color);
 }
 
 nav.p-breadcrumb {

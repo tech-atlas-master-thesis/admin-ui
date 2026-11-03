@@ -1,28 +1,30 @@
 import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, linkedSignal, signal } from '@angular/core';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { disabled, form, FormField, readonly } from '@angular/forms/signals';
-import { InputText } from 'primeng/inputtext';
-import { Textarea } from 'primeng/textarea';
+import { InputText } from '@openng/optimus-ui/inputtext';
+import { Textarea } from '@openng/optimus-ui/textarea';
 import { ConfigurationStore } from '../configuration.store';
 import { ConfigurationVersionStore } from './configuration-version.store';
 import { TableConstants } from '@shared/contants/table.constants';
 import { AuthRole } from '@shared/auth/auth-roles';
-import { Button } from 'primeng/button';
+import { Button } from '@openng/optimus-ui/button';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ConfigurationStateDto } from '@api/models/configuration/configuration-state-dto';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { JsonEditor } from 'ang-jsoneditor';
 import { FormsModule } from '@angular/forms';
-import { InputNumber } from 'primeng/inputnumber';
+import { InputNumber } from '@openng/optimus-ui/inputnumber';
 import { ConfigurationTechnologies } from './configuration-technologies/configuration-technologies';
 import { ConfigurationStateTag } from './state-tag/configuration-state-tag.component';
 import { ConfigurationRegexMapComponent } from './configuration-regex-map/configuration-regex-map.component';
+import { OptimusFormFieldSync } from '@shared/forms/optimus-form-field-sync';
 
 @Component({
   selector: 'app-configuration-version',
   imports: [
     TranslocoPipe,
     FormField,
+    OptimusFormFieldSync,
     InputText,
     Textarea,
     Button,
@@ -97,8 +99,10 @@ export class ConfigurationVersion {
     if (!nextState) {
       return;
     }
-    this.versionForm.edit().setControlValue(true);
-    this.versionForm.state().setControlValue(nextState);
+    this.versionForm.edit().controlValue.set(true);
+    this.versionForm.edit().markAsDirty();
+    this.versionForm.state().controlValue.set(nextState);
+    this.versionForm.state().markAsDirty();
   }
 
   private getNextState(state?: ConfigurationStateDto) {

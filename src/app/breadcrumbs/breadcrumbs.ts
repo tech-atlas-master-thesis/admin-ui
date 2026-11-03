@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { Breadcrumb } from 'primeng/breadcrumb';
+import { Breadcrumb } from '@openng/optimus-ui/breadcrumb';
 import { ActivatedRouteSnapshot, Data, Params, ResolveEnd, Router, RoutesRecognized } from '@angular/router';
 import { BehaviorSubject, filter, tap } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { I18nService } from '@shared/i18n/i18n-service';
-import { MenuItem } from 'primeng/api';
+import { MenuItem } from '@openng/optimus-ui/api';
 
 interface BreadcrumbElement {
   routeUrls?: string[];

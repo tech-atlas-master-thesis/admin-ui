@@ -7,11 +7,11 @@ import { PipelineCreateDto } from '../models/pipeline/pipeline-create-dto';
 import { PipelineConfigDto } from '../models/pipeline/pipeline-config-dto';
 import { API_BASE_URL } from './api-base-url.token';
 import { StepConfigDto } from '@api/models/pipeline/step-config-dto';
-import { PaginatorState } from 'primeng/paginator';
+import { PaginatorState } from '@openng/optimus-ui/paginator';
 import { PipelineFilterDto } from '@api/models/pipeline/pipeline-filter-dto';
 import { PaginatedListDto } from '@api/models/paginated-list-dto';
 import { TableConstants } from '@shared/contants/table.constants';
-import { SortMeta } from 'primeng/api';
+import { SortMeta } from '@openng/optimus-ui/api';
 import { SortUtil } from '@shared/util/sort';
 import { FilterUtil } from '@shared/util/filter';
 

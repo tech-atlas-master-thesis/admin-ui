@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { LazyInput } from '@shared/lazy-input/lazy-input';
 import { ConfigurationApi } from '@api/service/configuration-api';
-import { PaginatorState } from 'primeng/paginator';
+import { PaginatorState } from '@openng/optimus-ui/paginator';
 import { catchError, Observable, of } from 'rxjs';
 import { PaginatedListDto } from '@api/models/paginated-list-dto';
-import { SelectItem } from 'primeng/api';
-import { Select } from 'primeng/select';
+import { SelectItem } from '@openng/optimus-ui/api';
+import { Select } from '@openng/optimus-ui/select';
 import { FormsModule } from '@angular/forms';
-import { InputText } from 'primeng/inputtext';
+import { InputText } from '@openng/optimus-ui/inputtext';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { LazySelect } from '@shared/lazy-input/lazy-select/lazy-select';
 import { ConfigurationVersionDto } from '@api/models/configuration/configuration-version-dto';

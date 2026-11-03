@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { Button, ButtonSeverity } from 'primeng/button';
-import { Popover } from 'primeng/popover';
+import { Button, ButtonSeverity } from '@openng/optimus-ui/button';
+import { Popover } from '@openng/optimus-ui/popover';
 import { TranslocoPipe } from '@jsverse/transloco';
 
 @Component({

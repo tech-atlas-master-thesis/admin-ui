@@ -1,3 +1,4 @@
+<!-- $any(): Optimus UI types `pattern`/`min`/`max` inputs incompatibly with Signal Forms (openng-org/optimus-ui#155) -->
 <div class="sc-new-pipeline">
   <section>
     <h3>{{ 'pipeline.label.type' | transloco }}</h3>
@@ -7,8 +8,7 @@
           id="new-pipeline-type"
           class="full-width"
           [options]="typeOptions()"
-          [ngModel]="pipelineForm.pipelineType()"
-          (ngModelChange)="pipelineForm.pipelineType().value.set($event)"
+          [formField]="$any(pipelineForm.pipelineType)"
           dataKey="type"
         >
         </p-select>

@@ -5,8 +5,8 @@ import { Breadcrumbs } from './breadcrumbs/breadcrumbs';
 import { TranslocoService } from '@jsverse/transloco';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { AuthService } from '@shared/auth/auth.service';
-import { Toast } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { Toast } from '@openng/optimus-ui/toast';
+import { MessageService } from '@openng/optimus-ui/api';
 import { ErrorService } from '@shared/error/error.service';
 import { filter, tap } from 'rxjs';
 

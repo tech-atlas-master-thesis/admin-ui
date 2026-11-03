@@ -1,7 +1,7 @@
 import { computed, Directive, effect, ElementRef, input, model, signal, viewChild } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
-import { ScrollerOptions, SelectItem } from 'primeng/api';
-import { PaginatorState } from 'primeng/paginator';
+import { ScrollerOptions, SelectItem } from '@openng/optimus-ui/api';
+import { PaginatorState } from '@openng/optimus-ui/paginator';
 import { PaginatedListDto } from '@api/models/paginated-list-dto';
 import {
   BehaviorSubject,
@@ -16,7 +16,7 @@ import {
 } from 'rxjs';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { TableConstants } from '@shared/contants/table.constants';
-import { Select, SelectLazyLoadEvent } from 'primeng/select';
+import { Select, SelectLazyLoadEvent } from '@openng/optimus-ui/select';
 import { LazyInput } from '@shared/lazy-input/lazy-input';
 import { EqualityCheckUtil } from '@shared/util/equal';
 

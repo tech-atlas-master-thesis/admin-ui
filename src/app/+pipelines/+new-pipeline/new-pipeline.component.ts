@@ -1,24 +1,34 @@
 import { ChangeDetectionStrategy, Component, computed, DestroyRef, effect, inject, signal } from '@angular/core';
 import { PipelinesStore } from '../pipelines.store';
-import { Select } from 'primeng/select';
+import { Select } from '@openng/optimus-ui/select';
 import { TranslocoPipe } from '@jsverse/transloco';
-import { FloatLabel } from 'primeng/floatlabel';
+import { FloatLabel } from '@openng/optimus-ui/floatlabel';
 import { NewPipelineForm } from './new-pipeline.interface';
 import { form, FormField, required, schema } from '@angular/forms/signals';
-import { FormsModule } from '@angular/forms';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { map, startWith, switchMap, tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { I18nService } from '@shared/i18n/i18n-service';
-import { InputText } from 'primeng/inputtext';
-import { Textarea } from 'primeng/textarea';
+import { InputText } from '@openng/optimus-ui/inputtext';
+import { Textarea } from '@openng/optimus-ui/textarea';
 import { StepConfiguration } from './step-configuration/step-configuration';
-import { Button } from 'primeng/button';
+import { Button } from '@openng/optimus-ui/button';
 import { PipelineService } from '../pipeline.service';
+import { OptimusFormFieldSync } from '@shared/forms/optimus-form-field-sync';
 
 @Component({
   selector: 'app-new-pipeline',
-  imports: [Select, TranslocoPipe, FloatLabel, FormsModule, InputText, FormField, Textarea, StepConfiguration, Button],
+  imports: [
+    Select,
+    TranslocoPipe,
+    FloatLabel,
+    InputText,
+    FormField,
+    OptimusFormFieldSync,
+    Textarea,
+    StepConfiguration,
+    Button,
+  ],
   templateUrl: './new-pipeline.component.html',
   styleUrl: './new-pipeline.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

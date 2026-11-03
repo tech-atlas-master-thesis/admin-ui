@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { ToastMessageOptions } from 'primeng/api';
+import { ToastMessageOptions } from '@openng/optimus-ui/api';
 import { I18nService } from '@shared/i18n/i18n-service';
 import { HttpErrorResponse } from '@angular/common/http';
 

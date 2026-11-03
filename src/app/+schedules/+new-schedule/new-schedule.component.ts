@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, DestroyRef, effect, inject, signal } from '@angular/core';
-import { Button } from 'primeng/button';
-import { FloatLabel } from 'primeng/floatlabel';
-import { InputText } from 'primeng/inputtext';
-import { Select } from 'primeng/select';
+import { Button } from '@openng/optimus-ui/button';
+import { FloatLabel } from '@openng/optimus-ui/floatlabel';
+import { InputText } from '@openng/optimus-ui/inputtext';
+import { Select } from '@openng/optimus-ui/select';
 import { StepConfiguration } from '../../+pipelines/+new-pipeline/step-configuration/step-configuration';
-import { Textarea } from 'primeng/textarea';
+import { Textarea } from '@openng/optimus-ui/textarea';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { PipelineService } from '../../+pipelines/pipeline.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,13 +12,13 @@ import { I18nService } from '@shared/i18n/i18n-service';
 import { form, FormField, required, schema, validate } from '@angular/forms/signals';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { map, startWith, switchMap, tap } from 'rxjs';
-import { FormsModule } from '@angular/forms';
 import { NewScheduleForm } from './new-schedule.interface';
 import { SchedulesStore } from '../schedules.store';
-import { Checkbox } from 'primeng/checkbox';
+import { Checkbox } from '@openng/optimus-ui/checkbox';
 import { scheduleCronValidator } from '../validator/cron-validator';
 import { CronOptions } from '../shared/cron-options';
-import { Tooltip } from 'primeng/tooltip';
+import { Tooltip } from '@openng/optimus-ui/tooltip';
+import { OptimusFormFieldSync } from '@shared/forms/optimus-form-field-sync';
 
 @Component({
   selector: 'app-new-schedule',
@@ -30,8 +30,8 @@ import { Tooltip } from 'primeng/tooltip';
     StepConfiguration,
     Textarea,
     TranslocoPipe,
-    FormsModule,
     FormField,
+    OptimusFormFieldSync,
     Checkbox,
     Tooltip,
   ],

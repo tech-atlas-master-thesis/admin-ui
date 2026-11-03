@@ -1,4 +1,4 @@
-import { PaginatorState } from 'primeng/paginator';
+import { PaginatorState } from '@openng/optimus-ui/paginator';
 
 export interface PaginatedListDto<T> {
   items: T[];

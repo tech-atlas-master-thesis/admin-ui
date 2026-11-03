@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { DatePipe, NgClass } from '@angular/common';
-import { TableModule } from 'primeng/table';
+import { TableModule } from '@openng/optimus-ui/table';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { PipelineStepsStore } from '../pipeline-steps.store';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';

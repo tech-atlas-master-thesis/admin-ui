@@ -1,4 +1,4 @@
-import { SortMeta } from 'primeng/api';
+import { SortMeta } from '@openng/optimus-ui/api';
 
 export type SortOrder = -1 | 1;
 

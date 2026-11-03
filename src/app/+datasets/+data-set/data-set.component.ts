@@ -2,14 +2,14 @@ import { ChangeDetectionStrategy, Component, DestroyRef, effect, inject, Signal,
 import { DataSetStore } from './data-set.store';
 import { DataSetObjectStore } from './data-set-object.store';
 import { TranslocoPipe } from '@jsverse/transloco';
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from 'primeng/tabs';
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@openng/optimus-ui/tabs';
 import { DataSetObjects } from './data-set-objects/data-set-objects.component';
 import { DataSetObjectsColumn } from './data-set-objects/data-set-objects.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { filter, map, startWith, take, tap } from 'rxjs';
 import { PaginatedListDto } from '@api/models/paginated-list-dto';
-import { Button } from 'primeng/button';
+import { Button } from '@openng/optimus-ui/button';
 import { FileDownload } from '@shared/file/file-download';
 import { DataSetObjectType } from '@api/models/dataset/data-set-object-type';
 

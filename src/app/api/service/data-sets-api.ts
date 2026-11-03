@@ -1,8 +1,8 @@
 import { inject } from '@angular/core';
 import { Api } from '../api';
 import { HttpClient } from '@angular/common/http';
-import { PaginatorState } from 'primeng/paginator';
-import { SortMeta } from 'primeng/api';
+import { PaginatorState } from '@openng/optimus-ui/paginator';
+import { SortMeta } from '@openng/optimus-ui/api';
 import { FilterUtil } from '@shared/util/filter';
 import { PaginatedListDto } from '@api/models/paginated-list-dto';
 import { SortUtil } from '@shared/util/sort';

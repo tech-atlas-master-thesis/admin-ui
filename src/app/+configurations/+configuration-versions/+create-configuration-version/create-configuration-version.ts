@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
-import { Button } from 'primeng/button';
-import { InputText } from 'primeng/inputtext';
-import { Textarea } from 'primeng/textarea';
+import { Button } from '@openng/optimus-ui/button';
+import { InputText } from '@openng/optimus-ui/inputtext';
+import { Textarea } from '@openng/optimus-ui/textarea';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { ActivatedRoute, Router } from '@angular/router';
 import { form, FormField } from '@angular/forms/signals';
@@ -12,6 +12,7 @@ import { ConfigurationStore } from '../configuration.store';
 import { LazyConfigurationVersion } from '@shared/lazy-input/lazy-configuration-version/lazy-configuration-version';
 import { ConfigurationVersionDto } from '@api/models/configuration/configuration-version-dto';
 import { FormsModule } from '@angular/forms';
+import { OptimusFormFieldSync } from '@shared/forms/optimus-form-field-sync';
 
 interface CreateVersionModel {
   name: string;
@@ -21,7 +22,16 @@ interface CreateVersionModel {
 
 @Component({
   selector: 'app-create-configuration-version',
-  imports: [Button, InputText, Textarea, TranslocoPipe, FormField, LazyConfigurationVersion, FormsModule],
+  imports: [
+    Button,
+    InputText,
+    Textarea,
+    TranslocoPipe,
+    FormField,
+    OptimusFormFieldSync,
+    LazyConfigurationVersion,
+    FormsModule,
+  ],
   templateUrl: './create-configuration-version.html',
   styleUrl: './create-configuration-version.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
