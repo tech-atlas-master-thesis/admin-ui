@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { Card } from 'primeng/card';
-import { Skeleton } from 'primeng/skeleton';
+import { Card } from '@openng/optimus-ui/card';
+import { Skeleton } from '@openng/optimus-ui/skeleton';
 
 @Component({
   selector: 'app-metric-card',
