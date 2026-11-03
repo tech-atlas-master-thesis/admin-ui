@@ -7,7 +7,7 @@ import {
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideHttpClient, withInterceptors, withInterceptorsFromDi, withXhr } from '@angular/common/http';
+import { provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { provideTransloco } from '@jsverse/transloco';
 import { TranslocoHttpLoader } from '../transloco-loader';
 import { provideOptimus } from '@openng/optimus-ui/config';
@@ -21,7 +21,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
-    provideHttpClient(withXhr(), withInterceptorsFromDi(), withInterceptors([errorInterceptor])),
+    provideHttpClient(withInterceptorsFromDi(), withInterceptors([errorInterceptor])),
     provideRouter(routes),
     provideTransloco({
       config: {
