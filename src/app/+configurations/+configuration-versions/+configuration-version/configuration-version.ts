@@ -97,8 +97,10 @@ export class ConfigurationVersion {
     if (!nextState) {
       return;
     }
-    this.versionForm.edit().setControlValue(true);
-    this.versionForm.state().setControlValue(nextState);
+    this.versionForm.edit().controlValue.set(true);
+    this.versionForm.edit().markAsDirty();
+    this.versionForm.state().controlValue.set(nextState);
+    this.versionForm.state().markAsDirty();
   }
 
   private getNextState(state?: ConfigurationStateDto) {

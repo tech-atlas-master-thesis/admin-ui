@@ -27,7 +27,7 @@
           <p-auto-complete
             #keywords
             [ngModel]="form.keywords().value()"
-            (ngModelChange)="form.keywords().setControlValue($event)"
+            (ngModelChange)="form.keywords().controlValue.set($event)"
             inputId="multiple-ac-2"
             multiple
             fluid
@@ -40,7 +40,7 @@
           <p-auto-complete
             #limitToDataSource
             [ngModel]="form.limitToDataSource().value()"
-            (ngModelChange)="form.keywords().setControlValue($event)"
+            (ngModelChange)="form.keywords().controlValue.set($event)"
             inputId="multiple-ac-2"
             multiple
             fluid
