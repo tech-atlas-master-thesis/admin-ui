@@ -14,7 +14,7 @@ import { I18nService } from '@shared/i18n/i18n-service';
 import { ConfigurationsStore } from '../configurations.store';
 import { ConfigurationDefinitionDto } from '@api/models/configuration/configuration-definition-dto';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { OptimusFormFieldSync } from '@shared/forms/optimus-form-field-sync';
 
 interface NewConfigurationForm {
   type: ConfigurationDefinitionDto | null;
@@ -24,7 +24,7 @@ interface NewConfigurationForm {
 
 @Component({
   selector: 'app-create-configuration',
-  imports: [Button, FloatLabel, InputText, Select, Textarea, TranslocoPipe, FormsModule, FormField],
+  imports: [Button, FloatLabel, InputText, Select, Textarea, TranslocoPipe, FormField, OptimusFormFieldSync],
   templateUrl: './create-configuration.html',
   styleUrl: './create-configuration.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

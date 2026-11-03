@@ -5,7 +5,6 @@ import { TranslocoPipe } from '@jsverse/transloco';
 import { FloatLabel } from '@openng/optimus-ui/floatlabel';
 import { NewPipelineForm } from './new-pipeline.interface';
 import { form, FormField, required, schema } from '@angular/forms/signals';
-import { FormsModule } from '@angular/forms';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { map, startWith, switchMap, tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,10 +14,21 @@ import { Textarea } from '@openng/optimus-ui/textarea';
 import { StepConfiguration } from './step-configuration/step-configuration';
 import { Button } from '@openng/optimus-ui/button';
 import { PipelineService } from '../pipeline.service';
+import { OptimusFormFieldSync } from '@shared/forms/optimus-form-field-sync';
 
 @Component({
   selector: 'app-new-pipeline',
-  imports: [Select, TranslocoPipe, FloatLabel, FormsModule, InputText, FormField, Textarea, StepConfiguration, Button],
+  imports: [
+    Select,
+    TranslocoPipe,
+    FloatLabel,
+    InputText,
+    FormField,
+    OptimusFormFieldSync,
+    Textarea,
+    StepConfiguration,
+    Button,
+  ],
   templateUrl: './new-pipeline.component.html',
   styleUrl: './new-pipeline.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

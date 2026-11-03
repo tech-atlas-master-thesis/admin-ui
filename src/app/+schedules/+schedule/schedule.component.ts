@@ -5,8 +5,7 @@ import { InputText } from '@openng/optimus-ui/inputtext';
 import { StepConfiguration } from '../../+pipelines/+new-pipeline/step-configuration/step-configuration';
 import { Textarea } from '@openng/optimus-ui/textarea';
 import { TranslocoPipe } from '@jsverse/transloco';
-import { FormsModule } from '@angular/forms';
-import { form, FormField, readonly, required, schema, validate } from '@angular/forms/signals';
+import { disabled, form, FormField, readonly, required, schema, validate } from '@angular/forms/signals';
 import { SchedulesStore } from '../schedules.store';
 import { PipelineService } from '../../+pipelines/pipeline.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,6 +18,7 @@ import { scheduleCronValidator } from '../validator/cron-validator';
 import { Select } from '@openng/optimus-ui/select';
 import { CronOptions } from '../shared/cron-options';
 import { Tooltip } from '@openng/optimus-ui/tooltip';
+import { OptimusFormFieldSync } from '@shared/forms/optimus-form-field-sync';
 
 @Component({
   selector: 'app-schedule',
@@ -29,8 +29,8 @@ import { Tooltip } from '@openng/optimus-ui/tooltip';
     StepConfiguration,
     Textarea,
     TranslocoPipe,
-    FormsModule,
     FormField,
+    OptimusFormFieldSync,
     Select,
     Tooltip,
   ],
@@ -73,7 +73,7 @@ export class ScheduleComponent {
     schema((path) => {
       required(path.pipelineType);
       required(path.name);
-      readonly(path.pipelineType);
+      disabled(path.pipelineType);
       readonly(path, (p) => !p.value().edit);
       validate(path.cron, scheduleCronValidator);
     }),

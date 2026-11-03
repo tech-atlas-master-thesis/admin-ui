@@ -1,3 +1,4 @@
+<!-- $any(): Optimus UI types `pattern`/`min`/`max` inputs incompatibly with Signal Forms (openng-org/optimus-ui#155) -->
 <div class="default-page schedule">
   <h1 class="actions-header">
     {{ 'schedule.title' | transloco: { scheduleId: scheduleForm.id().value() } }}
@@ -29,8 +30,7 @@
           #pipelineType
           class="full-width"
           [options]="typeOptions()"
-          [ngModel]="scheduleForm.pipelineType().value()"
-          [disabled]="true"
+          [formField]="$any(scheduleForm.pipelineType)"
           dataKey="type"
         >
         </p-select>
@@ -60,15 +60,7 @@
             <span class="pi pi-info-circle" [pTooltip]="'schedule.cronDescription' | transloco"></span>
           }
         </label>
-        <p-select
-          #cron
-          [ngModel]="scheduleForm.cron().value()"
-          [options]="cronOptions()"
-          [editable]="true"
-          [invalid]="scheduleForm.cron().invalid()"
-          [readonly]="!scheduleForm.edit().value()"
-          (ngModelChange)="scheduleForm.cron().value.set($event)"
-        ></p-select>
+        <p-select #cron [formField]="$any(scheduleForm.cron)" [options]="cronOptions()" [editable]="true"></p-select>
       </div>
       <div class="fluid-form-element">
         <label [for]="active">{{ 'label.active' | transloco }}</label>

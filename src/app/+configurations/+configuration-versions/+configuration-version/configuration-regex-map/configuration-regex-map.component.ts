@@ -17,10 +17,11 @@ import { TranslocoPipe } from '@jsverse/transloco';
 import { AutoComplete } from '@openng/optimus-ui/autocomplete';
 import { Listbox } from '@openng/optimus-ui/listbox';
 import { FormsModule } from '@angular/forms';
+import { OptimusFormFieldSync } from '@shared/forms/optimus-form-field-sync';
 
 @Component({
   selector: 'app-configuration-regex-map',
-  imports: [InputText, FormField, TranslocoPipe, AutoComplete, Listbox, FormsModule],
+  imports: [InputText, FormField, OptimusFormFieldSync, TranslocoPipe, AutoComplete, Listbox, FormsModule],
   templateUrl: './configuration-regex-map.component.html',
   styleUrl: './configuration-regex-map.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

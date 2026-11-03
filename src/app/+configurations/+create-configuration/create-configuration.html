@@ -1,3 +1,4 @@
+<!-- $any(): Optimus UI types `pattern`/`min`/`max` inputs incompatibly with Signal Forms (openng-org/optimus-ui#155) -->
 <div class="default-page">
   <section>
     <h3>{{ 'newConfiguration.title' | transloco }}</h3>
@@ -7,8 +8,7 @@
           id="new-configuration-type"
           class="full-width"
           [options]="typeOptions()"
-          [ngModel]="configurationForm.type()"
-          (ngModelChange)="configurationForm.type().value.set($event)"
+          [formField]="$any(configurationForm.type)"
           dataKey="type"
         >
         </p-select>

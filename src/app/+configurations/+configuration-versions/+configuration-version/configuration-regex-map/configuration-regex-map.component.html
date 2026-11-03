@@ -1,3 +1,4 @@
+<!-- $any(): Optimus UI types `pattern`/`min`/`max` inputs incompatibly with Signal Forms (openng-org/optimus-ui#155) -->
 <div class="configuration-regex-map">
   <div>
     <p-list-box
@@ -26,26 +27,22 @@
           <label [for]="keywords">{{ 'configuration.regexMap.keywords' | transloco }}</label>
           <p-auto-complete
             #keywords
-            [ngModel]="form.keywords().value()"
-            (ngModelChange)="form.keywords().controlValue.set($event)"
+            [formField]="$any(form.keywords)"
             inputId="multiple-ac-2"
             multiple
             fluid
             [typeahead]="false"
-            [readonly]="readonly()"
           />
         </div>
         <div class="fluid-form-element">
           <label [for]="limitToDataSource">{{ 'configuration.regexMap.limitToDataSource' | transloco }}</label>
           <p-auto-complete
             #limitToDataSource
-            [ngModel]="form.limitToDataSource().value()"
-            (ngModelChange)="form.keywords().controlValue.set($event)"
+            [formField]="$any(form.limitToDataSource)"
             inputId="multiple-ac-2"
             multiple
             fluid
             [typeahead]="false"
-            [readonly]="readonly()"
           />
         </div>
       </div>

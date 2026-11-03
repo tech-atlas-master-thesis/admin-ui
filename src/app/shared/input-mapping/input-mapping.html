@@ -1,3 +1,4 @@
+<!-- $any(): Optimus UI types `pattern`/`min`/`max` inputs incompatibly with Signal Forms (openng-org/optimus-ui#155) -->
 <p-input-group>
   <div class="p-component p-textarea input-mapping">
     @for (mapping of mappings(); track mapping.key) {
@@ -24,7 +25,7 @@
     <input pInputText #mappingAddKey [pAutoFocus]="true" [formField]="addMappingForm.key" />
     ->
     @if (enumValues(); as enumValues) {
-      <p-select [options]="enumValues" [(ngModel)]="addMappingForm.value().value" dataKey="name">
+      <p-select [options]="enumValues" [formField]="$any(addMappingForm.value)" dataKey="name">
         <ng-template #item let-item>
           <span>
             {{ item.displayName | localised }}

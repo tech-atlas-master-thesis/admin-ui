@@ -9,7 +9,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Button } from '@openng/optimus-ui/button';
 import { Popover } from '@openng/optimus-ui/popover';
 import { InputGroup } from '@openng/optimus-ui/inputgroup';
@@ -22,6 +22,7 @@ import { Select } from '@openng/optimus-ui/select';
 import { LocalisedPipe } from '@shared/i18n/localised.pipe';
 import { Tooltip } from '@openng/optimus-ui/tooltip';
 import { Tag } from '@openng/optimus-ui/tag';
+import { OptimusFormFieldSync } from '@shared/forms/optimus-form-field-sync';
 
 type Mapping = Record<string, string>;
 
@@ -33,7 +34,6 @@ interface AddMappingForm {
 @Component({
   selector: 'app-input-mapping',
   imports: [
-    FormsModule,
     Button,
     Popover,
     InputGroup,
@@ -41,6 +41,7 @@ interface AddMappingForm {
     TranslocoPipe,
     AutoFocus,
     FormField,
+    OptimusFormFieldSync,
     Select,
     LocalisedPipe,
     Tooltip,

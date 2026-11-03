@@ -21,6 +21,7 @@ import { TranslocoPipe } from '@jsverse/transloco';
 import { InputText } from '@openng/optimus-ui/inputtext';
 import { AutoComplete } from '@openng/optimus-ui/autocomplete';
 import { Button } from '@openng/optimus-ui/button';
+import { OptimusFormFieldSync } from '@shared/forms/optimus-form-field-sync';
 
 interface ConfigurationTechnologySelection {
   fieldIndex: number;
@@ -38,7 +39,7 @@ interface ConfigurationTechnologyForm {
 
 @Component({
   selector: 'app-configuration-technologies',
-  imports: [Tree, TranslocoPipe, InputText, FormField, AutoComplete, Button, PrimeTemplate],
+  imports: [Tree, TranslocoPipe, InputText, FormField, OptimusFormFieldSync, AutoComplete, Button, PrimeTemplate],
   templateUrl: './configuration-technologies.html',
   styleUrl: './configuration-technologies.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

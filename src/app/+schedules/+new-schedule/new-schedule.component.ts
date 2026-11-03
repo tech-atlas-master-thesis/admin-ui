@@ -12,13 +12,13 @@ import { I18nService } from '@shared/i18n/i18n-service';
 import { form, FormField, required, schema, validate } from '@angular/forms/signals';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { map, startWith, switchMap, tap } from 'rxjs';
-import { FormsModule } from '@angular/forms';
 import { NewScheduleForm } from './new-schedule.interface';
 import { SchedulesStore } from '../schedules.store';
 import { Checkbox } from '@openng/optimus-ui/checkbox';
 import { scheduleCronValidator } from '../validator/cron-validator';
 import { CronOptions } from '../shared/cron-options';
 import { Tooltip } from '@openng/optimus-ui/tooltip';
+import { OptimusFormFieldSync } from '@shared/forms/optimus-form-field-sync';
 
 @Component({
   selector: 'app-new-schedule',
@@ -30,8 +30,8 @@ import { Tooltip } from '@openng/optimus-ui/tooltip';
     StepConfiguration,
     Textarea,
     TranslocoPipe,
-    FormsModule,
     FormField,
+    OptimusFormFieldSync,
     Checkbox,
     Tooltip,
   ],

@@ -18,6 +18,7 @@ import { AuthRole } from '@shared/auth/auth-roles';
 import { FormsModule } from '@angular/forms';
 import { ConfigurationStateDto } from '@api/models/configuration/configuration-state-dto';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { OptimusFormFieldSync } from '@shared/forms/optimus-form-field-sync';
 
 @Component({
   selector: 'app-configuration-versions',
@@ -25,6 +26,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     TranslocoPipe,
     InputText,
     FormField,
+    OptimusFormFieldSync,
     Textarea,
     AuditPanel,
     AuthorizationPipe,

@@ -17,12 +17,14 @@ import { InputNumber } from '@openng/optimus-ui/inputnumber';
 import { ConfigurationTechnologies } from './configuration-technologies/configuration-technologies';
 import { ConfigurationStateTag } from './state-tag/configuration-state-tag.component';
 import { ConfigurationRegexMapComponent } from './configuration-regex-map/configuration-regex-map.component';
+import { OptimusFormFieldSync } from '@shared/forms/optimus-form-field-sync';
 
 @Component({
   selector: 'app-configuration-version',
   imports: [
     TranslocoPipe,
     FormField,
+    OptimusFormFieldSync,
     InputText,
     Textarea,
     Button,

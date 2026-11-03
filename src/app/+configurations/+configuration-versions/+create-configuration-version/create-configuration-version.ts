@@ -12,6 +12,7 @@ import { ConfigurationStore } from '../configuration.store';
 import { LazyConfigurationVersion } from '@shared/lazy-input/lazy-configuration-version/lazy-configuration-version';
 import { ConfigurationVersionDto } from '@api/models/configuration/configuration-version-dto';
 import { FormsModule } from '@angular/forms';
+import { OptimusFormFieldSync } from '@shared/forms/optimus-form-field-sync';
 
 interface CreateVersionModel {
   name: string;
@@ -21,7 +22,16 @@ interface CreateVersionModel {
 
 @Component({
   selector: 'app-create-configuration-version',
-  imports: [Button, InputText, Textarea, TranslocoPipe, FormField, LazyConfigurationVersion, FormsModule],
+  imports: [
+    Button,
+    InputText,
+    Textarea,
+    TranslocoPipe,
+    FormField,
+    OptimusFormFieldSync,
+    LazyConfigurationVersion,
+    FormsModule,
+  ],
   templateUrl: './create-configuration-version.html',
   styleUrl: './create-configuration-version.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
