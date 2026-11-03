@@ -3,17 +3,17 @@ import { ConfigValueForm } from '../../new-pipeline.interface';
 import { UserConfigDefinitionDto } from '@api/models/pipeline/user-config/user-config-definition-dto';
 import { LocalisedPipe } from '@shared/i18n/localised.pipe';
 import { UserConfigTypeDto } from '@api/models/pipeline/user-config/user-config-type-dto';
-import { InputText } from 'primeng/inputtext';
+import { InputText } from '@openng/optimus-ui/inputtext';
 import { ReactiveFormsModule } from '@angular/forms';
-import { InputNumber } from 'primeng/inputnumber';
-import { Textarea } from 'primeng/textarea';
-import { Select } from 'primeng/select';
-import { AutoComplete } from 'primeng/autocomplete';
-import { Tooltip } from 'primeng/tooltip';
+import { InputNumber } from '@openng/optimus-ui/inputnumber';
+import { Textarea } from '@openng/optimus-ui/textarea';
+import { Select } from '@openng/optimus-ui/select';
+import { AutoComplete } from '@openng/optimus-ui/autocomplete';
+import { Tooltip } from '@openng/optimus-ui/tooltip';
 import { InputMapping } from '@shared/input-mapping/input-mapping';
 import { ConfigCollectionInput } from './config-collection-input/config-collection-input';
-import { DatePicker } from 'primeng/datepicker';
-import { Checkbox } from 'primeng/checkbox';
+import { DatePicker } from '@openng/optimus-ui/datepicker';
+import { Checkbox } from '@openng/optimus-ui/checkbox';
 
 @Component({
   selector: 'app-configuration-value',

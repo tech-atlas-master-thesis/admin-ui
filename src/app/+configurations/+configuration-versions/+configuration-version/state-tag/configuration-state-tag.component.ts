@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { ConfigurationStateDto } from '@api/models/configuration/configuration-state-dto';
-import { Tag } from 'primeng/tag';
+import { Tag } from '@openng/optimus-ui/tag';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { Severity } from '@shared/types/severity';
 

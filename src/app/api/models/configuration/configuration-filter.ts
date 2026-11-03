@@ -1,4 +1,4 @@
-import { FilterMetadata } from 'primeng/api';
+import { FilterMetadata } from '@openng/optimus-ui/api';
 
 export interface ConfigurationFilter extends Record<string, FilterMetadata[] | undefined> {
   name?: FilterMetadata[];

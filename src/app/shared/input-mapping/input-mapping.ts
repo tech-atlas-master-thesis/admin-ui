@@ -10,18 +10,18 @@ import {
   viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Button } from 'primeng/button';
-import { Popover } from 'primeng/popover';
-import { InputGroup } from 'primeng/inputgroup';
-import { InputText } from 'primeng/inputtext';
+import { Button } from '@openng/optimus-ui/button';
+import { Popover } from '@openng/optimus-ui/popover';
+import { InputGroup } from '@openng/optimus-ui/inputgroup';
+import { InputText } from '@openng/optimus-ui/inputtext';
 import { TranslocoPipe } from '@jsverse/transloco';
-import { AutoFocus } from 'primeng/autofocus';
+import { AutoFocus } from '@openng/optimus-ui/autofocus';
 import { form, FormField, required } from '@angular/forms/signals';
 import { UserConfigEnumDto } from '@api/models/pipeline/user-config/user-config-enum-dto';
-import { Select } from 'primeng/select';
+import { Select } from '@openng/optimus-ui/select';
 import { LocalisedPipe } from '@shared/i18n/localised.pipe';
-import { Tooltip } from 'primeng/tooltip';
-import { Tag } from 'primeng/tag';
+import { Tooltip } from '@openng/optimus-ui/tooltip';
+import { Tag } from '@openng/optimus-ui/tag';
 
 type Mapping = Record<string, string>;
 

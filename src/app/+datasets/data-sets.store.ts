@@ -2,8 +2,8 @@ import { patchState, signalStore, withComputed, withMethods, withProps, withStat
 import { computed, inject, resource } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { TableConstants } from '@shared/contants/table.constants';
-import { PaginatorState } from 'primeng/paginator';
-import { FilterMetadata, SortMeta } from 'primeng/api';
+import { PaginatorState } from '@openng/optimus-ui/paginator';
+import { FilterMetadata, SortMeta } from '@openng/optimus-ui/api';
 import { SortUtil } from '@shared/util/sort';
 import { DatasetsFilterDto } from '@api/models/dataset/datasets-filter-dto';
 import { DataSetsApi } from '@api/service/data-sets-api';

@@ -1,7 +1,7 @@
 import { computed, inject, Injectable, resource, Signal } from '@angular/core';
 import { firstValueFrom, of } from 'rxjs';
 import { PipelineApi } from '@api/service/pipeline-api';
-import { SelectItem } from 'primeng/api';
+import { SelectItem } from '@openng/optimus-ui/api';
 import { PipelineConfigDto } from '@api/models/pipeline/pipeline-config-dto';
 import { I18nService } from '@shared/i18n/i18n-service';
 import { PipelinesStore } from './pipelines.store';

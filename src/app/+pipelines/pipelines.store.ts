@@ -4,9 +4,9 @@ import { PipelineApi } from '@api/service/pipeline-api';
 import { firstValueFrom, tap } from 'rxjs';
 import { PipelineCreateDto } from '@api/models/pipeline/pipeline-create-dto';
 import { TableConstants } from '@shared/contants/table.constants';
-import { PaginatorState } from 'primeng/paginator';
+import { PaginatorState } from '@openng/optimus-ui/paginator';
 import { PipelineFilterDto } from '@api/models/pipeline/pipeline-filter-dto';
-import { FilterMetadata, SortMeta } from 'primeng/api';
+import { FilterMetadata, SortMeta } from '@openng/optimus-ui/api';
 import { SortUtil } from '@shared/util/sort';
 
 interface PipelineStoreState {

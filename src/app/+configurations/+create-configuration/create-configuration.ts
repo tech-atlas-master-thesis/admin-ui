@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, DestroyRef, effect, inject, signal } from '@angular/core';
-import { Button } from 'primeng/button';
-import { FloatLabel } from 'primeng/floatlabel';
-import { InputText } from 'primeng/inputtext';
-import { Select } from 'primeng/select';
-import { Textarea } from 'primeng/textarea';
+import { Button } from '@openng/optimus-ui/button';
+import { FloatLabel } from '@openng/optimus-ui/floatlabel';
+import { InputText } from '@openng/optimus-ui/inputtext';
+import { Select } from '@openng/optimus-ui/select';
+import { Textarea } from '@openng/optimus-ui/textarea';
 import { TranslocoPipe } from '@jsverse/transloco';
-import { SelectItem } from 'primeng/api';
+import { SelectItem } from '@openng/optimus-ui/api';
 import { PipelineConfigDto } from '@api/models/pipeline/pipeline-config-dto';
 import { form, FormField, required, schema } from '@angular/forms/signals';
 import { tap } from 'rxjs';

@@ -14,13 +14,13 @@ import {
   ConfigurationTechnologyFieldCodex,
 } from './configuration-technologies.codec';
 import { applyEach, form, FormField, FormValueControl, readonly, required } from '@angular/forms/signals';
-import { PrimeTemplate, TreeDragDropService, TreeNode } from 'primeng/api';
-import { Tree, TreeNodeDropEvent, TreeNodeExpandEvent } from 'primeng/tree';
+import { PrimeTemplate, TreeDragDropService, TreeNode } from '@openng/optimus-ui/api';
+import { Tree, TreeNodeDropEvent, TreeNodeExpandEvent } from '@openng/optimus-ui/tree';
 import { EqualityCheckUtil } from '@shared/util/equal';
 import { TranslocoPipe } from '@jsverse/transloco';
-import { InputText } from 'primeng/inputtext';
-import { AutoComplete } from 'primeng/autocomplete';
-import { Button } from 'primeng/button';
+import { InputText } from '@openng/optimus-ui/inputtext';
+import { AutoComplete } from '@openng/optimus-ui/autocomplete';
+import { Button } from '@openng/optimus-ui/button';
 
 interface ConfigurationTechnologySelection {
   fieldIndex: number;

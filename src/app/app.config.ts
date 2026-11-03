@@ -10,7 +10,7 @@ import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 import { provideTransloco } from '@jsverse/transloco';
 import { TranslocoHttpLoader } from '../transloco-loader';
-import { providePrimeNG } from 'primeng/config';
+import { provideOptimus } from '@openng/optimus-ui/config';
 import { provideOAuthClient } from 'angular-oauth2-oidc';
 import { Preset } from './preset';
 import { errorInterceptor } from '@shared/error/error.interceptor';
@@ -39,7 +39,7 @@ export const appConfig: ApplicationConfig = {
       },
       loader: TranslocoHttpLoader,
     }),
-    providePrimeNG({
+    provideOptimus({
       theme: {
         preset: Preset,
         options: { darkModeSelector: '.app-dark-mode' },

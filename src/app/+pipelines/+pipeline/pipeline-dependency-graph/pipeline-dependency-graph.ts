@@ -9,8 +9,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { PipelineStepsStore } from '../pipeline-steps.store';
-import { Popover } from 'primeng/popover';
-import { Button } from 'primeng/button';
+import { Popover } from '@openng/optimus-ui/popover';
+import { Button } from '@openng/optimus-ui/button';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { StepDto } from '@api/models/pipeline/step-dto';
 import { StateClassPipe } from '@shared/styles/state-class.pipe';

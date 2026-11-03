@@ -1,4 +1,4 @@
-import { SelectItem } from 'primeng/api';
+import { SelectItem } from '@openng/optimus-ui/api';
 
 export const CronOptions: SelectItem<string>[] = [
   {

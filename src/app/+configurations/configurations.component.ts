@@ -1,18 +1,18 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { TableFilterEvent, TableModule, TablePageEvent } from 'primeng/table';
+import { TableFilterEvent, TableModule, TablePageEvent } from '@openng/optimus-ui/table';
 import { ConfigurationsStore } from './configurations.store';
 import { TableConstants } from '@shared/contants/table.constants';
 import { TranslocoPipe } from '@jsverse/transloco';
-import { MultiSelect } from 'primeng/multiselect';
+import { MultiSelect } from '@openng/optimus-ui/multiselect';
 import { FormsModule } from '@angular/forms';
-import { Button } from 'primeng/button';
+import { Button } from '@openng/optimus-ui/button';
 import { RouterLink } from '@angular/router';
 import { AuthRole } from '@shared/auth/auth-roles';
 import { AuthorizationPipe } from '@shared/auth/authorization.pipe';
-import { Tooltip } from 'primeng/tooltip';
+import { Tooltip } from '@openng/optimus-ui/tooltip';
 import { AuditPanel } from '@shared/info-panel/audit-info-panel/audit-panel.component';
 import { I18nService } from '@shared/i18n/i18n-service';
-import { SelectItem } from 'primeng/api';
+import { SelectItem } from '@openng/optimus-ui/api';
 import { PipelineFilterDto } from '@api/models/pipeline/pipeline-filter-dto';
 
 @Component({

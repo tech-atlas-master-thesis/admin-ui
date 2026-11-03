@@ -12,10 +12,10 @@ import {
 import { applyEach, form, FormField, FormValueControl, readonly, required } from '@angular/forms/signals';
 import { EqualityCheckUtil } from '@shared/util/equal';
 import { ConfigurationRegexMapCodec } from './configuration-regex-map.codec';
-import { InputText } from 'primeng/inputtext';
+import { InputText } from '@openng/optimus-ui/inputtext';
 import { TranslocoPipe } from '@jsverse/transloco';
-import { AutoComplete } from 'primeng/autocomplete';
-import { Listbox } from 'primeng/listbox';
+import { AutoComplete } from '@openng/optimus-ui/autocomplete';
+import { Listbox } from '@openng/optimus-ui/listbox';
 import { FormsModule } from '@angular/forms';
 
 @Component({

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { PipelineStore } from './pipeline.store';
-import { TableModule } from 'primeng/table';
+import { TableModule } from '@openng/optimus-ui/table';
 import { PipelineStep } from './pipeline-step/pipeline-step.component';
 import { PipelineTimeline } from './pipeline-timeline/pipeline-timeline';
 import { PipelineDependencyGraph } from './pipeline-dependency-graph/pipeline-dependency-graph';

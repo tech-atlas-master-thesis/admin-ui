@@ -7,7 +7,7 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { PipelineStore } from '../../pipeline.store';
 import { PipelineApi } from '@api/service/pipeline-api';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Button } from 'primeng/button';
+import { Button } from '@openng/optimus-ui/button';
 import { FileDownload } from '@shared/file/file-download';
 
 @Component({

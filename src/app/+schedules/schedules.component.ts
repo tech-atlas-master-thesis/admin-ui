@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { AuditPanel } from '@shared/info-panel/audit-info-panel/audit-panel.component';
 import { AuthorizationPipe } from '@shared/auth/authorization.pipe';
-import { Button } from 'primeng/button';
-import { MultiSelect } from 'primeng/multiselect';
+import { Button } from '@openng/optimus-ui/button';
+import { MultiSelect } from '@openng/optimus-ui/multiselect';
 import { NgTemplateOutlet } from '@angular/common';
-import { TableFilterEvent, TableModule, TablePageEvent } from 'primeng/table';
+import { TableFilterEvent, TableModule, TablePageEvent } from '@openng/optimus-ui/table';
 import { TableSkeleton } from '@shared/table/table-skeleton/table-skeleton';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { PipelineService } from '../+pipelines/pipeline.service';
@@ -16,7 +16,7 @@ import { SchedulesStore } from './schedules.store';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { Tooltip } from 'primeng/tooltip';
+import { Tooltip } from '@openng/optimus-ui/tooltip';
 
 @Component({
   selector: 'app-schedules',

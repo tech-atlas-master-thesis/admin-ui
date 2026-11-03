@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { I18nService } from '@shared/i18n/i18n-service';
-import { MenuItem } from 'primeng/api';
-import { Menubar } from 'primeng/menubar';
-import { Button } from 'primeng/button';
-import { Menu } from 'primeng/menu';
+import { MenuItem } from '@openng/optimus-ui/api';
+import { Menubar } from '@openng/optimus-ui/menubar';
+import { Button } from '@openng/optimus-ui/button';
+import { Menu } from '@openng/optimus-ui/menu';
 import { NgOptimizedImage } from '@angular/common';
-import { Popover } from 'primeng/popover';
+import { Popover } from '@openng/optimus-ui/popover';
 import { AuthService } from '@shared/auth/auth.service';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Tag } from 'primeng/tag';
+import { Tag } from '@openng/optimus-ui/tag';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { AuthRole } from '@shared/auth/auth-roles';
 

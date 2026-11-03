@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { SelectItem } from 'primeng/api';
-import { PaginatorState } from 'primeng/paginator';
+import { SelectItem } from '@openng/optimus-ui/api';
+import { PaginatorState } from '@openng/optimus-ui/paginator';
 
 @Injectable({
   providedIn: 'root',
