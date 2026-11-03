@@ -63,8 +63,8 @@ export class InputMapping implements ControlValueAccessor {
   enumValues = input<UserConfigEnumDto[]>();
   readonly = input<boolean>();
 
-  value = signal<Mapping>({});
-  mappings = computed(() => Object.entries(this.value()).map(([key, value]) => ({ key, value })));
+  value = signal<Mapping | null>({});
+  mappings = computed(() => Object.entries(this.value() ?? {}).map(([key, value]) => ({ key, value })));
   disabled = signal(false);
 
   addMappingValue = signal<AddMappingForm>({ key: '', value: '' });
@@ -74,7 +74,7 @@ export class InputMapping implements ControlValueAccessor {
     // TODO: add validation for duplicate keys
   });
 
-  private onChange?: (v: Mapping) => void;
+  private onChange?: (v: Mapping | null) => void;
   private onTouched?: () => void;
 
   constructor() {
@@ -88,10 +88,10 @@ export class InputMapping implements ControlValueAccessor {
     });
   }
 
-  writeValue(v: Mapping): void {
+  writeValue(v: Mapping | null): void {
     this.value.set(v);
   }
-  registerOnChange(fn: (v: Mapping) => void): void {
+  registerOnChange(fn: (v: Mapping | null) => void): void {
     this.onChange = fn;
   }
   registerOnTouched(fn: () => void): void {
@@ -113,6 +113,8 @@ export class InputMapping implements ControlValueAccessor {
   }
 
   protected removeMapping(mappingKey: string) {
-    this.value.update((mapping) => Object.fromEntries(Object.entries(mapping).filter(([key]) => key !== mappingKey)));
+    this.value.update((mapping) =>
+      Object.fromEntries(Object.entries(mapping ?? {}).filter(([key]) => key !== mappingKey)),
+    );
   }
 }
