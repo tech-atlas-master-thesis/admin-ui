@@ -7,4 +7,47 @@
   h1 {
     margin: 0;
   }
+
+  &__error {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+    gap: 1rem;
+  }
+
+  &__lists {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(28rem, 100%), 1fr));
+    gap: 1rem;
+    align-items: start;
+  }
+
+  &__list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: var(--p-card-body-padding) var(--p-card-body-padding) 0;
+    font-size: var(--p-card-title-font-size);
+    font-weight: var(--p-card-title-font-weight);
+
+    a {
+      font-size: 0.875rem;
+      font-weight: normal;
+    }
+  }
+
+  &__link {
+    color: var(--p-primary-color);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

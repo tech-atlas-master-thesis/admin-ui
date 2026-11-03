@@ -1,0 +1,16 @@
+<p-card>
+  <div class="metric-card" [class.metric-card--highlight]="highlight()">
+    <div class="metric-card__header">
+      <span>{{ label() }}</span>
+      <i class="pi" [class]="icon()"></i>
+    </div>
+    @if (loading()) {
+      <p-skeleton width="4rem" height="2.5rem"></p-skeleton>
+    } @else {
+      <span class="metric-card__value">{{ value() ?? '-' }}</span>
+    }
+    <div class="metric-card__details">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</p-card>

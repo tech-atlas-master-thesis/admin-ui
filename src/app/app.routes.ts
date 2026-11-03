@@ -8,6 +8,9 @@ import { DataSetsStore } from './+datasets/data-sets.store';
 import { SchedulesApi } from '@api/service/schedules-api';
 import { SchedulesStore } from './+schedules/schedules.store';
 import { PipelineService } from './+pipelines/pipeline.service';
+import { DashboardApi } from '@api/service/dashboard-api';
+import { AuthRole } from '@shared/auth/auth-roles';
+import { authorizationGuard } from '@shared/auth/authorization.guard';
 
 export const routes: Routes = [
   {
@@ -44,6 +47,11 @@ export const routes: Routes = [
   },
   {
     path: '',
+    data: {
+      role: AuthRole.VIEW,
+    },
+    canActivate: [authorizationGuard],
+    providers: [DashboardApi],
     loadComponent: () => import('./+dashboard/dashboard').then((m) => m.Dashboard),
   },
   {

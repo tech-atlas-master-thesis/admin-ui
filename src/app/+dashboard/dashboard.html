@@ -6,4 +6,153 @@
     -
     {{ 'dashboard.title' | transloco }}
   </h1>
+
+  @let dashboard = dashboardStore.dashboard();
+  @let loading = dashboardStore.initialLoading();
+
+  @if (dashboardStore.error()) {
+    <p-message severity="error">
+      <div class="dashboard__error">
+        <span>{{ 'dashboard.loadError' | transloco }}</span>
+        <p-button
+          [label]="'dashboard.retry' | transloco"
+          icon="pi pi-refresh"
+          severity="danger"
+          size="small"
+          [text]="true"
+          (onClick)="dashboardStore.reload()"
+        ></p-button>
+      </div>
+    </p-message>
+  }
+
+  <div class="dashboard__metrics">
+    <app-metric-card
+      icon="pi-play-circle"
+      [label]="'dashboard.running' | transloco"
+      [value]="dashboard?.pipelines?.running"
+      [loading]="loading"
+    >
+      @if (dashboard) {
+        {{ 'dashboard.queued' | transloco: { count: dashboard.pipelines.open } }}
+      }
+    </app-metric-card>
+    <app-metric-card
+      icon="pi-check-circle"
+      [label]="'dashboard.finished' | transloco"
+      [value]="dashboard?.pipelines?.finished"
+      [loading]="loading"
+    ></app-metric-card>
+    <app-metric-card
+      icon="pi-exclamation-triangle"
+      [label]="'dashboard.errors' | transloco"
+      [value]="dashboard?.pipelines?.error"
+      [loading]="loading"
+      [highlight]="(dashboard?.pipelines?.error ?? 0) > 0"
+    ></app-metric-card>
+    <app-metric-card
+      icon="pi-database"
+      [label]="'dashboard.dataSets' | transloco"
+      [value]="dashboard?.dataSets?.total"
+      [loading]="loading"
+    >
+      @if (dashboard) {
+        @if (dashboard.dataSets.latest; as latest) {
+          {{ 'dashboard.latestDataSet' | transloco }}:
+          <a class="dashboard__link" [routerLink]="['/', 'datasets', 'dataset', latest.id]">{{
+            latest.pipelineName
+          }}</a>
+        } @else {
+          {{ 'dashboard.noDataSets' | transloco }}
+        }
+      }
+    </app-metric-card>
+  </div>
+
+  <div class="dashboard__lists">
+    <p-card>
+      <ng-template #header>
+        <div class="dashboard__list-header">
+          <span>{{ 'dashboard.recentErrors' | transloco }}</span>
+        </div>
+      </ng-template>
+      <p-table [value]="dashboard?.pipelines?.recentErrors ?? []">
+        <ng-template #header>
+          <tr>
+            <th>{{ 'label.name' | transloco }}</th>
+            <th>{{ 'label.created' | transloco }}</th>
+          </tr>
+        </ng-template>
+        <ng-template #body let-pipeline>
+          <tr>
+            <td>
+              <a class="dashboard__link" [routerLink]="['/', 'pipelines', 'pipeline', pipeline.id]">{{
+                pipeline.name
+              }}</a>
+            </td>
+            <td>{{ pipeline.created.at | date: ('format.dateTime' | transloco) }}</td>
+          </tr>
+        </ng-template>
+        <ng-template #emptymessage>
+          <app-table-skeleton
+            #errorsSkeleton
+            [columns]="2"
+            [loading]="loading"
+            [missingText]="'dashboard.noRecentErrors' | transloco"
+          ></app-table-skeleton>
+          <ng-container *ngTemplateOutlet="errorsSkeleton.template()"></ng-container>
+        </ng-template>
+      </p-table>
+    </p-card>
+
+    <p-card>
+      <ng-template #header>
+        <div class="dashboard__list-header">
+          <span>
+            {{ 'dashboard.activeSchedules' | transloco }}
+            @if (dashboard) {
+              ({{ dashboard.schedules.active }})
+            }
+          </span>
+          <a class="dashboard__link" routerLink="/schedules">{{ 'dashboard.allSchedules' | transloco }}</a>
+        </div>
+      </ng-template>
+      <p-table [value]="dashboard?.schedules?.recentlyExecuted ?? []">
+        <ng-template #header>
+          <tr>
+            <th>{{ 'label.name' | transloco }}</th>
+            <th>{{ 'label.cron' | transloco }}</th>
+            <th>{{ 'dashboard.lastExecution' | transloco }}</th>
+          </tr>
+        </ng-template>
+        <ng-template #body let-schedule>
+          @let cronLabel = cronLabels.get(schedule.cron);
+          <tr>
+            <td>
+              <a class="dashboard__link" [routerLink]="['/', 'schedules', 'schedule', schedule.id]">{{
+                schedule.pipeline.name
+              }}</a>
+            </td>
+            <td>{{ cronLabel ? (cronLabel | transloco) : schedule.cron }}</td>
+            <td>
+              {{
+                schedule.lastExecution
+                  ? (schedule.lastExecution | date: ('format.dateTime' | transloco))
+                  : ('dashboard.neverExecuted' | transloco)
+              }}
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template #emptymessage>
+          <app-table-skeleton
+            #schedulesSkeleton
+            [columns]="3"
+            [loading]="loading"
+            [missingText]="'dashboard.noActiveSchedules' | transloco"
+          ></app-table-skeleton>
+          <ng-container *ngTemplateOutlet="schedulesSkeleton.template()"></ng-container>
+        </ng-template>
+      </p-table>
+    </p-card>
+  </div>
 </div>

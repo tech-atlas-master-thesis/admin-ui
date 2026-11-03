@@ -83,7 +83,23 @@
     }
   },
   "dashboard": {
-    "title": "Dashboard"
+    "title": "Dashboard",
+    "running": "Running",
+    "queued": "{{count}} queued",
+    "finished": "Finished",
+    "errors": "Errors",
+    "dataSets": "Data Sets",
+    "latestDataSet": "Latest",
+    "noDataSets": "No data sets yet",
+    "recentErrors": "Recent Errors",
+    "noRecentErrors": "No failed pipelines",
+    "activeSchedules": "Active Schedules",
+    "noActiveSchedules": "No active schedules",
+    "allSchedules": "All schedules",
+    "lastExecution": "Last Execution",
+    "neverExecuted": "Never",
+    "loadError": "The dashboard could not be updated",
+    "retry": "Retry"
   },
   "schedules": {
     "title": "Schedules",
