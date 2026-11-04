@@ -113,10 +113,10 @@
         </td>
         <td>
           <span [pTooltip]="pipeline.description ? pipeline.description : undefined">{{
-            pipeline.displayName | localised: pipeline.type
+            pipeline.displayName | localised: pipeline.name
           }}</span>
         </td>
-        <td>{{ pipeline.name }}</td>
+        <td>{{ pipeline.type }}</td>
         <td>{{ pipeline.state }}</td>
         <td>
           <div class="action-buttons action-buttons--end">

@@ -114,7 +114,7 @@
         <td>
           <span [pTooltip]="schedule.description ? schedule.description : undefined">{{ schedule.pipeline.name }}</span>
         </td>
-        <td>{{ schedule.pipeline.name }}</td>
+        <td>{{ schedule.pipeline.type }}</td>
         <td>{{ schedule.active ? ('label.active' | transloco) : ('label.inactive' | transloco) }}</td>
         <td class="action-buttons">
           <app-audit-panel [created]="schedule.created" [modified]="schedule.modified"></app-audit-panel>
