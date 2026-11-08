@@ -2,7 +2,7 @@
 <p-dialog [(visible)]="dialogOpen" [header]="'imprint.dialogTitle' | transloco" [style]="{ 'max-width': '90ch' }">
   <h3>{{ 'imprint.title' | transloco }}</h3>
   <p>
-    {{ 'imprint.mediaOwners' | transloco }}:
+    <span class="imprint__title">{{ 'imprint.mediaOwners' | transloco }}</span>
     @for (owner of mediaOwners; track owner) {
       {{ owner }}
       @if (!$last) {
@@ -11,7 +11,7 @@
     }
   </p>
   <p>
-    {{ 'imprint.contact' | transloco }}:
+    <span class="imprint__title">{{ 'imprint.contact' | transloco }}</span>
     @for (email of emails; track email) {
       <a [href]="'mailto:' + email">{{ email }}</a>
       @if (!$last) {
@@ -21,13 +21,13 @@
   </p>
   <p>{{ 'imprint.purpose' | transloco }}</p>
   <p>
-    {{ 'imprint.fullImprint' | transloco }}:
-    <a href="https://tech-atlas.at">https://tech-atlas.at</a>
+    <span class="imprint__title">{{ 'imprint.fullImprint' | transloco }}</span>
+    <a [href]="FULL_IMPRINT_URI">{{ FULL_IMPRINT_URI }}</a>
   </p>
   <br />
   <h3>{{ 'privacyNotice.title' | transloco }}</h3>
   <p>
-    {{ 'privacyNotice.controllers' | transloco }}:
+    <span class="imprint__title">{{ 'privacyNotice.controllers' | transloco }}</span>
     @for (owner of mediaOwners; track owner) {
       {{ owner }}
       @if (!$last) {
@@ -36,7 +36,7 @@
     }
   </p>
   <p>
-    {{ 'imprint.contact' | transloco }}:
+    <span class="imprint__title">{{ 'imprint.contact' | transloco }}</span>
     @for (email of emails; track email) {
       <a [href]="'mailto:' + email">{{ email }}</a>
       @if (!$last) {
@@ -45,19 +45,19 @@
     }
   </p>
   <p>
-    <strong>{{ 'privacyNotice.data.title' | transloco }}</strong>
+    <span class="imprint__title">{{ 'privacyNotice.data.title' | transloco }}</span>
     {{ 'privacyNotice.data.text' | transloco }}
   </p>
   <p>
-    <strong>{{ 'privacyNotice.legalBasis.title' | transloco }}</strong>
+    <span class="imprint__title">{{ 'privacyNotice.legalBasis.title' | transloco }}</span>
     {{ 'privacyNotice.legalBasis.text' | transloco }}
   </p>
   <p>
-    <strong>{{ 'privacyNotice.retention.title' | transloco }}</strong>
+    <span class="imprint__title">{{ 'privacyNotice.retention.title' | transloco }}</span>
     {{ 'privacyNotice.retention.text' | transloco }}
   </p>
   <p>
-    <strong>{{ 'privacyNotice.rights.title' | transloco }}</strong>
+    <span class="imprint__title">{{ 'privacyNotice.rights.title' | transloco }}</span>
     {{ 'privacyNotice.rights.text' | transloco }}
   </p>
 </p-dialog>

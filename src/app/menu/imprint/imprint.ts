@@ -16,6 +16,7 @@ interface Owner {
   templateUrl: './imprint.html',
 })
 export class Imprint {
+  protected readonly FULL_IMPRINT_URI = 'https://tech-atlas.at';
   private readonly OWNERS: Owner[] = [
     {
       name: 'Fabian Mooslechner',
