@@ -1,0 +1,63 @@
+<p-button icon="pi pi-info-circle" [title]="'imprint.dialogTitle' | transloco" (onClick)="onClick()"></p-button>
+<p-dialog [(visible)]="dialogOpen" [header]="'imprint.dialogTitle' | transloco" [style]="{ 'max-width': '90ch' }">
+  <h3>{{ 'imprint.title' | transloco }}</h3>
+  <p>
+    {{ 'imprint.mediaOwners' | transloco }}:
+    @for (owner of mediaOwners; track owner) {
+      {{ owner }}
+      @if (!$last) {
+        ·
+      }
+    }
+  </p>
+  <p>
+    {{ 'imprint.contact' | transloco }}:
+    @for (email of emails; track email) {
+      <a [href]="'mailto:' + email">{{ email }}</a>
+      @if (!$last) {
+        ·
+      }
+    }
+  </p>
+  <p>{{ 'imprint.purpose' | transloco }}</p>
+  <p>
+    {{ 'imprint.fullImprint' | transloco }}:
+    <a href="https://tech-atlas.at">https://tech-atlas.at</a>
+  </p>
+  <br />
+  <h3>{{ 'privacyNotice.title' | transloco }}</h3>
+  <p>
+    {{ 'privacyNotice.controllers' | transloco }}:
+    @for (owner of mediaOwners; track owner) {
+      {{ owner }}
+      @if (!$last) {
+        ·
+      }
+    }
+  </p>
+  <p>
+    {{ 'imprint.contact' | transloco }}:
+    @for (email of emails; track email) {
+      <a [href]="'mailto:' + email">{{ email }}</a>
+      @if (!$last) {
+        ·
+      }
+    }
+  </p>
+  <p>
+    <strong>{{ 'privacyNotice.data.title' | transloco }}</strong>
+    {{ 'privacyNotice.data.text' | transloco }}
+  </p>
+  <p>
+    <strong>{{ 'privacyNotice.legalBasis.title' | transloco }}</strong>
+    {{ 'privacyNotice.legalBasis.text' | transloco }}
+  </p>
+  <p>
+    <strong>{{ 'privacyNotice.retention.title' | transloco }}</strong>
+    {{ 'privacyNotice.retention.text' | transloco }}
+  </p>
+  <p>
+    <strong>{{ 'privacyNotice.rights.title' | transloco }}</strong>
+    {{ 'privacyNotice.rights.text' | transloco }}
+  </p>
+</p-dialog>

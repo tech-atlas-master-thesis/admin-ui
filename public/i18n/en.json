@@ -35,7 +35,8 @@
     "created": "Created",
     "modified": "Modified",
     "at": "At",
-    "by": "By"
+    "by": "By",
+    "and": "and"
   },
   "action": {
     "edit": "Edit",
@@ -193,5 +194,33 @@
     "breadcrumbKey": "New Configuration Version",
     "title": "New Configuration Version",
     "baseVersion": "Base Version"
+  },
+  "imprint": {
+    "dialogTitle": "Imprint and Privacy Notice",
+    "title": "Imprint",
+    "mediaOwners": "Media Owner",
+    "contact": "Contact",
+    "purpose": "The admin panel is an internal tool for maintaining the data of the Austrian TechAtlas. Only invited users can access it.",
+    "fullImprint": "Full imprint"
+  },
+  "privacyNotice": {
+    "title": "Privacy Notice",
+    "controllers": "Controllers",
+    "data": {
+      "title": "What data we process",
+      "text": "For your user account, we process your username, email address, an internal user ID and your permissions. When you start pipelines, change configurations or publish datasets, we record who performed the action and when. Sign-in is handled by Authentik, which we host ourselves. It stores sign-in events, including your IP address, for 30 days."
+    },
+    "legalBasis": {
+      "title": "Purpose and legal basis",
+      "text": "We process this data to control access, keep the system secure and keep a record of who changed what. Legal basis: Art. 6(1)(b) GDPR (providing access) and Art. 6(1)(f) GDPR (security and accountability)."
+    },
+    "retention": {
+      "title": "Retention and Recipients",
+      "text": "We delete your account data once your access ends. The record of changes is kept for as long as the related datasets exist. All data is stored on our own servers and is not passed on to third parties. The only exception is connection data processed by Cloudflare when content is delivered (see the dashboard’s privacy notice)."
+    },
+    "rights": {
+      "title": "Your rights",
+      "text": "You have the right of access, rectification, erasure, restriction of processing, data portability and objection (Art. 15–21 GDPR). To exercise them, contact us at the addresses above. You can also lodge a complaint with the Austrian Data Protection Authority (www.dsb.gv.at)."
+    }
   }
 }

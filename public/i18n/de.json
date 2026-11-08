@@ -35,7 +35,8 @@
     "created": "Erstellt",
     "modified": "Verändert",
     "at": "Um",
-    "by": "Von"
+    "by": "Von",
+    "and": "und"
   },
   "action": {
     "edit": "Bearbeiten",
@@ -193,5 +194,33 @@
     "breadcrumbKey": "Neue Konfiguration Version",
     "title": "Neue Konfiguration Version",
     "baseVersion": "Basis Version"
+  },
+  "imprint": {
+    "dialogTitle": "Impressum und Datenschutzerklärung",
+    "title": "Impressum",
+    "mediaOwners": "Medieninhaber",
+    "contact": "Kontakt",
+    "purpose": "Das Admin-Panel ist ein internes Werkzeug zur Pflege der Daten des Austrian TechAtlas. Es ist nur für eingeladene Personen zugänglich.",
+    "fullImprint": "Vollständiges Impressum"
+  },
+  "privacyNotice": {
+    "title": "Datenschutz",
+    "controllers": "Verantwortliche",
+    "data": {
+      "title": "Welche Daten",
+      "text": "Für Ihr Nutzerkonto verarbeiten wir Benutzername, E-Mail-Adresse, eine interne Nutzerkennung und Ihre Berechtigungen. Wenn Sie Pipelines starten, Konfigurationen ändern oder Datensätze veröffentlichen, speichern wir dazu, wer die Aktion wann ausgeführt hat. Zum Anmelden setzen wir die von uns selbst betriebene Software Authentik ein. Sie speichert Anmeldeereignisse einschließlich IP-Adresse für 30 Tage."
+    },
+    "legalBasis": {
+      "title": "Zweck und Rechtsgrundlage",
+      "text": "Wir verarbeiten diese Daten, um den Zugang zu steuern, das System abzusichern und nachvollziehbar zu machen, wer welche Änderungen an den Daten vorgenommen hat. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Bereitstellung des Zugangs) und lit. f DSGVO (Sicherheit und Nachvollziehbarkeit)."
+    },
+    "retention": {
+      "title": "Speicherdauer und Empfänger",
+      "text": "Kontodaten löschen wir, sobald Ihr Zugang endet. Änderungsprotokolle bleiben gespeichert, solange die zugehörigen Datensätze bestehen. Alle Daten liegen auf unseren eigenen Servern und werden nicht an Dritte weitergegeben. Ausgenommen sind Verbindungsdaten, die bei der Auslieferung über Cloudflare anfallen (siehe Datenschutzerklärung des Dashboards)."
+    },
+    "rights": {
+      "title": "Ihre Rechte",
+      "text": "Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit und Widerspruch (Art. 15–21 DSGVO). Wenden Sie sich dazu an die oben genannten Kontaktadressen. Beschwerden können Sie an die österreichische Datenschutzbehörde richten (www.dsb.gv.at)."
+    }
   }
 }

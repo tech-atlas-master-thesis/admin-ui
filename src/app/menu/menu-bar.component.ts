@@ -11,10 +11,11 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { Tag } from '@openng/optimus-ui/tag';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { AuthRole } from '@shared/auth/auth-roles';
+import { Imprint } from './imprint/imprint';
 
 @Component({
   selector: 'app-menu-bar',
-  imports: [Menubar, Button, Menu, NgOptimizedImage, Popover, Tag, TranslocoPipe],
+  imports: [Menubar, Button, Menu, NgOptimizedImage, Popover, Tag, TranslocoPipe, Imprint],
   templateUrl: './menu-bar.component.html',
   styleUrl: './menu-bar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

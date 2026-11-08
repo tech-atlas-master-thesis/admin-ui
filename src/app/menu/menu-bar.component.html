@@ -5,6 +5,7 @@
     </ng-template>
     <ng-template #end>
       <div class="action-buttons">
+        <app-imprint></app-imprint>
         <p-button icon="pi pi-user" (onClick)="user.toggle($event)"></p-button>
         <p-button [icon]="isDarkMode() ? 'pi pi-sun' : 'pi pi-moon'" (onClick)="toggleDarkMode()"></p-button>
         <p-button icon="pi pi-language" (onClick)="languageSelect.toggle($event)"> </p-button>
