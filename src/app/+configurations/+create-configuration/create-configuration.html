@@ -23,12 +23,13 @@
     </div>
     <div class="fluid-form-element fluid-form-full-width">
       <label [for]="description">{{ 'label.description' | transloco }}</label>
+      <!-- pTextarea does not support Signal Forms [formField] yet (openng-org/optimus-ui#1971), use ngModel -->
       <textarea
         #description
         rows="3"
         pTextarea
         [autoResize]="true"
-        [formField]="configurationForm.description"
+        [(ngModel)]="configurationForm.description().value"
       ></textarea>
     </div>
   </section>

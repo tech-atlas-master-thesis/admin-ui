@@ -5,6 +5,8 @@ import { TranslocoPipe } from '@jsverse/transloco';
 import { FloatLabel } from '@openng/optimus-ui/floatlabel';
 import { NewPipelineForm } from './new-pipeline.interface';
 import { form, FormField, required, schema } from '@angular/forms/signals';
+
+import { FormsModule } from '@angular/forms';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { map, startWith, switchMap, tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,6 +24,7 @@ import { OptimusFormFieldSync } from '@shared/forms/optimus-form-field-sync';
     Select,
     TranslocoPipe,
     FloatLabel,
+    FormsModule,
     InputText,
     FormField,
     OptimusFormFieldSync,

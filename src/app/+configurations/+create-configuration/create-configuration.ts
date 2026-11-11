@@ -8,6 +8,8 @@ import { TranslocoPipe } from '@jsverse/transloco';
 import { SelectItem } from '@openng/optimus-ui/api';
 import { PipelineConfigDto } from '@api/models/pipeline/pipeline-config-dto';
 import { form, FormField, required, schema } from '@angular/forms/signals';
+
+import { FormsModule } from '@angular/forms';
 import { tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { I18nService } from '@shared/i18n/i18n-service';
@@ -24,7 +26,17 @@ interface NewConfigurationForm {
 
 @Component({
   selector: 'app-create-configuration',
-  imports: [Button, FloatLabel, InputText, Select, Textarea, TranslocoPipe, FormField, OptimusFormFieldSync],
+  imports: [
+    Button,
+    FloatLabel,
+    FormsModule,
+    InputText,
+    Select,
+    Textarea,
+    TranslocoPipe,
+    FormField,
+    OptimusFormFieldSync,
+  ],
   templateUrl: './create-configuration.html',
   styleUrl: './create-configuration.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

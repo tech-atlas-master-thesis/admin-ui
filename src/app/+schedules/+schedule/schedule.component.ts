@@ -6,6 +6,8 @@ import { StepConfiguration } from '../../+pipelines/+new-pipeline/step-configura
 import { Textarea } from '@openng/optimus-ui/textarea';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { disabled, form, FormField, readonly, required, schema, validate } from '@angular/forms/signals';
+
+import { FormsModule } from '@angular/forms';
 import { SchedulesStore } from '../schedules.store';
 import { PipelineService } from '../../+pipelines/pipeline.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -25,6 +27,7 @@ import { OptimusFormFieldSync } from '@shared/forms/optimus-form-field-sync';
   imports: [
     Button,
     Checkbox,
+    FormsModule,
     InputText,
     StepConfiguration,
     Textarea,

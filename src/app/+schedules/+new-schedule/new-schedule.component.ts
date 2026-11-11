@@ -10,6 +10,8 @@ import { PipelineService } from '../../+pipelines/pipeline.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { I18nService } from '@shared/i18n/i18n-service';
 import { form, FormField, required, schema, validate } from '@angular/forms/signals';
+
+import { FormsModule } from '@angular/forms';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { map, startWith, switchMap, tap } from 'rxjs';
 import { NewScheduleForm } from './new-schedule.interface';
@@ -25,6 +27,7 @@ import { OptimusFormFieldSync } from '@shared/forms/optimus-form-field-sync';
   imports: [
     Button,
     FloatLabel,
+    FormsModule,
     InputText,
     Select,
     StepConfiguration,
