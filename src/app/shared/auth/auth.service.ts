@@ -1,6 +1,6 @@
 import { HostListener, Injectable } from '@angular/core';
 import { OAuthEvent, OAuthService, OAuthSuccessEvent } from 'angular-oauth2-oidc';
-import { authCodeFlowConfig } from '../../oauth.config';
+import { createAuthCodeFlowConfig } from '../../oauth.config';
 import { BehaviorSubject, firstValueFrom, Observable, skip, tap } from 'rxjs';
 import { AuthUserInfo } from '@shared/auth/auth.interface';
 
@@ -41,7 +41,7 @@ export class AuthService extends OAuthService {
   }
 
   initialize() {
-    this.configure(authCodeFlowConfig);
+    this.configure(createAuthCodeFlowConfig());
     this.subscribeEvents();
     this.setupAutomaticSilentRefresh();
     this.loadDiscoveryDocumentAndLogin({ disableNonceCheck: true }).then(async (loaded) => {

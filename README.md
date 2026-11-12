@@ -28,6 +28,21 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
+## Runtime configuration
+
+The OIDC issuer and client id can be set per deployment without rebuilding the image. The
+container writes them to `/config.json` at start-up, and the app loads that file before it
+bootstraps (`src/app/runtime-config.ts`).
+
+| Environment variable | Overrides                        |
+| -------------------- | -------------------------------- |
+| `OAUTH_ISSUER`       | `auth.issuer` in `environment`   |
+| `OAUTH_CLIENT_ID`    | `auth.clientId` in `environment` |
+
+A variable that is unset or empty keeps the value compiled in from `src/environment`. With
+`ng serve`, `public/config.json` is served as it is; put values there to try another issuer
+locally.
+
 ## Code scaffolding
 
 Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
